@@ -1,0 +1,71 @@
+.container {
+    margin: 0 200px;
+    display: flex;
+    justify-content: space-between;
+    min-height: 45vh;
+    margin-bottom: 20px;
+}
+.form {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    border: 1px solid black;
+}
+
+.label {
+    font-weight: 600;
+}
+
+.provisional {
+    color: red;
+}
+
+.formNote {
+    min-height: 150px;
+    text-align: start;
+    min-width: 600px;
+}
+
+.flex {
+    display: flex;
+    justify-content: space-between;
+}
+
+brick {
+    margin: 20px 0;
+    border-bottom: 1px solid rgb(225, 221, 221);
+}
+
+.output {
+    border: 2px solid #CF2030;
+    padding: 0 20px;
+    margin-top: 20px;
+}
+
+.title {
+    width: 100%;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 20px;
+    color: red;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
+.button {
+    margin: 50px 120px;
+    background-color: #CF2030 !important;
+    border: none !important;
+    height: 40px;
+    &:hover {
+        opacity: 0.9;
+    }
+}
+
+.link {
+    text-decoration: none;
+    color: white;
+    &:hover {
+        color: white;
+    }
+}

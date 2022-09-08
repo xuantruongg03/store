@@ -1,0 +1,45 @@
+.detail{
+    margin: 0 100px;
+    min-width: 500px;
+    max-width: 500px;
+    min-height: 100px;
+    // max-height: 100px;
+}
+
+.title{
+    background-color: #233E92;
+    color: #FFFFF8;
+    padding: 10px;
+    text-align: center;
+    margin: 0 auto;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+.ul{
+    border: 1px solid rgb(247, 244, 244);
+    margin: 0;
+
+}
+
+.list{
+    list-style-type: circle;
+    list-style-position: inside;
+    text-align: left;
+    padding: 0;
+    padding-left: 5px;
+}
+
+.btn{
+    width: 100%;
+    height: 35px;
+    margin-top: 15px;   
+    background-color: #FFFFF8;
+    border: 1px solid #233E92;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #2368A4;
+    &:hover{
+        opacity: 0.9;
+    }
+}

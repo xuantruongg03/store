@@ -1,0 +1,19 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container{
+    margin: 0 100px;
+    display: flex;
+    min-height: 45vh;
+}
+
+.disabled{
+    display: none !important;
+}
+
+Link {
+    color: black;
+}

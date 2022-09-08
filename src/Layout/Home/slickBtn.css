@@ -1,0 +1,17 @@
+.slick-prev:before {
+    content: '<';
+    color: #233E92 !important;
+    font-size: 25px !important;
+    margin-left: -15px !important;
+}
+
+.slick-next:before {
+    content: '>';
+    color: #233E92 !important;
+    font-size: 25px !important;
+}
+
+.slick-next:hover, 
+.slick-prev:hover{
+    opacity: 0.9;
+}

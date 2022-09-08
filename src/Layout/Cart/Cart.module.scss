@@ -1,0 +1,111 @@
+.container {
+    margin: 0 100px;
+    min-height: 45vh;
+    position: relative;
+}
+.cart {
+    display: flex;
+    width: 100%;
+    padding: 20px;
+    background-color: #fff;
+}
+.cartProduct {
+    display: flex;
+    width: 100%;
+    min-height: 100px;
+}
+.imgProduct {
+    width: 70px;
+    height: 70px;
+}
+
+.titleProduct {
+    max-width: 150px;
+    min-width: 150px;
+    text-align: center;
+    text-decoration: none;
+    color: black;
+    &:hover {
+        color: red;
+    }
+}
+
+.infoProduct {
+    max-width: 150px;
+    min-width: 150px;
+    text-align: center;
+}
+
+.btn {
+    height: 30px;
+    width: 20px;
+    margin: 0 5px;
+    font-size: 18px;
+    cursor: pointer;
+    background-color: #fff;
+    border: none;
+    background-color: transparent;
+}
+
+.numberProduct {
+    height: 30px;
+    width: 30px;
+    font-size: 16px;
+    text-align: center;
+}
+
+.btnpay {
+    height: 40px;
+    width: 200px;
+    font-size: 18px;
+    padding-top: 7px;
+    font-weight: 600;
+    background-color: #000099;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    float: right;
+    margin-right: 50px;
+    cursor: pointer;
+}
+.btnpay:hover {
+    color: #fff;
+    opacity: 0.8;
+}
+.checkbox {
+    height: 15px;
+    width: 15px;
+}
+.totalPrice{
+    min-width: 150px;
+}
+Table {
+    text-align: center;
+}
+
+.btndel{
+    height: 40px;
+    font-size: 18px;
+    padding-top: 7px;
+    font-weight: 600;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    float: right;
+    cursor: pointer;
+    width: 100px;
+    margin-right: 20px;
+    background-color: red;
+    opacity: 0.9;
+    padding-top: 3px;
+}
+
+.btndel:hover {
+    opacity: 0.8;
+}

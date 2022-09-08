@@ -1,0 +1,23 @@
+.list-group {
+    margin-left: 30px;
+    /* border: 0.5px solid gray; */
+    border-top: none;
+    border-bottom: none;
+}
+
+.list-group-item {
+    border-bottom: 0.5px solid rgb(229, 223, 223);
+    padding: 5px 15px;
+    font-weight: 400;
+    cursor: pointer;
+    font-size: 15px;
+    list-style: circle;
+    list-style-position: inside;
+}
+
+.item {
+    color: black;
+}
+.item:hover {
+    color: blue;
+}

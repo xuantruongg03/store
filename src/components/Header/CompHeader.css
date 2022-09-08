@@ -1,0 +1,103 @@
+.flex{
+    display: flex;
+}
+
+.contact{
+    background-color: #000099;
+    height: 35px;
+}
+
+.nav{
+    margin: 20px !important;
+    display: flex;
+    justify-content: space-between;
+}
+
+.logo{
+    /* width: 25%; */
+    padding-left: 20px;
+    
+}
+
+.form-search{
+    width: 50%;
+}
+
+.form-search-input{
+    padding: 5px 0px 5px 10px;
+    margin: 20px 0px 0px 200px;
+    height: 30px;
+    width: 60%;
+    border: 0.5px solid ;
+    border-radius: 5px 0px 0px 5px;
+}
+
+.iconSearch{
+    cursor: pointer;
+    font-size: 18px;
+    margin-top: 19px;
+    background-color: red;
+    color: aliceblue;
+    padding: 6.5px;
+    border-radius: 0px 5px 5px 0px;
+}
+
+.cart{
+    margin: 25px 50px 0px 20px;
+}
+
+.btn-cart{
+    background-color: #000099;
+    color: aliceblue;
+    text-decoration: none;
+    padding: 10px;
+    width: 100%;
+    border-radius: 10px;
+}
+.btn-cart:hover{
+    color: aliceblue;
+    opacity: 0.8;
+}
+.brick{
+    background-color: #000099;
+    height: 2px;
+}
+
+/* nav-menu */
+
+.nav-menu{
+    height: 30px;
+    background-color: #000099;
+    display: flex;
+}
+
+.list-menu{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.icon{
+    padding-right: 10px;
+    color: white;
+    cursor: pointer;
+}
+
+li{
+    list-style: none;
+    line-height: 25px;
+    padding: 0 100px;
+}
+
+ul li a{
+    text-decoration: none;
+    color: white;
+}
+
+.dropDownCategory{
+    display: inline-block;
+    color: white;
+    cursor: default;
+    position: relative;
+}
+

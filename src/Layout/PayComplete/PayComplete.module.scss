@@ -1,0 +1,23 @@
+.container {
+    text-align: center;
+    min-height: 40vh;
+    margin-top: 50px;
+}
+.para {
+    font-size: 18px;
+}
+
+.span {
+    font-weight: 600;
+}
+
+.link {
+    font-size: 18px;
+    font-weight: 600;
+    color: rgb(51, 36, 219);
+    text-decoration: none;
+    text-transform: uppercase;
+    &:hover {
+        color: red;
+    }
+}

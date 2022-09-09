@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { Button } from 'react-bootstrap';
 import Table from 'react-bootstrap/Table';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -40,7 +39,13 @@ function Cart(props) {
             <br />
 
             <div className={style.container}>
-                <Table style={{ width: '100%' }}>
+            <h1 
+                style={{ textAlign: 'center', fontSize: '100px', color: 'red', marginTop: '10px' }} 
+                className = {cart.length <= 0 ? '' : 'disabled'}
+                >
+                    GIỎ HÀNG TRỐNG
+            </h1>
+                <Table style={{ width: '100%' }} className = {cart.length > 0 ? '' : 'disabled'}>
                     <thead style={{ color: 'red' }}>
                         <tr>
                             <th>Sản phẩm</th>
@@ -61,7 +66,7 @@ function Cart(props) {
             <Link to={'/pay'} className={style.btnpay}>
                 Thanh Toán
             </Link>
-            <button className={clsx(style.btndel)} onClick={handleDelete}>Xóa</button>
+            <button className={clsx(style.btndel)} onClick={handleDelete}>Xóa SP</button>
             <br />
         </div>
     );

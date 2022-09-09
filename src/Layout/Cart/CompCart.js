@@ -30,7 +30,9 @@ function CompCart(props) {
             props.setSelect(selected);
         }
         else {
-            console.log(check);
+            props.setSelect(selected.filter((select) => {
+                return select !== e.target.value
+            }));
         }
     };
     return (

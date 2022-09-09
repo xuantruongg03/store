@@ -24,15 +24,18 @@ function CompCart(props) {
     };
 
     const handleSelection = (e) => {
-        var check = document.querySelector('.checkbox');
-        if (check.checked) {
+        var value = e.target.value; 
+        if (e.target.checked) {
             selected.push(e.target.value);
             props.setSelect(selected);
         }
         else {
-            props.setSelect(selected.filter((select) => {
-                return select !== e.target.value
-            }));
+            for (let i = 0; i < selected.length; i++) {
+                if (selected[i] == value) {
+                    selected.splice(i, 1);
+                }
+            }
+            props.setSelect(selected);
         }
     };
     return (

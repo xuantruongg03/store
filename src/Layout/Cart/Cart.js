@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import style from './Cart.module.scss';
 import CompCart from './CompCart';
 import clsx from 'clsx';
-
+const selected = [];
 function Cart(props) {
     const [cart, setCart] = useState([]);
     const [select, setSelect] = useState([]);
@@ -31,8 +31,16 @@ function Cart(props) {
         select.map((id) => {
             fetch('http://localhost:3000/cart/' + id, requestOptions).then((response) => {
             document.querySelector(".cart-" + id).remove();
+            // if (select.length <= 0) {
+            //     document.querySelector('.cart').classList.add('disabled');
+            // }
+            for (let i = 0; i < select.length; i++) {
+                if (select[i] == id) {
+                    select.splice(i, 1);
+                }
+            }
         });
-        })
+    })
     };
     return (
         <div style={{ backgroundColor: '#FAFAFA', overflow: 'auto' }}>
@@ -41,11 +49,11 @@ function Cart(props) {
             <div className={style.container}>
             <h1 
                 style={{ textAlign: 'center', fontSize: '100px', color: 'red', marginTop: '10px' }} 
-                className = {cart.length <= 0 ? '' : 'disabled'}
+                className = {clsx(cart.length <= 0 ? '' : 'disabled')}
                 >
                     GIỎ HÀNG TRỐNG
             </h1>
-                <Table style={{ width: '100%' }} className = {cart.length > 0 ? '' : 'disabled'}>
+                <Table style={{ width: '100%' }} className = {clsx(cart.length > 0 ? '' : 'disabled', 'cart')}>
                     <thead style={{ color: 'red' }}>
                         <tr>
                             <th>Sản phẩm</th>

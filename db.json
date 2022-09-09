@@ -183,5 +183,17 @@
       ]
     }
   ],
-  "cart": []
+  "cart": [
+    {
+      "src": "https://img.cdn.vncdn.io/nvn/ncdn/store3/96878/ps/20220310/10032022030327_1_1d.jpg",
+      "title": "Ghế Gaming Ares EGC207",
+      "infomation": "1 TB",
+      "price": 3103000,
+      "amount": 1,
+      "id": 1
+    }
+  ],
+  "pay": [
+    
+  ]
 }

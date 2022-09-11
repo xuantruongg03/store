@@ -1,17 +1,20 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect, useState } from 'react';
 import Table from 'react-bootstrap/Table';
-import 'bootstrap/dist/css/bootstrap.min.css';
-
 import { Link } from 'react-router-dom';
 
+import clsx from 'clsx';
+import { useSelector } from 'react-redux';
 import style from './Cart.module.scss';
 import CompCart from './CompCart';
-import clsx from 'clsx';
-const selected = [];
-function Cart(props) {
+
+function Cart() {
+    const state = useSelector((state) => {
+        console.log(state.cart.title);
+    })
+
     const [cart, setCart] = useState([]);
     const [select, setSelect] = useState([]);
-    const [amount, setAmount] = useState(cart.amount);
     useEffect(() => {
         document.title = "Giỏ Hàng"
         fetch('http://localhost:3000/cart')
@@ -31,9 +34,7 @@ function Cart(props) {
         select.map((id) => {
             fetch('http://localhost:3000/cart/' + id, requestOptions).then((response) => {
             document.querySelector(".cart-" + id).remove();
-            // if (select.length <= 0) {
-            //     document.querySelector('.cart').classList.add('disabled');
-            // }
+            // xóa id đã gửi yêu cầu delete
             for (let i = 0; i < select.length; i++) {
                 if (select[i] == id) {
                     select.splice(i, 1);
@@ -67,7 +68,7 @@ function Cart(props) {
                     </thead>
 
                     {cart.map((item, index) => (
-                        <CompCart data={item} setAmount={setAmount} key={index} setSelect={setSelect}/>
+                        <CompCart data={item} key={index} setSelect={setSelect}/>
                     ))}
                 </Table>
             </div>

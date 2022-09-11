@@ -1,20 +1,20 @@
-import { Routes, Route, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
 
 import './App.css';
 
 // import formatsMoney from './Convert/ConvertMoneyVND';
 import slug from './Convert/ConvertStringVNtoTitle';
 
-import CompHeader from './components/Header/CompHeader.js';
 import CompFooter from './components/CompFooter/CompFooter';
-import CompProductInfo from './Layout/Infomation/CompProductInfo';
-import NoPage from './NoPage';
-import Home from './Layout/Home/Home';
-import Products from './Layout/Products/Products';
+import CompHeader from './components/Header/CompHeader.js';
 import Cart from './Layout/Cart/Cart';
+import Home from './Layout/Home/Home';
+import CompProductInfo from './Layout/Infomation/CompProductInfo';
 import Pay from './Layout/Pay/Pay';
 import PayComplete from './Layout/PayComplete/PayComplete';
+import Products from './Layout/Products/Products';
+import NoPage from './NoPage';
 
 function App() {
     // state info

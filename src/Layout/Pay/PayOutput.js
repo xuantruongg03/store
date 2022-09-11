@@ -19,7 +19,7 @@ function PayOutput(props) {
                     <Form.Label className={style.label} style = {{textTransform: "uppercase", fontWeight: "700"}}>Sản Phẩm</Form.Label>
                     <Form.Label className={style.label} style = {{textTransform: "uppercase", fontWeight: "700"}}>Tạm Tính</Form.Label>
                 </Form.Group>
-                <brick />
+                <bri />
             </Row>
 
             <Row>
@@ -29,7 +29,7 @@ function PayOutput(props) {
                         {formatsMoney(props.data.price)}
                     </Form.Label>
                 </Form.Group>
-                <brick />
+                <bri />
             </Row>
 
             <Row>
@@ -39,7 +39,7 @@ function PayOutput(props) {
                         {`-` + formatsMoney(props.data.sale)}
                     </Form.Label>
                 </Form.Group>
-                <brick />
+                <bri />
             </Row>
             <Row>
                 <Form.Group className={style.flex}>
@@ -48,14 +48,14 @@ function PayOutput(props) {
                         {formatsMoney(props.data.freeship)}
                     </Form.Label>
                 </Form.Group>
-                <brick />
+                <bri />
             </Row>
             <Row>
                 <Form.Group className={style.flex}>
                     <Form.Label className={style.label}>Tổng tiền</Form.Label>
                     <Form.Label className={clsx(style.label, style.provisional)}>{formatsMoney(totalPrice)}</Form.Label>
                 </Form.Group>
-                <brick />
+                <bri />
             </Row>
             <Row>
                 <Form.Group>
@@ -63,7 +63,7 @@ function PayOutput(props) {
                         Chọn hình thức thanh toán
                     </Form.Label>
                 </Form.Group>
-                <brick />
+                <bri />
             </Row>
 
             <Row key="radio">

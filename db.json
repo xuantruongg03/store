@@ -215,78 +215,17 @@
       "price": 3103000,
       "amount": 1,
       "id": 5
+    },
+    {
+      "src": "https://traffic-edge53.cdn.vncdn.io/nvn/ncdn/store3/96878/ps/20220309/09032022090330_41.png",
+      "title": "Laptop Đồ Họa ConceptD 7 Ezel CC715-71-7940",
+      "infomation": "1 TB",
+      "price": 80790000,
+      "amount": 1,
+      "id": 6
     }
   ],
   "pay": [
-    {
-      "data": {
-        "name": "Trường",
-        "phone": "0981793201",
-        "address": "Phước Thuận",
-        "conscious": "Nguyễn Văn Cừ",
-        "district": "TP.Quy Nhơn",
-        "city": "Bình Định",
-        "notes": "",
-        "payment": "cash",
-        "titleProduct": [
-          "Ghế Gaming Ares EGC207"
-        ],
-        "price": null
-      },
-      "id": 1
-    },
-    {
-      "data": {
-        "name": "Trường",
-        "phone": "0981793201",
-        "address": "Phước Thuận",
-        "conscious": "Nguyễn Văn Cừ 2",
-        "district": "TP.Quy Nhơn",
-        "city": "HCM",
-        "notes": "",
-        "payment": "banking",
-        "titleProduct": [
-          "Chuột không dây Logitech M590 Wireless Bluetoth",
-          "Ghế Gaming Ares EGC207"
-        ],
-        "price": 3742000
-      },
-      "id": 2
-    },
-    {
-      "data": {
-        "name": "",
-        "phone": 0,
-        "address": "",
-        "conscious": "",
-        "district": "",
-        "city": "",
-        "notes": "",
-        "payment": "",
-        "titleProduct": [
-          "Chuột không dây Logitech M590 Wireless Bluetoth",
-          "Ghế Gaming Ares EGC207"
-        ],
-        "price": 3742000
-      },
-      "id": 3
-    },
-    {
-      "data": {
-        "name": "",
-        "phone": 0,
-        "address": "",
-        "conscious": "",
-        "district": "",
-        "city": "",
-        "notes": "",
-        "payment": "",
-        "titleProduct": [
-          "Chuột không dây Logitech M590 Wireless Bluetoth"
-        ],
-        "price": 639000
-      },
-      "id": 4
-    }
+    
   ]
 }

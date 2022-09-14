@@ -17,7 +17,7 @@ function CompProductInfo(props) {
     const [img, setImg] = useState(localStorage.getItem('img'));
     const [price, setPrice] = useState(localStorage.getItem('price'));
     const [description, setDescription] = useState(localStorage.getItem('description'));
-    const [infomation, setInfomation] = useState(localStorage.getItem('infomation').split(','));
+    const [infomation, setInfomation] = useState(localStorage.getItem('infomation'));
 
     localStorage.setItem('title', title);
     localStorage.setItem('price', price);
@@ -61,7 +61,7 @@ function CompProductInfo(props) {
             <div style={{ display: 'flex' }}>
                 <CompProductInfoIntro des={description} />
                 <br />
-                <CompProductInfoIntroDetail inf={infomation} />
+                <CompProductInfoIntroDetail  />
             </div>
             <br />
         </div>

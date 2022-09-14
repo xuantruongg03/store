@@ -27,7 +27,7 @@ function PayOutput(props) {
         titleProduct: props.data.title,
         price: totalPrice,
     };
-    const handleBuy = (e) => {
+    const handleBuy = () => {
         dispatch({
             type: 'BUY',
             data: propsData,

@@ -61,7 +61,7 @@ function CompProductInfo(props) {
             <div style={{ display: 'flex' }}>
                 <CompProductInfoIntro des={description} />
                 <br />
-                <CompProductInfoIntroDetail inf={infomation.split(",")} />
+                <CompProductInfoIntroDetail inf={infomation} />
             </div>
             <br />
         </div>

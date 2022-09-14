@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import CompProductItem from 'src/components/CompProducts/CompProductItem';
 
 const styles = {
@@ -14,15 +14,24 @@ const subTitle = {
 };
 
 function Products(props) {
+    const [sale, setSale] = useState([]);
     useEffect(() => {
-        document.title = props.subTitle
+        document.title = props.subTitle;
         window.scrollTo(0, 0);
-    })
+        fetch('http://localhost:3000/' + props.subkey)
+            .then((response) => response.json())
+            .then((data) => {
+                setSale(data);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }, []);
     return (
         <div>
             <h2 style={subTitle}>{props.subTitle}</h2>
             <div style={styles}>
-                {props.listProducts.map((product, index) => (
+                {sale.map((product, index) => (
                     <CompProductItem
                         key={product.id}
                         title={product.title}
@@ -31,7 +40,6 @@ function Products(props) {
                         cost={product.cost}
                         des={product.description}
                         inf={product.infomation}
-                        addQuantity={props.addQuantity}
                         setTitle={props.setTitle}
                         setImg={props.setImg}
                         setPrice={props.setPrice}

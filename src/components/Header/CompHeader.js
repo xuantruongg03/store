@@ -1,9 +1,11 @@
+import { faBars, faCartShopping, faPiggyBank, faSearch, faShieldAlt, faTruck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import './CompHeader.css';
-import { faBars, faSearch, faShieldAlt, faCartShopping, faPiggyBank, faTruck } from '@fortawesome/free-solid-svg-icons';
 
 function CompHeader(props) {
+    const dispatch = useDispatch();
     return (
         <div className="CompHeader">
             <div className="contact"></div>

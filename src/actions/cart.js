@@ -1,6 +1,14 @@
 export const deleteProduct = () => {
     return {
         type: 'DELETE_CART',
-        payload: {}
-    }
-}
+        payload: [],
+    };
+};
+
+export const pay = () => {
+    return {
+        type: 'PAY',
+        data: {},
+    };
+};
+

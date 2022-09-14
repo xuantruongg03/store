@@ -1,35 +1,67 @@
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import Row from 'react-bootstrap/Row';
-import clsx from 'clsx';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import clsx from 'clsx';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
+import { useDispatch } from 'react-redux';
 
-import style from './Pay.module.scss';
-import formatsMoney from 'src/Convert/ConvertMoneyVND';
 import { Link } from 'react-router-dom';
+import formatsMoney from 'src/Convert/ConvertMoneyVND';
+import style from './Pay.module.scss';
 
 function PayOutput(props) {
-    const totalPrice = props.data.price - props.data.sale - props.data.freeship;
-
+    const totalPrice = props.data.totalPrice - props.data.sale - props.data.freeship;
+    const handleSelectpayment = (e) => {
+        props.setPayment(e.target.value);
+    };
+    const dispatch = useDispatch();
+    const propsData = {
+        name: props.data.name,
+        phone: props.data.phone,
+        address: props.data.address,
+        conscious: props.data.conscious,
+        district: props.data.district,
+        city: props.data.city,
+        notes: props.data.notes,
+        payment: props.data.payment,
+        titleProduct: props.data.title,
+        price: totalPrice,
+    };
+    const handleBuy = (e) => {
+        dispatch({
+            type: 'BUY',
+            data: propsData,
+        });
+    };
     return (
         <Form className={clsx(style.output)}>
             <Form.Label className={clsx(style.label, 'mt-2', style.title)}>Thông Tin Đơn Hàng</Form.Label>
             <Row>
                 <Form.Group className={style.flex}>
-                    <Form.Label className={style.label} style = {{textTransform: "uppercase", fontWeight: "700"}}>Sản Phẩm</Form.Label>
-                    <Form.Label className={style.label} style = {{textTransform: "uppercase", fontWeight: "700"}}>Tạm Tính</Form.Label>
+                    <Form.Label className={style.label} style={{ textTransform: 'uppercase', fontWeight: '700' }}>
+                        Sản Phẩm
+                    </Form.Label>
+                    <Form.Label className={style.label} style={{ textTransform: 'uppercase', fontWeight: '700' }}>
+                        Tạm Tính
+                    </Form.Label>
                 </Form.Group>
-                <bri />
+                <div className={style.bri} />
             </Row>
 
             <Row>
                 <Form.Group className={style.flex}>
-                    <Form.Label className={style.label}>{props.data.title}</Form.Label>
+                    <div>
+                        {props.data.title.map((title, index) => (
+                            <li key={index} style={{ padding: '0', display: 'block' }}>
+                                <Form.Label className={style.label}>{title}</Form.Label>
+                            </li>
+                        ))}
+                    </div>
                     <Form.Label className={clsx(style.label, style.provisional)}>
-                        {formatsMoney(props.data.price)}
+                        {formatsMoney(props.data.totalPrice)}
                     </Form.Label>
                 </Form.Group>
-                <bri />
+                <div className={style.bri} />
             </Row>
 
             <Row>
@@ -39,7 +71,7 @@ function PayOutput(props) {
                         {`-` + formatsMoney(props.data.sale)}
                     </Form.Label>
                 </Form.Group>
-                <bri />
+                <div className={style.bri} />
             </Row>
             <Row>
                 <Form.Group className={style.flex}>
@@ -48,14 +80,14 @@ function PayOutput(props) {
                         {formatsMoney(props.data.freeship)}
                     </Form.Label>
                 </Form.Group>
-                <bri />
+                <div className={style.bri} />
             </Row>
             <Row>
                 <Form.Group className={style.flex}>
                     <Form.Label className={style.label}>Tổng tiền</Form.Label>
                     <Form.Label className={clsx(style.label, style.provisional)}>{formatsMoney(totalPrice)}</Form.Label>
                 </Form.Group>
-                <bri />
+                <div className={style.bri} />
             </Row>
             <Row>
                 <Form.Group>
@@ -63,12 +95,14 @@ function PayOutput(props) {
                         Chọn hình thức thanh toán
                     </Form.Label>
                 </Form.Group>
-                <bri />
+                <div className={style.bri} />
             </Row>
 
             <Row key="radio">
                 <Form.Group>
                     <Form.Check
+                        onClick={handleSelectpayment}
+                        value="cash"
                         type="radio"
                         name="flexRadioDefault"
                         id="flexRadioDefault2"
@@ -76,6 +110,8 @@ function PayOutput(props) {
                     />
                     <br />
                     <Form.Check
+                        onClick={handleSelectpayment}
+                        value="banking"
                         type="radio"
                         name="flexRadioDefault"
                         id="flexRadioDefault1"
@@ -84,7 +120,9 @@ function PayOutput(props) {
                 </Form.Group>
             </Row>
             <Button variant="primary" type="submit" className={style.button}>
-                <Link to = {"/paycomplete"} className = {style.link}>Xác Nhận Thanh Toán</Link>
+                <Link to={'/paycomplete'} className={style.link} onClick={handleBuy}>
+                    Xác Nhận Thanh Toán
+                </Link>
             </Button>
         </Form>
     );

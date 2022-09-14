@@ -9,6 +9,8 @@ import style from './Cart.module.scss';
 const selected = [];
 function CompCart(props) {
     const [totalPrice, setTotalPrice] = useState(props.data.price);
+    let selectedTitlePay = [];
+    let selectedPricePay = [];
     useEffect(() => {
         setTotalPrice(props.data.price * props.data.amount);
     });
@@ -24,20 +26,29 @@ function CompCart(props) {
     };
 
     const handleSelection = (e) => {
-        var value = e.target.value; 
+        selectedTitlePay = [...props.func.selectTitlePay];
+        selectedPricePay = [...props.func.selectPricePay];
+        var value = e.target.value;
         if (e.target.checked) {
             selected.push(e.target.value);
-            props.setSelect(selected);
-        }
-        else {
+            props.func.setSelect(selected);
+            selectedPricePay.push(props.data.price)
+            selectedTitlePay.push(props.data.title)
+        } else {
             for (let i = 0; i < selected.length; i++) {
                 if (selected[i] == value) {
                     selected.splice(i, 1);
+                    selectedTitlePay.splice(i, 1);
+                    selectedPricePay.splice(i, 1);
                 }
             }
-            props.setSelect(selected);
+            props.func.setSelect(selected);
         }
+        console.log(selectedTitlePay);
+        props.func.setSelectTitlePay([...selectedTitlePay]);
+        props.func.setSelectPricePay([...selectedPricePay]);
     };
+
     return (
         <tbody className={'cart-' + props.data.id}>
             <tr>
@@ -66,7 +77,7 @@ function CompCart(props) {
                 <th>
                     <input
                         type="checkbox"
-                        className={clsx(style.btnSelect, "checkbox")}
+                        className={clsx(style.btnSelect, 'checkbox')}
                         value={props.data.id}
                         onClick={handleSelection}
                     />

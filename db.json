@@ -13,7 +13,7 @@
       "img": "src/Layout/Home/CompBanner/Banner/banner3.png"
     }
   ],
-  "productSale": [
+  "sale": [
     {
       "id": 1,
       "title": "Ghế Gaming Ares EGC207",
@@ -99,7 +99,7 @@
       ]
     }
   ],
-  "productComputer": [
+  "computer": [
     {
       "id": 1,
       "title": "Laptop Asus Gaming ROG Strix G15",
@@ -185,21 +185,108 @@
   ],
   "cart": [
     {
-      "src": "https://traffic-edge59.cdn.vncdn.io/nvn/ncdn/store3/96878/ps/20220310/10032022110345_1_51.jpg",
-      "title": "Ghế Gaming E-Dra Apollo EGC227",
-      "infomation": "1 TB",
-      "price": 2089000,
-      "amount": 1,
-      "id": 1
-    },
-    {
       "src": "https://traffic-edge03.cdn.vncdn.io/nvn/ncdn/store3/96878/ps/20220310/10032022030343_1_1k.jpg",
       "title": "Chuột không dây Logitech M590 Wireless Bluetoth",
       "infomation": "1 TB",
       "price": 639000,
       "amount": 1,
+      "id": 1
+    },
+    {
+      "src": "https://traffic-edge59.cdn.vncdn.io/nvn/ncdn/store3/96878/ps/20220310/10032022110345_1_51.jpg",
+      "title": "Ghế Gaming E-Dra Apollo EGC227",
+      "infomation": "1 TB",
+      "price": 2089000,
+      "amount": 1,
       "id": 2
+    },
+    {
+      "src": "https://img.cdn.vncdn.io/nvn/ncdn/store3/96878/ps/20220310/10032022030327_1_1d.jpg",
+      "title": "Ghế Gaming Ares EGC207",
+      "infomation": "1 TB",
+      "price": 3103000,
+      "amount": 1,
+      "id": 4
+    },
+    {
+      "src": "https://img.cdn.vncdn.io/nvn/ncdn/store3/96878/ps/20220310/10032022030327_1_1d.jpg",
+      "title": "Ghế Gaming Ares EGC207",
+      "infomation": "1 TB",
+      "price": 3103000,
+      "amount": 1,
+      "id": 5
     }
   ],
-  "pay": []
+  "pay": [
+    {
+      "data": {
+        "name": "Trường",
+        "phone": "0981793201",
+        "address": "Phước Thuận",
+        "conscious": "Nguyễn Văn Cừ",
+        "district": "TP.Quy Nhơn",
+        "city": "Bình Định",
+        "notes": "",
+        "payment": "cash",
+        "titleProduct": [
+          "Ghế Gaming Ares EGC207"
+        ],
+        "price": null
+      },
+      "id": 1
+    },
+    {
+      "data": {
+        "name": "Trường",
+        "phone": "0981793201",
+        "address": "Phước Thuận",
+        "conscious": "Nguyễn Văn Cừ 2",
+        "district": "TP.Quy Nhơn",
+        "city": "HCM",
+        "notes": "",
+        "payment": "banking",
+        "titleProduct": [
+          "Chuột không dây Logitech M590 Wireless Bluetoth",
+          "Ghế Gaming Ares EGC207"
+        ],
+        "price": 3742000
+      },
+      "id": 2
+    },
+    {
+      "data": {
+        "name": "",
+        "phone": 0,
+        "address": "",
+        "conscious": "",
+        "district": "",
+        "city": "",
+        "notes": "",
+        "payment": "",
+        "titleProduct": [
+          "Chuột không dây Logitech M590 Wireless Bluetoth",
+          "Ghế Gaming Ares EGC207"
+        ],
+        "price": 3742000
+      },
+      "id": 3
+    },
+    {
+      "data": {
+        "name": "",
+        "phone": 0,
+        "address": "",
+        "conscious": "",
+        "district": "",
+        "city": "",
+        "notes": "",
+        "payment": "",
+        "titleProduct": [
+          "Chuột không dây Logitech M590 Wireless Bluetoth"
+        ],
+        "price": 639000
+      },
+      "id": 4
+    }
+  ]
 }

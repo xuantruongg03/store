@@ -1,11 +1,12 @@
 const initState = {
-    title: 'Hello World',
+    title: [],
+    price: [],
 };
 function cartReducer(state = initState, action) {
     switch (action.type) {
         case 'DELETE_CART':
             // xoa sp
-            select = [];
+            const select = action.payload;
             const requestOptions = {
                 method: 'DELETE',
                 headers: {
@@ -24,7 +25,15 @@ function cartReducer(state = initState, action) {
                     }
                 });
             });
-            break;
+            return state;
+        case 'PAY':
+            localStorage.setItem('selectTitlePay', action.data.selectTitlePay);
+            localStorage.setItem('selectPricePay', action.data.selectPricePay);
+            return [action.data];
+
+        case 'RESET':
+            return [];
+
         default:
             return state;
     }

@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react';
+import { faCartShopping, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faMinus, faCartShopping } from '@fortawesome/free-solid-svg-icons';
-import './CompProductItem.css';
+import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import slug from '../../Convert/ConvertStringVNtoTitle';
 import formatsMoney from 'src/Convert/ConvertMoneyVND';
+import slug from '../../Convert/ConvertStringVNtoTitle';
+import './CompProductItem.css';
 
 function CompProductItem(props) {
     let sale = Number((100 - (props.price / props.cost) * 100).toFixed(0));
@@ -31,44 +32,33 @@ function CompProductItem(props) {
         }
     };
 
-    const getInf = () => {
-        props.setTitle(props.title);
-        props.setImg(props.item);
-        props.setPrice(props.price);
-        props.setCost(props.cost);
-        props.setDes(props.des);
-        props.setInf(props.inf);
-    };
-
     useEffect(() => {
         if (sale <= 0) {
             setIsSales(false);
         }
     });
+    const dispatch = useDispatch();
     const handleBuy = () => {
-        const requestOptions = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                Accept: 'application/json',
-            },
-            body: JSON.stringify({
+        dispatch({
+            type: 'POST_CART',
+            data: {
                 src: props.item,
                 title: props.title,
                 infomation: '1 TB',
                 price: props.price,
                 amount: amount,
-            }),
-        };
-        fetch('http://localhost:3000/cart', requestOptions).then((response) => {
-            if (response.status >= 200 && response.status < 300) {
-                alert('Đặt hàng thành công! Hãy kiểm tra giỏ hàng của bạn.');
-            } else if (response.status === 500) {
-                alert('Lỗi phía Client! Thử lại sau.');
-            }
+            },
         });
     };
-
+    const getInf = () => {
+        dispatch({
+            type: 'GET_INFO',
+            data: {
+                title: props.title,
+                subkey: props.subkey
+            },
+        });
+    };
     return (
         <div className="styles">
             <div className={isSales === true ? 'sale' : 'disabled'}>

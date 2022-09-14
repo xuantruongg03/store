@@ -13,10 +13,12 @@
 
 .label {
     font-weight: 600;
+    max-width: 300px;
 }
 
 .provisional {
     color: red;
+    line-height: auto;
 }
 
 .formNote {
@@ -30,14 +32,14 @@
     justify-content: space-between;
 }
 
-bri {
-    margin: 20px 0;
+.bri {
+    margin: 10px 0;
     border-bottom: 1px solid rgb(225, 221, 221);
 }
 
 .output {
     border: 2px solid #CF2030;
-    padding: 0 20px;
+    padding: 0 30px;
     margin-top: 20px;
 }
 

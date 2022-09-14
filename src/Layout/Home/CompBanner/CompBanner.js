@@ -1,7 +1,5 @@
 
-import banner1 from "./Banner/banner1.png";
-import banner2 from "./Banner/banner2.png";
-import banner3 from "./Banner/banner3.png";
+
 import { useEffect, useState } from "react";
 
 function CompBanner() {
@@ -11,15 +9,15 @@ function CompBanner() {
   const banners = [
     {
       id: 1,
-      value: banner1,
+      value: "https://traffic-edge50.cdn.vncdn.io/nvn/ncdn/store3/96878/bn/01_Marc2ffc1317dfa116ebc613e1b464f85d8.png",
     },
     {
       id: 2,
-      value: banner2,
+      value: "https://traffic-edge06.cdn.vncdn.io/nvn/ncdn/store3/96878/bn/01_Marc6ef5979b85c2db3ba8c211780c60c9f.jpg",
     },
     {
       id: 3,
-      value: banner3,
+      value: "https://traffic-edge29.cdn.vncdn.io/nvn/ncdn/store3/96878/bn/07_Mar960229b53f63d4d2d2ec1043c278cd1f.png",
     },
   ];
 

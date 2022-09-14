@@ -4,14 +4,14 @@ function CompProductInfoIntroDetail(props) {
       <div className = {style.detail}>
         <p className = {style.title}>Mô tả chi tiết</p>
         <ul className={style.ul}>
-            {/* {props.inf.map((detail, index) => (
+            {props.inf.map((detail, index) => (
                 <li 
                   className={style.list}
                   key = {index}  
                 >
                       {detail}
                 </li>
-            ))} */}
+            ))}
       </ul>
       <button className = {style.btn}>Xem đầy đủ mô tả chi tiết</button>
       </div>

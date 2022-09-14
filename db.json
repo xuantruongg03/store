@@ -223,9 +223,23 @@
       "price": 80790000,
       "amount": 1,
       "id": 6
+    },
+    {
+      "src": "https://traffic-edge59.cdn.vncdn.io/nvn/ncdn/store3/96878/ps/20220310/10032022110345_1_51.jpg",
+      "title": "Ghế Gaming E-Dra Apollo EGC227",
+      "infomation": "1 TB",
+      "price": 2089000,
+      "amount": 1,
+      "id": 7
+    },
+    {
+      "src": "https://traffic-edge03.cdn.vncdn.io/nvn/ncdn/store3/96878/ps/20220310/10032022030343_1_1k.jpg",
+      "title": "Chuột không dây Logitech M590 Wireless Bluetoth",
+      "infomation": "1 TB",
+      "price": 639000,
+      "amount": 3,
+      "id": 8
     }
   ],
-  "pay": [
-    
-  ]
+  "pay": []
 }

@@ -20,12 +20,12 @@ function App() {
     const [title, setTitle] = useState('');
     useEffect(() => {
         if (title === null || title === undefined || title === "") {
-            setTitle(localStorage.getItem('store-title'));
+            setTitle(state.title);
+            // setTitle(localStorage.getItem('store-title'));
         } else {
             setTitle(state.title);
         }
     }, [state.title]);
-    console.log(title);
     return (
         <div className="App">
             <CompHeader />

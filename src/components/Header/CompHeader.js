@@ -8,7 +8,7 @@ function CompHeader(props) {
         <div className="CompHeader">
             <div className="contact"></div>
             <div className="nav">
-                <Link to={'/'}>
+                <Link to={'/store'}>
                     <img
                         className="logo"
                         src="https://traffic-edge31.cdn.vncdn.io/nvn/ncdn/store3/96878/logo_1648529159_logo%200338.png"

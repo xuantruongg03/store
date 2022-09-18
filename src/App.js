@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import slug from './Convert/ConvertStringVNtoTitle';
 
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import CompFooter from './components/CompFooter/CompFooter';
 import CompHeader from './components/Header/CompHeader.js';
@@ -13,7 +14,6 @@ import Pay from './Layout/Pay/Pay';
 import PayComplete from './Layout/PayComplete/PayComplete';
 import Products from './Layout/Products/Products';
 import NoPage from './NoPage';
-import { useEffect, useState } from 'react';
 
 function App() {
     const state = useSelector((state) => state.item);

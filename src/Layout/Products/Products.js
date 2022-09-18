@@ -33,6 +33,7 @@ function Products(props) {
             <div style={styles}>
                 {sale.map((product, index) => (
                     <CompProductItem
+                        subkey = {props.subkey}
                         key={product.id}
                         title={product.title}
                         item={product.img}
@@ -40,13 +41,6 @@ function Products(props) {
                         cost={product.cost}
                         des={product.description}
                         inf={product.infomation}
-                        setTitle={props.setTitle}
-                        setImg={props.setImg}
-                        setPrice={props.setPrice}
-                        setCost={props.setCost}
-                        setRate={props.setRate}
-                        setDes={props.setDes}
-                        setInf={props.setInf}
                     />
                 ))}
             </div>

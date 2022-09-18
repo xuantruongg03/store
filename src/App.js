@@ -1,4 +1,4 @@
-import { Route, Routes, useParams } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 import './App.css';
 import slug from './Convert/ConvertStringVNtoTitle';
@@ -12,17 +12,25 @@ import CompProductInfo from './Layout/Infomation/CompProductInfo';
 import Pay from './Layout/Pay/Pay';
 import PayComplete from './Layout/PayComplete/PayComplete';
 import Products from './Layout/Products/Products';
-import NoPage from './NoPage';
+// import NoPage from './NoPage';
+import { useEffect, useState } from 'react';
 
 function App() {
-    const title = useSelector((state) => state.item.title);
-    const { string } = useParams();
+    const state = useSelector((state) => state.item);
+    const [title, setTitle] = useState('');
+    useEffect(() => {
+        if (title === null || title === undefined || title === "") {
+            setTitle(localStorage.getItem('store-title'));
+        } else {
+            setTitle(state.title);
+        }
+    }, [state.title]);
+    console.log(title);
     return (
         <div className="App">
             <CompHeader />
             <Routes>
-                <Route path="/" index element={<Home />} />
-
+                <Route path="/" index element={<Home />}></Route>
                 <Route
                     path={slug('sản phẩm khuyến mãi')}
                     element={
@@ -31,20 +39,18 @@ function App() {
                         </div>
                     }
                 />
-                <Route
-                    path={':string/' + slug(title)}
-                    element={<CompProductInfo to={`${slug('sản phẩm khuyến mãi')}/${slug(title)}`} />}
-                />
+
+                <Route path={slug(title)} element={<CompProductInfo />} />
                 <Route path="cart" element={<Cart />} />
 
                 <Route path="pay" element={<Pay />} />
 
                 <Route path="paycomplete" element={<PayComplete />} />
 
-                <Route path="*" element={<NoPage />} />
+                {/* <Route path="*" element={<NoPage />} /> */}
             </Routes>
 
-            <CompFooter className="disabled" />
+            <CompFooter />
         </div>
     );
 }

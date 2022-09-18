@@ -58,6 +58,8 @@ function CompProductItem(props) {
                 subkey: props.subkey
             },
         });
+        localStorage.setItem('store-title', props.title);
+        localStorage.setItem('store-subkey', props.subkey);
     };
     return (
         <div className="styles">
@@ -68,7 +70,7 @@ function CompProductItem(props) {
 
             <img src={props.item} alt="Image" className="image" />
             <br />
-            <Link to={slug(props.title)} className="title" onClick={getInf}>
+            <Link to={"/" + slug(props.title)} className="title" onClick={getInf}>
                 {props.title}
             </Link>
             <div className="boxPrice">

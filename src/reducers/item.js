@@ -33,8 +33,7 @@ function itemReducer(state = initState, action) {
             });
             return state;
         case 'GET_INFO':
-            state.title = action.data.title;
-            state.subkey = action.data.subkey;
+            state = action.data
             return state;
         default:
             return state;

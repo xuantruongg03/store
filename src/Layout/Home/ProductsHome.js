@@ -32,7 +32,7 @@ function ProductsHome(props) {
                         subkey={props.subkey}
                         key={product.id}
                         title={product.title}
-                        item={product.img}
+                        img={product.img}
                         price={product.price}
                         cost={product.cost}
                         des={product.description}

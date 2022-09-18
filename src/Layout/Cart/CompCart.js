@@ -44,7 +44,6 @@ function CompCart(props) {
             }
             props.func.setSelect(selected);
         }
-        console.log(selectedTitlePay);
         props.func.setSelectTitlePay([...selectedTitlePay]);
         props.func.setSelectPricePay([...selectedPricePay]);
     };

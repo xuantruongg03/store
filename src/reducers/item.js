@@ -1,6 +1,11 @@
 const initState = {
     title: '',
     subkey: '',
+    cost: 0,
+    img: '',
+    price: 0,
+    des: '',
+    inf: []
 }
 function itemReducer(state = initState, action) {
     switch (action.type) {

@@ -4,7 +4,8 @@ import Table from 'react-bootstrap/Table';
 import { Link } from 'react-router-dom';
 
 import clsx from 'clsx';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { carts } from 'src/data';
 import style from './Cart.module.scss';
 import CompCart from './CompCart';
 
@@ -16,22 +17,12 @@ function Cart() {
     const [selectPricePay, setSelectPricePay] = useState([]);
     useEffect(() => {
         document.title = 'Giỏ Hàng';
-        fetch('http://localhost:3000/cart')
-            .then((res) => res.json())
-            .then((cart) => {
-                setCart(cart);
-            });
+        setCart(carts);
     }, []);
     const handleDelete = () => {
         dispatch({
             type: 'DELETE_CART',
             payload: select,
-        });
-    };
-    const handleBuy = () => {
-        dispatch({
-            type: 'PAY',
-            data: { selectTitlePay, selectPricePay },
         });
     };
     const func = {
@@ -70,7 +61,7 @@ function Cart() {
                     ))}
                 </Table>
             </div>
-            <Link to={'/pay'} className={style.btnpay} onClick={handleBuy}>
+            <Link to={'/pay'} className={style.btnpay}>
                 Thanh Toán
             </Link>
             <button className={clsx(style.btndel)} onClick={handleDelete}>

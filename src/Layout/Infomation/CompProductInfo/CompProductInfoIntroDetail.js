@@ -2,7 +2,6 @@ import style from "./CompProductInfoIntroDetail.module.scss";
 function CompProductInfoIntroDetail(props) {
   let info = [];
   info = props.info || localStorage.getItem("infomation").split(",");
-  console.log(info);
   return (
       <div className = {style.detail}>
         <p className = {style.title}>Mô tả chi tiết</p>

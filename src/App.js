@@ -12,7 +12,7 @@ import CompProductInfo from './Layout/Infomation/CompProductInfo';
 import Pay from './Layout/Pay/Pay';
 import PayComplete from './Layout/PayComplete/PayComplete';
 import Products from './Layout/Products/Products';
-// import NoPage from './NoPage';
+import NoPage from './NoPage';
 import { useEffect, useState } from 'react';
 
 function App() {
@@ -31,23 +31,25 @@ function App() {
             <CompHeader />
             <Routes>
                 <Route path="/store" index element={<Home />}></Route>
+
                 <Route
                     path={slug('sản phẩm khuyến mãi')}
                     element={
                         <div style={{ marginTop: '10px' }}>
-                            <Products subkey="sale" subTitle="Sản phẩm khuyến mãi" />
+                            <Products subkey="sales" subTitle="Sản phẩm khuyến mãi" />
                         </div>
                     }
                 />
 
                 <Route path={slug(title)} element={<CompProductInfo />} />
+                
                 <Route path="cart" element={<Cart />} />
 
                 <Route path="pay" element={<Pay />} />
 
                 <Route path="paycomplete" element={<PayComplete />} />
 
-                {/* <Route path="*" element={<NoPage />} /> */}
+                <Route path="*" element={<NoPage />} />
             </Routes>
 
             <CompFooter />

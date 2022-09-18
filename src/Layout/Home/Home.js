@@ -1,31 +1,16 @@
-import CompListMenu from '../../components/CompListMenu/CompListMenu';
-import CompBanner from './CompBanner/CompBanner';
-import CompTitle from '../../components/CompProducts/CompTitle';
-import ProductsHome from './ProductsHome';
 import { useEffect, useState } from 'react';
-
+import CompListMenu from '../../components/CompListMenu/CompListMenu';
+import CompTitle from '../../components/CompProducts/CompTitle';
+import CompBanner from './CompBanner/CompBanner';
+import ProductsHome from './ProductsHome';
+import {sales, computers} from "src/data"
 function Home(props) {
     const [sale, setSale] = useState([]);
     const [computer, setComputer] = useState([]);
     useEffect(() => {
         document.title = 'Computer Store';
-        fetch('http://localhost:3000/sale')
-            .then((response) => response.json())
-            .then((data) => {
-                setSale(data);
-            })
-            .catch((error) => {
-                console.error(error);
-            });
-
-        fetch('http://localhost:3000/computer')
-            .then((response) => response.json())
-            .then((data) => {
-                setComputer(data);
-            })
-            .catch((error) => {
-                console.error(error);
-            });
+        setSale(sales);
+        setComputer(computers);
     }, []);
     return (
         <div>

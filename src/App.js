@@ -19,7 +19,7 @@ function App() {
     const state = useSelector((state) => state.item);
     const [title, setTitle] = useState('');
     useEffect(() => {
-        if (title === null || title === undefined || title === "") {
+        if (title === null || title === undefined || title === '') {
             setTitle(state.title);
             // setTitle(localStorage.getItem('store-title'));
         } else {
@@ -30,7 +30,7 @@ function App() {
         <div className="App">
             <CompHeader />
             <Routes>
-                <Route path="/" index element={<Home />}></Route>
+                <Route path="/store" index element={<Home />}></Route>
                 <Route
                     path={slug('sản phẩm khuyến mãi')}
                     element={

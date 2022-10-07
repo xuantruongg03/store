@@ -3,7 +3,6 @@ import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import slug from './Convert/ConvertStringVNtoTitle';
 
-import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import CompFooter from './components/CompFooter/CompFooter';
 import CompHeader from './components/Header/CompHeader.js';
@@ -13,7 +12,8 @@ import CompProductInfo from './Layout/Infomation/CompProductInfo';
 import Pay from './Layout/Pay/Pay';
 import PayComplete from './Layout/PayComplete/PayComplete';
 import Products from './Layout/Products/Products';
-import NoPage from './NoPage';
+// import NoPage from './NoPage';
+import { useEffect, useState } from 'react';
 
 function App() {
     const state = useSelector((state) => state.item);
@@ -30,13 +30,13 @@ function App() {
         <div className="App">
             <CompHeader />
             <Routes>
-                <Route path="/store" index element={<Home />}></Route>
+                <Route path="/" index element={<Home />}></Route>
 
                 <Route
                     path={slug('sản phẩm khuyến mãi')}
                     element={
                         <div style={{ marginTop: '10px' }}>
-                            <Products subkey="sales" subTitle="Sản phẩm khuyến mãi" />
+                            <Products subkey="sale" subTitle="Sản phẩm khuyến mãi" />
                         </div>
                     }
                 />
@@ -49,7 +49,7 @@ function App() {
 
                 <Route path="paycomplete" element={<PayComplete />} />
 
-                <Route path="*" element={<NoPage />} />
+                {/* <Route path="*" element={<NoPage />} /> */}
             </Routes>
 
             <CompFooter />

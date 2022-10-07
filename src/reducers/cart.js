@@ -5,8 +5,17 @@ const initState = {
 function cartReducer(state = initState, action) {
     switch (action.type) {
         case 'DELETE_CART':
+            // xoa sp
             const select = action.payload;
+            const requestOptions = {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json',
+                },
+            };
             select.map((id) => {
+                fetch('http://localhost:3000/cart/' + id, requestOptions).then((response) => {
                     document.querySelector('.cart-' + id).remove();
                     // xóa id đã gửi yêu cầu delete
                     for (let i = 0; i < select.length; i++) {
@@ -14,6 +23,7 @@ function cartReducer(state = initState, action) {
                             select.splice(i, 1);
                         }
                     }
+                });
             });
             return state;
         case 'PAY':

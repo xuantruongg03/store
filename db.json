@@ -1,16 +1,16 @@
 {
   "Banner": [
     {
-      "title": "",
-      "img": "src/Layout/Home/CompBanner/Banner/banner1.png"
+      "id": 1,
+      "value": "https://traffic-edge50.cdn.vncdn.io/nvn/ncdn/store3/96878/bn/01_Marc2ffc1317dfa116ebc613e1b464f85d8.png"
     },
     {
-      "title": "",
-      "img": "src/Layout/Home/CompBanner/Banner/banner2.png"
+      "id": 2,
+      "value": "https://traffic-edge06.cdn.vncdn.io/nvn/ncdn/store3/96878/bn/01_Marc6ef5979b85c2db3ba8c211780c60c9f.jpg"
     },
     {
-      "title": "",
-      "img": "src/Layout/Home/CompBanner/Banner/banner3.png"
+      "id": 3,
+      "value": "https://traffic-edge29.cdn.vncdn.io/nvn/ncdn/store3/96878/bn/07_Mar960229b53f63d4d2d2ec1043c278cd1f.png"
     }
   ],
   "sale": [

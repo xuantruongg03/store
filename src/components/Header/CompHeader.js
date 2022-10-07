@@ -1,14 +1,16 @@
 import { faBars, faCartShopping, faPiggyBank, faSearch, faShieldAlt, faTruck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import './CompHeader.css';
 
 function CompHeader(props) {
+    const dispatch = useDispatch();
     return (
         <div className="CompHeader">
             <div className="contact"></div>
             <div className="nav">
-                <Link to={'/store'}>
+                <Link to={'/'}>
                     <img
                         className="logo"
                         src="https://traffic-edge31.cdn.vncdn.io/nvn/ncdn/store3/96878/logo_1648529159_logo%200338.png"

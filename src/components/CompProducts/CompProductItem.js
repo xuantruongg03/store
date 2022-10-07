@@ -55,12 +55,7 @@ function CompProductItem(props) {
             type: 'GET_INFO',
             data: {
                 title: props.title,
-                subkey: props.subkey,
-                cost: props.cost,
-                img: props.img,
-                price: props.price,
-                des: props.des,
-                inf: props.inf,
+                subkey: props.subkey
             },
         });
         localStorage.setItem('store-title', props.title);
@@ -73,7 +68,7 @@ function CompProductItem(props) {
                 <span>{sale + '%'}</span>
             </div>
 
-            <img src={props.img} alt="Image" className="image" />
+            <img src={props.item} alt="Image" className="image" />
             <br />
             <Link to={"/" + slug(props.title)} className="title" onClick={getInf}>
                 {props.title}

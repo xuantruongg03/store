@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import CompProductItem from 'src/components/CompProducts/CompProductItem';
-import {sales, computers} from "src/data"
 
 const styles = {
     borderTop: '1px solid gray',
@@ -19,7 +18,14 @@ function Products(props) {
     useEffect(() => {
         document.title = props.subTitle;
         window.scrollTo(0, 0);
-        setSale(sales);
+        fetch('http://localhost:3000/' + props.subkey)
+            .then((response) => response.json())
+            .then((data) => {
+                setSale(data);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
     }, []);
     return (
         <div>
@@ -30,7 +36,7 @@ function Products(props) {
                         subkey = {props.subkey}
                         key={product.id}
                         title={product.title}
-                        img={product.img}
+                        item={product.img}
                         price={product.price}
                         cost={product.cost}
                         des={product.description}

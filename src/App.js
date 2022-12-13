@@ -12,7 +12,7 @@ import CompProductInfo from './Layout/Infomation/CompProductInfo';
 import Pay from './Layout/Pay/Pay';
 import PayComplete from './Layout/PayComplete/PayComplete';
 import Products from './Layout/Products/Products';
-// import NoPage from './NoPage';
+import NoPage from './NoPage';
 import { useEffect, useState } from 'react';
 
 function App() {
@@ -25,7 +25,7 @@ function App() {
         } else {
             setTitle(state.title);
         }
-    }, [state.title]);
+    }, []);
     return (
         <div className="App">
             <CompHeader />
@@ -49,7 +49,7 @@ function App() {
 
                 <Route path="paycomplete" element={<PayComplete />} />
 
-                {/* <Route path="*" element={<NoPage />} /> */}
+                <Route path="*" element={<NoPage />} />
             </Routes>
 
             <CompFooter />

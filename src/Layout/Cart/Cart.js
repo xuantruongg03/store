@@ -4,7 +4,7 @@ import Table from 'react-bootstrap/Table';
 import { Link } from 'react-router-dom';
 
 import clsx from 'clsx';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import style from './Cart.module.scss';
 import CompCart from './CompCart';
 

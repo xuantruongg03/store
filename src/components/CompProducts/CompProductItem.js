@@ -42,7 +42,7 @@ function CompProductItem(props) {
         dispatch({
             type: 'POST_CART',
             data: {
-                src: props.item,
+                // src: props.item,
                 title: props.title,
                 infomation: '1 TB',
                 price: props.price,
@@ -68,7 +68,7 @@ function CompProductItem(props) {
                 <span>{sale + '%'}</span>
             </div>
 
-            <img src={props.item} alt="Image" className="image" />
+            <img src={props.item} alt="img" className="image" />
             <br />
             <Link to={"/" + slug(props.title)} className="title" onClick={getInf}>
                 {props.title}

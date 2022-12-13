@@ -5,7 +5,7 @@ const initState = {
 function itemReducer(state = initState, action) {
     switch (action.type) {
         case 'POST_CART':
-            const src = action.data.src;
+            // const src = action.data.src; //image
             const title = action.data.title;
             const infomation = action.data.infomation;
             const price = action.data.price;
@@ -17,7 +17,7 @@ function itemReducer(state = initState, action) {
                     Accept: 'application/json',
                 },
                 body: JSON.stringify({
-                    src,
+                    // src,
                     title,
                     infomation,
                     price,

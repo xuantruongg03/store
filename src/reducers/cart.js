@@ -19,11 +19,12 @@ function cartReducer(state = initState, action) {
                     document.querySelector('.cart-' + id).remove();
                     // xóa id đã gửi yêu cầu delete
                     for (let i = 0; i < select.length; i++) {
-                        if (select[i] == id) {
+                        if (select[i] === id) {
                             select.splice(i, 1);
                         }
                     }
                 });
+                return state;
             });
             return state;
         case 'PAY':

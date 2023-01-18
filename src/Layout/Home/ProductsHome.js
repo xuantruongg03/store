@@ -23,20 +23,20 @@ function ProductsHome(props) {
     useEffect(() => {
         window.scrollTo(0, 0);
     });
-
     return (
         <div style={styles} id="product">
             <Slider {...property}>
                 {props.listProducts.map((product, index) => (
                     <CompProductItem
                         subkey={props.subkey}
-                        key={product.id}
-                        title={product.title}
-                        item={product.img}
-                        price={product.price}
-                        cost={product.cost}
-                        des={product.description}
-                        inf={product.infomation}
+                        key={index}
+                        title={product.tensanpham}
+                        item={product.hinhanh}
+                        price={product.giaban}
+                        cost={product.giaban}
+                        des={product.mota}
+                        inf={product.mota}
+                        id_product={product.id_sanpham}
                     />
                 ))}
             </Slider>

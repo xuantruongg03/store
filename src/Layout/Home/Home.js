@@ -3,29 +3,19 @@ import CompBanner from './CompBanner/CompBanner';
 import CompTitle from '../../components/CompProducts/CompTitle';
 import ProductsHome from './ProductsHome';
 import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 function Home(props) {
     const [sale, setSale] = useState([]);
     const [computer, setComputer] = useState([]);
     useEffect(() => {
         document.title = 'Computer Store';
-        fetch('http://localhost:3000/sale')
-            .then((response) => response.json())
-            .then((data) => {
-                setSale(data);
-            })
-            .catch((error) => {
-                console.error(error);
-            });
+        //call api
 
-        fetch('http://localhost:3000/computer')
-            .then((response) => response.json())
-            .then((data) => {
-                setComputer(data);
+        axios.get('http://localhost:8000/api/v1/get-product')
+            .then(res => {  
+                setComputer(res.data.data)
             })
-            .catch((error) => {
-                console.error(error);
-            });
     }, []);
     return (
         <div>
@@ -34,8 +24,8 @@ function Home(props) {
                 <CompBanner />
             </div>
             <br />
-            <CompTitle title="Sản phẩm khuyến mãi" />
-            <ProductsHome listProducts={sale} subkey="sale"/>
+            {/* <CompTitle title="Sản phẩm khuyến mãi" />
+            <ProductsHome listProducts={sale} subkey="sale" /> */}
 
             <CompTitle title="Máy tính xách tay" />
             <ProductsHome listProducts={computer} subkey="computer" />

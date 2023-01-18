@@ -13,19 +13,23 @@ const subTitle = {
     color: 'red',
 };
 
+
 function Products(props) {
+
     const [sale, setSale] = useState([]);
     useEffect(() => {
         document.title = props.subTitle;
         window.scrollTo(0, 0);
-        fetch('http://localhost:3000/' + props.subkey)
-            .then((response) => response.json())
-            .then((data) => {
-                setSale(data);
-            })
-            .catch((error) => {
-                console.error(error);
-            });
+        // fetch('http://localhost:8080/api/v1/get-product' + props.subkey)
+        //     .then((response) => response.json())
+        //     .then((data) => {
+        //         setSale(data);
+        //         console.log(data);
+        //     })
+        //     .catch((error) => {
+        //         console.error(error);
+        //     });
+        // userAction();
     }, []);
     return (
         <div>

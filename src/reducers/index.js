@@ -1,11 +1,12 @@
 import { combineReducers } from "redux";
 import payReducer from "./pay";
 import cartReducer from "./cart";
-import itemReducer from "./item";
+import reducerItem from "./item";
 
 const rootReducer = combineReducers({
     cart: cartReducer,
-    item: itemReducer,
+    item: reducerItem.itemReducer,
+    getInfo: reducerItem.getInfo,
     pay: payReducer
   })
 export default rootReducer;

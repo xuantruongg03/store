@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
@@ -9,64 +10,47 @@ import CompProductInfoPrice from './CompProductInfo/CompProductInfoPrice';
 import CompProductInfoTitle from './CompProductInfo/CompProductInfoTitle';
 
 function CompProductInfo(props) {
-    const state = useSelector((state) => {
-        return state.item;
-    });
-    // const info = localStorage.getItem('infomation').split(",");
-    const [subkey, setSubkey] = useState(localStorage.getItem('store-subkey'));
-    const [title, setTitle] = useState(localStorage.getItem('store-title'));
-    const [cost, setCost] = useState(localStorage.getItem('store-cost'));
-    const [img, setImg] = useState(localStorage.getItem('store-img'));
-    const [price, setPrice] = useState(localStorage.getItem('store-price'));
-    const [description, setDescription] = useState(localStorage.getItem('store-description'));
+    const [title, setTitle] = useState();
+    const [cost, setCost] = useState();
+    const [img, setImg] = useState();
+    const [price, setPrice] = useState();
+    const [description, setDescription] = useState();
     const [infomation, setInfomation] = useState([]);
-    
-    localStorage.setItem('store-title', title);
-    localStorage.setItem('store-price', price);
-    localStorage.setItem('store-description', description);
-    localStorage.setItem('store-cost', cost);
-    localStorage.setItem('store-img', img);
-    localStorage.setItem('store-nfomation', infomation);
-    
+    const [quatity, setQuatity] = useState()
+
+    const id = useSelector((state) => state.item.id_product);
     useEffect(() => {
         window.scrollTo(0, 0);
-        fetch('http://localhost:3000/' + subkey)
-            .then((response) => response.json())
-            .then((data) => {
-                for (let i = 0; i < data.length; i++) {
-                    if (data[i].title === title) {
-                        document.title = data[i].title;
-                        setTitle(data[i].title);
-                        setImg(data[i].img);
-                        setCost(data[i].cost);
-                        setPrice(data[i].price);
-                        setDescription(data[i].description);
-                        setInfomation(data[i].infomation);
-                        break;
-                    }
-                }
-                console.log("Completed");
-            })
-            .catch((error) => {
-                console.error(error);
-            });
-    }, []);
+        axios.get(`http://localhost:8000/api/v1/products/${id}`).then((res) => {
+            const data = res.data.data;
+            setTitle(data.product[0].tensanpham)
+            setPrice(data.product[0].giaban)
+            setCost(data.product[0].giaban)
+            setDescription(data.product[0].mota)
+            setImg(data.product[0].hinhanh)
+            setDescription(data.product[0].mota)
+            const detail = Object.values(data.detail[0]);
+            detail.shift();
+            setInfomation(detail);
+            setQuatity(data.product[0].soluong)
+        });
+    }, [id]);
     return (
         <div style={{ margin: '0 130px' }}>
             <CompProductInfoTitle title={title} />
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <CompProductInfoImg img={img} />
                 <CompProductInfoPrice price={price} cost={cost} />
-                <CompProductInfoDes />
+                <CompProductInfoDes quatity = {quatity}/>
             </div>
 
             <div style={{ display: 'flex' }}>
                 <CompProductInfoIntro des={description} />
                 <br />
-                <CompProductInfoIntroDetail info = {infomation} />
+                <CompProductInfoIntroDetail info={infomation} />
             </div>
             <br />
-            <Outlet/>
+            <Outlet />
         </div>
     );
 }

@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import slug from './Convert/ConvertStringVNtoTitle';
 
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import CompFooter from './components/CompFooter/CompFooter';
 import CompHeader from './components/Header/CompHeader.js';
@@ -13,18 +14,17 @@ import Pay from './Layout/Pay/Pay';
 import PayComplete from './Layout/PayComplete/PayComplete';
 import Products from './Layout/Products/Products';
 import NoPage from './NoPage';
-import { useEffect, useState } from 'react';
 
 function App() {
-    const state = useSelector((state) => state.item);
-    const [title, setTitle] = useState('');
+    const title = useSelector((state) => state.item.title) || "title";
+    // const [title, setTitle] = useState('');
     useEffect(() => {
-        if (title === null || title === undefined || title === '') {
-            setTitle(state.title);
-            // setTitle(localStorage.getItem('store-title'));
-        } else {
-            setTitle(state.title);
-        }
+        // if (title === null || title === undefined || title === '') {
+        //     setTitle(state.title);
+        //     // setTitle(localStorage.getItem('store-title'));
+        // } else {
+        //     setTitle(state.title);
+        // }
     }, []);
     return (
         <div className="App">
@@ -42,7 +42,7 @@ function App() {
                 />
 
                 <Route path={slug(title)} element={<CompProductInfo />} />
-                
+
                 <Route path="cart" element={<Cart />} />
 
                 <Route path="pay" element={<Pay />} />

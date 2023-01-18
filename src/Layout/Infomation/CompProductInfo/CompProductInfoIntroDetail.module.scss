@@ -1,5 +1,5 @@
 .detail{
-    margin: 0 100px;
+    margin: 0 50px;
     min-width: 500px;
     max-width: 500px;
     min-height: 100px;
@@ -14,11 +14,28 @@
     margin: 0 auto;
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.li {
+    display: flex;
+    // justify-content: space-between;
+    padding: 0;
+}
+.lable{
+    max-width: 50%;
+    min-width: 30%;
+    font-weight: 600;
+}
+.inf{
+    padding-left: 5px;
 }
 
 .ul{
-    border: 1px solid rgb(247, 244, 244);
+    // border: 1px solid rgb(247, 244, 244);
     margin: 0;
+    padding-left: 10px;
 
 }
 

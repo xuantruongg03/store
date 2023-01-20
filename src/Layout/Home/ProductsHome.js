@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-
+import 'slick-carousel/slick/slick.css';
 import CompProductItem from '../../components/CompProducts/CompProductItem';
 import './slickBtn.css';
+
 const styles = {
     borderTop: '1px solid gray',
     margin: '0 142px 0 130px',

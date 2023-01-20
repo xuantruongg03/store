@@ -36,16 +36,14 @@ function CompProductItem(props) {
         if (sale <= 0) {
             setIsSales(false);
         }
-    });
+    }, [sale]);
+    
     const dispatch = useDispatch();
     const handleBuy = () => {
         dispatch({
-            type: 'POST_CART',
+            type: 'ADD_TO_CARD',
             data: {
-                src: props.item,
-                title: props.title,
-                infomation: '1 TB',
-                price: props.price,
+                id_product: props.id_product,
                 amount: amount,
             },
         });
@@ -59,8 +57,8 @@ function CompProductItem(props) {
                 id_product: props.id_product
             },
         });
-        localStorage.setItem('store-title', props.title);
-        localStorage.setItem('store-subkey', props.subkey);
+        // localStorage.setItem('store-title', props.title);
+        // localStorage.setItem('store-subkey', props.subkey);
     };
     return (
         <div className="styles">
@@ -71,11 +69,11 @@ function CompProductItem(props) {
 
             <img src={props.item} alt="img" className="image" />
             <br />
-            <Link to={"/" + slug(props.title)} className="title" onClick={getInf}>
+            <Link to={"/products/" + slug(props.title)} className="title" onClick={getInf}>
                 {props.title}
             </Link>
             <div className="boxPrice">
-                <h3 className="price">{formatsMoney(props.price*1000)}</h3>
+                <h3 className="price">{formatsMoney(props.price)}</h3>
                 <h4 className={isSales === true ? 'cost' : 'disabled'}>{formatsMoney(props.cost)}</h4>
             </div>
 

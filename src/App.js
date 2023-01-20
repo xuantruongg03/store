@@ -1,12 +1,9 @@
-import { Route, Routes } from 'react-router-dom';
-
-import './App.css';
-import slug from './Convert/ConvertStringVNtoTitle';
-
-import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { Route, Routes } from 'react-router-dom';
+import './App.css';
 import CompFooter from './components/CompFooter/CompFooter';
 import CompHeader from './components/Header/CompHeader.js';
+import slug from './Convert/ConvertStringVNtoTitle';
 import Cart from './Layout/Cart/Cart';
 import Home from './Layout/Home/Home';
 import CompProductInfo from './Layout/Infomation/CompProductInfo';
@@ -16,32 +13,21 @@ import Products from './Layout/Products/Products';
 import NoPage from './NoPage';
 
 function App() {
-    const title = useSelector((state) => state.item.title) || "title";
-    // const [title, setTitle] = useState('');
-    useEffect(() => {
-        // if (title === null || title === undefined || title === '') {
-        //     setTitle(state.title);
-        //     // setTitle(localStorage.getItem('store-title'));
-        // } else {
-        //     setTitle(state.title);
-        // }
-    }, []);
+    const title = useSelector((state) => state.item.title) || 'title';
+    
     return (
         <div className="App">
             <CompHeader />
             <Routes>
                 <Route path="/" index element={<Home />}></Route>
 
-                <Route
-                    path={slug('sản phẩm khuyến mãi')}
-                    element={
-                        <div style={{ marginTop: '10px' }}>
-                            <Products subkey="sale" subTitle="Sản phẩm khuyến mãi" />
-                        </div>
-                    }
-                />
+                <Route path="/sale">
+                    <Route path={slug('sản phẩm khuyến mãi')} element={Products} subkey="sale" subTitle="Sản phẩm khuyến mãi"/>
+                </Route>
 
-                <Route path={slug(title)} element={<CompProductInfo />} />
+                <Route path="/products">
+                    <Route path={slug(title)} element={<CompProductInfo />} />
+                </Route>
 
                 <Route path="cart" element={<Cart />} />
 

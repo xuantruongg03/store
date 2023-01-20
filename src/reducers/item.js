@@ -1,35 +1,33 @@
 // const { default: axios } = require('axios');
 
+const { default: axios, Axios } = require("axios");
+
 const initState = {};
 function itemReducer(state = initState, action) {
     switch (action.type) {
-        case 'POST_CART':
-            // const src = action.data.src;
-            // const title = action.data.title;
-            // const infomation = action.data.infomation;
-            // const price = action.data.price;
-            // const amount = action.data.amount;
-            // const requestOptions = {
-            //     method: 'POST',
-            //     headers: {
-            //         'Content-Type': 'application/json',
-            //         Accept: 'application/json',
-            //     },
-            //     body: JSON.stringify({
-            //         src,
-            //         title,
-            //         infomation,
-            //         price,
-            //         amount,
-            //     }),
-            // };
-            // fetch('http://localhost:3000/cart', requestOptions).then((response) => {
-            //     if (response.status >= 200 && response.status < 300) {
-            //         alert('Đặt hàng thành công! Hãy kiểm tra giỏ hàng của bạn.');
-            //     } else if (response.status === 500) {
-            //         alert('Lỗi phía Client! Thử lại sau.');
-            //     }
-            // });
+        case 'ADD_TO_CARD':
+            const id_sanpham = action.data.id_product;
+            const soluong = action.data.amount;
+            const id_khachhang = 1;
+            const requestOptions = {
+                method: 'POST',
+                body: JSON.stringify({
+                    id_sanpham, 
+                    soluong,
+                    id_khachhang
+                }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            };
+
+            fetch('http://localhost:8000/api/v1/add-to-cart', requestOptions).then((response) => {
+                if (response.status >= 200 && response.status < 300) {
+                    alert('Đặt hàng thành công! Hãy kiểm tra giỏ hàng của bạn.');
+                } else if (response.status === 500) {
+                    alert('Lỗi phía Client! Thử lại sau.');
+                }
+            });
             return state;
 
         case 'GET_INFO':
@@ -39,16 +37,4 @@ function itemReducer(state = initState, action) {
     }
 }
 
-const getInfo = (state = initState, action) => {
-    switch (action) {
-        case 'GET_INFO':
-            //gọi axios lấy mô tả chi tiết sản phẩm
-            console.log(action.data);
-            return state;
-
-        default:
-            return state;
-    }
-};
-
-module.exports = { getInfo, itemReducer };
+module.exports = { itemReducer };

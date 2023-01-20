@@ -7,6 +7,7 @@ import clsx from 'clsx';
 import { useDispatch } from 'react-redux';
 import style from './Cart.module.scss';
 import CompCart from './CompCart';
+import axios from 'axios';
 
 function Cart() {
     const dispatch = useDispatch();
@@ -14,32 +15,37 @@ function Cart() {
     const [select, setSelect] = useState([]);
     const [selectTitlePay, setSelectTitlePay] = useState([]);
     const [selectPricePay, setSelectPricePay] = useState([]);
+    const [selectQuatity, setSelectQuatity] = useState([]);
+    const idCart = 1;
+
     useEffect(() => {
         document.title = 'Giỏ Hàng';
-        fetch('http://localhost:3000/cart')
-            .then((res) => res.json())
-            .then((cart) => {
-                setCart(cart);
-            });
+        axios.get(`http://localhost:8000/api/v1/cart/get-cart/${idCart}`).then((res) => {
+            setCart(res.data.data.cart);
+        });
     }, []);
     const handleDelete = () => {
         dispatch({
             type: 'DELETE_CART',
-            payload: select,
+            data: select,
         });
     };
     const handleBuy = () => {
         dispatch({
             type: 'PAY',
-            data: { selectTitlePay, selectPricePay },
+            data: { selectTitlePay, selectPricePay, id_product: select, selectQuatity },
         });
     };
     const func = {
-        setSelectTitlePay,
-        selectTitlePay,
-        setSelectPricePay,
-        selectPricePay,
         setSelect,
+        setSelectTitlePay,
+        setSelectPricePay,
+        setSelectQuatity,
+    };
+    const value = {
+        selectTitlePay,
+        selectPricePay,
+        selectQuatity,
     };
     return (
         <div style={{ backgroundColor: '#FAFAFA', overflow: 'auto' }}>
@@ -66,7 +72,7 @@ function Cart() {
                     </thead>
 
                     {cart.map((item, index) => (
-                        <CompCart data={item} key={index} func={func} />
+                        <CompCart data={item} key={index} func={func} value={value}/>
                     ))}
                 </Table>
             </div>

@@ -4,11 +4,16 @@ import formatsMoney from '../../../Convert/ConvertMoneyVND';
 import { useState } from 'react';
 
 function CompProductInfoPrice(props) {
-    const [color, setColor] = useState('');
-    const handleSetColor = (color) => {
-        setColor(color.target.value);
+    const [config, setConfig] = useState('');
+    const handleSetConfig = (config) => {
+        setConfig(config.target.value);
     };
-    localStorage.setItem('color', color);
+    const hanldeBuyNow = () => {
+        console.log('Buy Now');
+    };
+    const handleContact = () => {
+        console.log('Contact');
+    };
     return (
         <div className={style.priceBox}>
             <p>
@@ -19,16 +24,32 @@ function CompProductInfoPrice(props) {
                 Rate: <span className={style.rateNumber}>5.0</span>
             </p>
             <br />
-            <p className={style.color}>Màu sắc:</p>
-            <button value="red" onClick={handleSetColor} className={clsx(style.btnColor, style.red)}></button>
-            <button value="gray" onClick={handleSetColor} className={clsx(style.btnColor, style.gray)}></button>
+            <p className={style.configuration}>Cấu hình:</p>
+            <button onClick={handleSetConfig} value="256" className={clsx(style.btnConfig)}>
+                256GB
+            </button>
+            <button
+                onClick={handleSetConfig}
+                value="512"
+                className={clsx(style.btnConfig)}
+                style={{ marginLeft: '10px' }}
+            >
+                512GB
+            </button>
             <br />
-            <button className={style.add}>
+            <div>
+                <p className={style.inf}>
+                    Tình trạng: <span className={style.des}>{props.quatity > 1 ? 'Còn hàng' : 'Hết hàng'}</span>{' '}
+                </p>
+            </div>
+            <button className={style.add} onClick={hanldeBuyNow}>
                 Mua ngay
                 <br />
                 <span style={{ fontSize: '12px' }}>Giao hàng tận nơi</span>
             </button>
-            <button className={style.contact}>Liên hệ đặt hàng</button>
+            <button onClick={handleContact} className={style.contact}>
+                Liên hệ đặt hàng
+            </button>
         </div>
     );
 }

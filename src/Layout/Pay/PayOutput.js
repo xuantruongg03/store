@@ -3,35 +3,22 @@ import clsx from 'clsx';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
-import { useDispatch } from 'react-redux';
 
 import { Link } from 'react-router-dom';
 import formatsMoney from 'src/Convert/ConvertMoneyVND';
 import style from './Pay.module.scss';
 
 function PayOutput(props) {
-    const totalPrice = props.data.totalPrice - props.data.sale - props.data.freeship;
+    const sale = 0;
+    const freeship = 0;
+    let totalPrice = 0;
+    props.data.map((element) => {
+        return totalPrice += element.price * element.quatity
+    });
+    totalPrice -= (sale + freeship);
+
     const handleSelectpayment = (e) => {
         props.setPayment(e.target.value);
-    };
-    const dispatch = useDispatch();
-    const propsData = {
-        name: props.data.name,
-        phone: props.data.phone,
-        address: props.data.address,
-        conscious: props.data.conscious,
-        district: props.data.district,
-        city: props.data.city,
-        notes: props.data.notes,
-        payment: props.data.payment,
-        titleProduct: props.data.title,
-        price: totalPrice,
-    };
-    const handleBuy = () => {
-        dispatch({
-            type: 'BUY',
-            data: propsData,
-        });
     };
     return (
         <Form className={clsx(style.output)}>
@@ -47,28 +34,27 @@ function PayOutput(props) {
                 </Form.Group>
                 <div className={style.bri} />
             </Row>
-
             <Row>
                 <Form.Group className={style.flex}>
                     <div>
-                        {props.data.title.map((title, index) => (
+                        {props.data.map((element, index) => (
                             <li key={index} style={{ padding: '0', display: 'block' }}>
-                                <Form.Label className={style.label}>{title}</Form.Label>
+                                <Form.Label className={style.label}>{element.title} x {element.quatity}</Form.Label>
                             </li>
                         ))}
                     </div>
                     <Form.Label className={clsx(style.label, style.provisional)}>
-                        {formatsMoney(props.data.totalPrice)}
+                        {formatsMoney(totalPrice)}
                     </Form.Label>
                 </Form.Group>
                 <div className={style.bri} />
             </Row>
-
+        
             <Row>
                 <Form.Group className={style.flex}>
                     <Form.Label className={style.label}>Mã giảm giá</Form.Label>
                     <Form.Label className={clsx(style.label, style.provisional)}>
-                        {`-` + formatsMoney(props.data.sale)}
+                        {`-` + formatsMoney(sale)}
                     </Form.Label>
                 </Form.Group>
                 <div className={style.bri} />
@@ -77,7 +63,7 @@ function PayOutput(props) {
                 <Form.Group className={style.flex}>
                     <Form.Label className={style.label}>Phí vận chuyển</Form.Label>
                     <Form.Label className={clsx(style.label, style.provisional)}>
-                        {formatsMoney(props.data.freeship)}
+                        {formatsMoney(freeship)}
                     </Form.Label>
                 </Form.Group>
                 <div className={style.bri} />
@@ -102,7 +88,7 @@ function PayOutput(props) {
                 <Form.Group>
                     <Form.Check
                         onClick={handleSelectpayment}
-                        value="cash"
+                        value="Thanh toán khi nhận hàng"
                         type="radio"
                         name="flexRadioDefault"
                         id="flexRadioDefault2"
@@ -111,7 +97,7 @@ function PayOutput(props) {
                     <br />
                     <Form.Check
                         onClick={handleSelectpayment}
-                        value="banking"
+                        value="Chuyển khoản"
                         type="radio"
                         name="flexRadioDefault"
                         id="flexRadioDefault1"
@@ -120,7 +106,7 @@ function PayOutput(props) {
                 </Form.Group>
             </Row>
             <Button variant="primary" type="submit" className={style.button}>
-                <Link to={'/paycomplete'} className={style.link} onClick={handleBuy}>
+                <Link to={'/paycomplete'} className={style.link} onClick={props.buy}>
                     Xác Nhận Thanh Toán
                 </Link>
             </Button>

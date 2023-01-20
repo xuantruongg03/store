@@ -13,9 +13,7 @@ const subTitle = {
     color: 'red',
 };
 
-
 function Products(props) {
-
     const [sale, setSale] = useState([]);
     useEffect(() => {
         document.title = props.subTitle;
@@ -37,14 +35,15 @@ function Products(props) {
             <div style={styles}>
                 {sale.map((product, index) => (
                     <CompProductItem
-                        subkey = {props.subkey}
-                        key={product.id}
-                        title={product.title}
-                        item={product.img}
-                        price={product.price}
-                        cost={product.cost}
-                        des={product.description}
-                        inf={product.infomation}
+                        subkey={props.subkey}
+                        key={index}
+                        title={product.tensanpham}
+                        item={product.hinhanh}
+                        price={product.giaban}
+                        cost={product.giaban}
+                        des={product.mota}
+                        inf={product.mota}
+                        id_product={product.id_sanpham}
                     />
                 ))}
             </div>

@@ -16,14 +16,14 @@ function Cart() {
     const [selectTitlePay, setSelectTitlePay] = useState([]);
     const [selectPricePay, setSelectPricePay] = useState([]);
     const [selectQuatity, setSelectQuatity] = useState([]);
-    const idCart = 1;
+    const idCart = localStorage.getItem("id_khachhang");
 
     useEffect(() => {
         document.title = 'Giỏ Hàng';
         axios.get(`http://localhost:8000/api/v1/cart/get-cart/${idCart}`).then((res) => {
             setCart(res.data.data.cart);
         });
-    }, []);
+    }, [idCart]);
     const handleDelete = () => {
         dispatch({
             type: 'DELETE_CART',

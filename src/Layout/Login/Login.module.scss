@@ -1,7 +1,95 @@
 .container {
     display: block !important;
     border: 1px solid black;
-    width: 500px;
-    height: 700px;
-    margin: 20px auto;
+    width: 400px;
+    height: 500px;
+    // margin: 7em auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.title{
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    color: #000099;
+    margin: 20px 0;
+}
+
+.formGroup{
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+}
+
+.login{
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0;
+}
+
+.lable{
+    font-size: 17px;
+    font-weight: bold;
+    color: #000099;
+    margin: 5px 0;
+}
+
+.input{
+    height: 30px;
+    border: 1px solid #000099;
+    border-radius: 5px;
+    padding: 0 10px;
+    box-sizing: border-box;
+    font-size: 15px;
+    color: #000099;
+    &:focus{
+        outline-color: #000099;
+    }
+}
+
+.lableAlert{
+    font-size: 14px;
+    color: red;
+    font-weight: 700;
+    margin: 5px 0;
+}
+
+.boxLable{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.labelForgetPassword{
+    font-size: 14px;
+    font-weight: bold;
+    color: #000099;
+    margin: 10px 0;
+    text-align: right;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.button{
+    height: 40px;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    background-color: #000099;
+    color: #fff;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 20px 0;
+    cursor: pointer;
 }

@@ -1,24 +1,20 @@
-// const { default: axios } = require('axios');
-
-const { default: axios, Axios } = require("axios");
-
 const initState = {};
 function itemReducer(state = initState, action) {
     switch (action.type) {
         case 'ADD_TO_CARD':
             const id_sanpham = action.data.id_product;
             const soluong = action.data.amount;
-            const id_khachhang = 1;
+            const id_khachhang = localStorage.getItem("id_khachhang");
             const requestOptions = {
                 method: 'POST',
                 body: JSON.stringify({
-                    id_sanpham, 
+                    id_sanpham,
                     soluong,
-                    id_khachhang
+                    id_khachhang,
                 }),
                 headers: {
-                    'Content-Type': 'application/json'
-                }
+                    'Content-Type': 'application/json',
+                },
             };
 
             fetch('http://localhost:8000/api/v1/add-to-cart', requestOptions).then((response) => {
@@ -31,7 +27,7 @@ function itemReducer(state = initState, action) {
             return state;
 
         case 'GET_INFO':
-            return state = action.data;
+            return (state = action.data);
         default:
             return state;
     }

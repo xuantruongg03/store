@@ -15,7 +15,7 @@ function payReducer(state = initState, action) {
         case 'BUY':
             const data = action.data;
             const product = action.data.product;
-            const id_khachhang = 1;
+            const id_khachhang = localStorage.getItem('id_khachhang');
             // const id_sanpham = data.id_product;
             const tennguoinhan = data.name;
             const sdtnguoinhan = data.phone;
@@ -24,19 +24,6 @@ function payReducer(state = initState, action) {
             const hinhthucthanhtoan = data.payment;
             // const soluong = 1;
             const giamgia = 0;
-
-            /**
-             * id_khachhang tự cho
-             * tennguoinhan
-             * diachinhan
-             * sdtnguoinhan
-             *
-             * id_sanpham
-             * soluong
-             * giamgia
-             * hinhthucthanhtoan
-             * ghichu
-             */
 
             product.map((element) => {
                 const requestOptions = {
@@ -56,11 +43,58 @@ function payReducer(state = initState, action) {
                         giamgia,
                     }),
                 };
-                fetch('http://localhost:8000/api/v1/buy', requestOptions).then((res) => {
-                    console.log(res.status);
-                });
+                product.map((element) => {
+                    const requestOptions = {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            id_khachhang,
+                            id_sanpham: element.id_product,
+                            tennguoinhan,
+                            sdtnguoinhan,
+                            diachinhan,
+                            ghichu,
+                            hinhthucthanhtoan,
+                            soluong: element.soluong,
+                            giamgia,
+                        }),
+                    };
 
-            })
+                    Promise.all[
+                        (fetch('http://localhost:8000/api/v1/buy', requestOptions),
+                        fetch(`http://localhost:8000/api/v1/cart/delete-product-cart/`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({
+                                id_sanpham: element.id_product,
+                                id_khachhang: localStorage.getItem('id_khachhang'),
+                            }),
+                        }))
+                    ].then((res) => {
+                        document.querySelector('.cart-' + element.id_product).remove();
+                    });
+                });
+                // fetch('http://localhost:8000/api/v1/buy', requestOptions).then((res) => {
+
+                // });
+                // fetch(`http://localhost:8000/api/v1/cart/delete-product-cart/`, {
+                //     method: 'POST',
+                //     headers: {
+                //         'Content-Type': 'application/json',
+                //     },
+                //     body: JSON.stringify({
+                //         id_sanpham: element.id_product,
+                //         id_khachhang: localStorage.getItem("id_khachhang")
+                //     }),
+                // }).then((res) => {
+                //     document.querySelector('.cart-' + element.id_product).remove();
+                // })
+                return state
+            });
             return state;
         default:
             return state;

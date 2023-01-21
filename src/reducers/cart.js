@@ -4,15 +4,18 @@ function cartReducer(state = initState, action) {
         case 'DELETE_CART':
             // xoa sp
             const select = action.data;
-            const requestOptions = {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            };
             select.map((id) => {
-                fetch(`http://localhost:8000/api/v1/cart/delete-product-cart/${id}`, requestOptions).then(
-                    (response) => {
+                fetch(`http://localhost:8000/api/v1/cart/delete-product-cart/`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        id_sanpham: id,
+                        id_khachhang: localStorage.getItem('id_khachhang'),
+                    }),
+                }).then(
+                    (res) => {
                         document.querySelector('.cart-' + id).remove();
                         // xóa id đã gửi yêu cầu delete
                         for (let i = 0; i < select.length; i++) {

@@ -1,11 +1,9 @@
 import { faBars, faCartShopping, faPiggyBank, faSearch, faShieldAlt, faTruck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import './CompHeader.css';
 
 function CompHeader(props) {
-    const dispatch = useDispatch();
     return (
         <div className="CompHeader">
             <div className="contact"></div>
@@ -14,6 +12,7 @@ function CompHeader(props) {
                     <img
                         className="logo"
                         src="https://traffic-edge31.cdn.vncdn.io/nvn/ncdn/store3/96878/logo_1648529159_logo%200338.png"
+                        alt="logo"
                     />
                 </Link>
 
@@ -23,7 +22,7 @@ function CompHeader(props) {
                 </form>
 
                 <div className="cart">
-                    <Link to={'cart'} className="btn-cart">
+                    <Link to="/cart" className="btn-cart">
                         <FontAwesomeIcon icon={faCartShopping} className="icon" />
                         Giỏ hàng
                     </Link>
@@ -40,19 +39,19 @@ function CompHeader(props) {
                     </li>
                     <li>
                         <FontAwesomeIcon icon={faShieldAlt} className="icon" />
-                        <a href="#" className="menu-item">
+                        <a href="/" className="menu-item">
                             Cam kết chất lượng
                         </a>
                     </li>
                     <li>
-                        <a href="#" className="menu-item">
+                        <a href="/" className="menu-item">
                             <FontAwesomeIcon icon={faPiggyBank} className="icon" />
                             Giá ưu đãi nhất
                         </a>
                     </li>
 
                     <li>
-                        <a href="#" className="menu-item">
+                        <a href="/" className="menu-item">
                             <FontAwesomeIcon icon={faTruck} className="icon" />
                             Miễn phí vận chuyển
                         </a>

@@ -53,16 +53,17 @@ function CompCart(props) {
         props.func.setSelectTitlePay([...selectedTitlePay]);
         props.func.setSelectPricePay([...selectedPricePay]);
         props.func.setSelectQuatity([...selectedQuatity]);
+        console.log(selected);
     };
 
     return (
-        <tbody className={'cart-' + props.data.id_giohang}>
+        <tbody className={'cart-' + props.data.id_sanpham}>
             <tr>
                 <th style={{ maxWidth: '50px' }}>
                     <img className={style.imgProduct} src={props.data.hinhanh} alt="sản phẩm" />
                 </th>
                 <th className={style.titleProduct}>
-                    <Link className={style.titleProduct} to={slug(props.data.tensanpham)}>
+                    <Link className={style.titleProduct} to={`/products/${slug(props.data.tensanpham)}`}>
                         {props.data.tensanpham}
                     </Link>
                 </th>
@@ -84,7 +85,7 @@ function CompCart(props) {
                     <input
                         type="checkbox"
                         className={clsx(style.btnSelect, 'checkbox')}
-                        value={props.data.id_giohang}
+                        value={props.data.id_sanpham}
                         onClick={handleSelection}
                     />
                 </th>

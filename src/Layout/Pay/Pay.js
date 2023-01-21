@@ -26,7 +26,7 @@ function Pay() {
         }
         return product.push(ob)
     })
-
+    
     const func = {
         setName,
         setPhone,

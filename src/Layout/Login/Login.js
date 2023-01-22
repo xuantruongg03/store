@@ -29,8 +29,8 @@ function Login() {
             },
         }).then((res) => {
             setState(res.data.state)
-            localStorage.setItem('id_khachhang', res.data.id_khachhang);
-            dispatch({ type: 'LOGIN', data: res.data.state });
+            localStorage.setItem('id_khachhang', res.data.data[0].id_khachhang);
+            dispatch({ type: 'LOGIN', data: res.data });
             res.data.state ? navigate('/') : navigate('/login');
         });
     };

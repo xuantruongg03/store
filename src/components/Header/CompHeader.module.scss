@@ -1,0 +1,187 @@
+.flex {
+    display: flex;
+}
+
+.contact {
+    background-color: #000099;
+    height: 35px;
+}
+
+.nav {
+    margin: 20px !important;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    /* width: 25%; */
+    padding-left: 20px;
+
+}
+
+.formSearch {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.formSearchInput {
+    border: 1px solid rgb(139, 136, 136);
+    height: 30px;
+    width: 50%;
+    border-radius: 30px;
+    font-size: 14px;
+    outline: none;
+}
+
+.iconSearch {
+    cursor: pointer;
+    font-size: 18px;
+    // margin-top: 19px;
+    background-color: #000099;
+    border-radius: 50%;
+    color: aliceblue;
+    padding: 5px;
+}
+
+.cart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btnCart {
+    background-color: #000099;
+    color: aliceblue;
+    text-decoration: none;
+    padding: 10px;
+    width: 100%;
+    border-radius: 10px;
+}
+
+.btnCart:hover {
+    color: aliceblue;
+    opacity: 0.8;
+}
+
+.boxAccount {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    // padding: 0 20px;
+    min-width: 135px;
+    position: relative;
+}
+
+.account {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border: 1px solid #000099;
+    cursor: pointer;
+}
+
+.accountMenu {
+    position: absolute;
+    top: 55px;
+    right: 0;
+    min-width: 135px;
+    width: fit-content;
+    background-color: #fff;
+    border: 1px solid #7286D3;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 16px;
+    z-index: 1;
+}
+
+.accountMenuItem {
+    text-decoration: none;
+    color: #000099;
+    padding: 10px 7px;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #8EA7E9;
+        color: #FFF2F2;
+    }
+}
+
+.accountName {
+    font-size: 16px;
+    text-align: center;
+    margin-left: 10px;
+    // padding: 10px 0;
+    color: #301E67;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.brick {
+    background-color: #000099;
+    height: 2px;
+}
+
+.boxBtnLogin {
+    display: flex;
+    justify-content: space-around;
+    min-width: 150px;
+}
+
+.btnLogin {
+    background-color: #000099;
+    color: aliceblue;
+    text-decoration: none;
+    margin: 0 5px;
+    padding: 7px;
+    border-radius: 10px;
+    border: none;
+
+    &:hover {
+        background-color: #7286D3;
+        color: #FFF2F2;
+    }
+}
+
+.navMenu {
+    height: 30px;
+    background-color: #000099;
+    display: flex;
+}
+
+.listMenu {
+    display: flex;
+    width: 100%;
+    height: 100%;   
+    justify-content: center;
+    margin: 0;
+}
+
+.icon {
+    padding-right: 10px;
+    color: #fff;
+}
+
+.li {
+    list-style: none;
+    // line-height: 25px;
+    padding: 0 100px;
+    display: flex;
+    align-items: center;
+}
+
+.menuItem {
+    text-decoration: none;
+    cursor: default;
+    color: #fff;
+}
+
+.dropDownCategory {
+    display: inline-block;
+    color: white;
+    cursor: default;
+    position: relative;
+}

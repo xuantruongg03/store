@@ -55,9 +55,9 @@ function CompCart(props) {
         props.func.setSelectQuatity([...selectedQuatity]);
         console.log(selected);
     };
-
+    
     return (
-        <tbody className={'cart-' + props.data.id_sanpham}>
+        <tbody className={clsx('cart-' + props.data.id_sanpham, style.box)}>
             <tr>
                 <th style={{ maxWidth: '50px' }}>
                     <img className={style.imgProduct} src={props.data.hinhanh} alt="sản phẩm" />

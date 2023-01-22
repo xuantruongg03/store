@@ -8,18 +8,23 @@ import ProductsHome from './ProductsHome';
 function Home(props) {
     // const [sale, setSale] = useState([]);
     const [computer, setComputer] = useState([]);
+    const [banner, setBanner] = useState([])
     useEffect(() => {
         document.title = 'Computer Store';
-        axios.get('http://localhost:8000/api/v1/get-product')
-            .then(res => {  
-                setComputer(res.data.data)
-            })
+        axios.get('http://localhost:8000/api/v1/get-product').then((res) => {
+            setComputer(res.data.data);
+        });
+
+        axios.get(`http://localhost:8000/api/v1/get-banners`).then((res) => {
+            const banners = res.data.data.banner;
+            setBanner(banners);
+        });
     }, []);
     return (
         <div>
-            <div className="container">
+            <div style={{ margin: '0 130px', display: 'flex' }}>
                 <CompListMenu setItem={props.setItem} />
-                <CompBanner />
+                <CompBanner data={banner}/>
             </div>
             <br />
             {/* <CompTitle title="Sản phẩm khuyến mãi" />

@@ -1,61 +1,104 @@
-import { faBars, faCartShopping, faPiggyBank, faSearch, faShieldAlt, faTruck } from '@fortawesome/free-solid-svg-icons';
+import { faPiggyBank, faScrewdriverWrench, faSearch, faShieldAlt, faTruck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import './CompHeader.css';
+import avatar from '../../access/image/avatar.jpg';
+import style from './CompHeader.module.scss';
+
+const list = [
+    {
+        id: 1,
+        name: 'Giá siêu ưu đãi',
+        icon: faPiggyBank,
+    },
+    {
+        id: 2,
+        name: 'Cam kết chất lượng',
+        icon: faShieldAlt,
+    },
+    {
+        id: 3,
+        name: 'Sửa chữa tại nhà',
+        icon: faScrewdriverWrench,
+    },
+    {
+        id: 4,
+        name: 'Miễn phí vận chuyển',
+        icon: faTruck,
+    },
+];
 
 function CompHeader(props) {
+    const state = useSelector(state => state.login);
+    const [stateLogin, setStateLogin] = useState(state != null ? state.state : false);
+    const [show, setShow] = useState(false);
+    const handleLogout = () => {
+        setStateLogin(false);
+    };
+
+    const showMenu = () => {
+        setShow(!show);
+    };
+
     return (
-        <div className="CompHeader">
-            <div className="contact"></div>
-            <div className="nav">
+        <div className={style.CompHeader}>
+            <div className={style.contact}></div>
+            <nav className={style.nav}>
                 <Link to={'/'}>
                     <img
-                        className="logo"
+                        className={style.logo}
                         src="https://traffic-edge31.cdn.vncdn.io/nvn/ncdn/store3/96878/logo_1648529159_logo%200338.png"
                         alt="logo"
                     />
                 </Link>
 
-                <form className="form-search flex">
-                    <input type="text" className="form-search-input" placeholder="Nhập tên sản phẩm muốn tìm..." />
-                    <FontAwesomeIcon icon={faSearch} className="iconSearch" />
-                </form>
-
-                <div className="cart">
-                    <Link to="/cart" className="btn-cart">
-                        <FontAwesomeIcon icon={faCartShopping} className="icon" />
-                        Giỏ hàng
-                    </Link>
+                <div className={style.formSearch}>
+                    <input type="text" className={style.formSearchInput} placeholder="Tìm kiếm" />
+                    <FontAwesomeIcon icon={faSearch} className={style.iconSearch} />
                 </div>
-            </div>
+                {stateLogin ? (
+                    <div className={style.boxAccount}>
+                        <img src={avatar} alt="Avatar" className={style.account} onClick={showMenu} />
+                        <div className={style.accountName} onClick={showMenu}>
+                            {state.data[0].ho + " " + state.data[0].ten}
+                        </div>
+                        {show ? (
+                            <div className={style.accountMenu}>
+                                <a href="/" className={style.accountMenuItem}>
+                                    Tài khoản
+                                </a>
+                                <Link to="/cart" className={style.accountMenuItem}>
+                                    Giỏ hàng
+                                </Link>
+                                <div className={style.accountMenuItem} onClick={handleLogout}>
+                                    Đăng xuất
+                                </div>
+                            </div>
+                        ) : null}
+                    </div>
+                ) : (
+                    <div className={style.boxBtnLogin}>
+                        <Link to="/login" className={style.btnLogin}>
+                            Đăng nhập
+                        </Link>
+                        <Link to="/register" className={style.btnLogin}>
+                            Đăng ký
+                        </Link>
+                    </div>
+                )}
+            </nav>
 
-            <div className="brick" />
+            <div className={style.brick} />
 
-            <div className="nav-menu">
-                <ul className="list-menu">
-                    <li>
-                        <FontAwesomeIcon icon={faBars} className="icon" />
-                        <div className="menu-item dropDownCategory">Danh mục sản phẩm</div>
-                    </li>
-                    <li>
-                        <FontAwesomeIcon icon={faShieldAlt} className="icon" />
-                        <a href="/" className="menu-item">
-                            Cam kết chất lượng
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/" className="menu-item">
-                            <FontAwesomeIcon icon={faPiggyBank} className="icon" />
-                            Giá ưu đãi nhất
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="/" className="menu-item">
-                            <FontAwesomeIcon icon={faTruck} className="icon" />
-                            Miễn phí vận chuyển
-                        </a>
-                    </li>
+            <div className={style.navMenu}>
+                <ul className={style.listMenu}>
+                    {list.map((item) => (
+                        <li className={style.li} key={item.id}>
+                            <FontAwesomeIcon icon={item.icon} className={style.icon} />
+                            <div className={style.menuItem}>{item.name}</div>
+                        </li>
+                    ))}
                 </ul>
             </div>
         </div>

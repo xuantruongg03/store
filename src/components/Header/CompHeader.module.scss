@@ -131,9 +131,11 @@
     min-width: 150px;
 }
 
-.btnLogin {
-    background-color: #000099;
-    color: aliceblue;
+.btnLogin, .btnRegister {
+    // background-color: #000099;
+    // color: aliceblue;
+    background-color: #FFFFFF;
+    color: #000099;
     text-decoration: none;
     margin: 0 5px;
     padding: 7px;
@@ -144,6 +146,11 @@
         background-color: #7286D3;
         color: #FFF2F2;
     }
+}
+
+.btnRegister {
+    
+    color: #000099;
 }
 
 .navMenu {

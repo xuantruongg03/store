@@ -50,7 +50,7 @@ function App() {
 
                     <Route path="pay" element={layout(<Pay />)} />
 
-                    <Route path="paycomplete" element={layout(<PayComplete />)} />
+                    <Route path="pay-complete" element={layout(<PayComplete />)} />
                 </Route>
                 
                 <Route path="/login" element={<Login />} />

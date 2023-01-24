@@ -53,12 +53,9 @@ function CompProductItem(props) {
             type: 'GET_INFO',
             data: {
                 title: props.title,
-                // subkey: props.subkey,
                 id_product: props.id_product
             },
         });
-        // localStorage.setItem('store-title', props.title);
-        // localStorage.setItem('store-subkey', props.subkey);
     };
     return (
         <div className="styles">

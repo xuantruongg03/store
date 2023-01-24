@@ -1,13 +1,12 @@
+import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import clsx from 'clsx';
 import { useEffect, useState } from 'react';
 import Table from 'react-bootstrap/Table';
-import { Link } from 'react-router-dom';
-
-import clsx from 'clsx';
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import style from './Cart.module.scss';
 import CompCart from './CompCart';
-import axios from 'axios';
 
 function Cart() {
     const dispatch = useDispatch();
@@ -16,7 +15,7 @@ function Cart() {
     const [selectTitlePay, setSelectTitlePay] = useState([]);
     const [selectPricePay, setSelectPricePay] = useState([]);
     const [selectQuatity, setSelectQuatity] = useState([]);
-    const idCart = localStorage.getItem("id_khachhang");
+    const idCart = localStorage.getItem('id_khachhang');
 
     useEffect(() => {
         document.title = 'Giỏ Hàng';
@@ -24,17 +23,27 @@ function Cart() {
             setCart(res.data.data.cart);
         });
     }, [idCart]);
-    const handleDelete = () => {
-        dispatch({
-            type: 'DELETE_CART',
-            data: select,
-        });
+    const handleDelete = (e) => {
+        if (selectTitlePay.length === 0) {
+            alert('Vui lòng chọn sản phẩm!');
+            e.preventDefault();
+        } else {
+            dispatch({
+                type: 'DELETE_CART',
+                data: select,
+            });
+        }
     };
-    const handleBuy = () => {
-        dispatch({
-            type: 'PAY',
-            data: { selectTitlePay, selectPricePay, id_product: select, selectQuatity },
-        });
+    const handleBuy = (e) => {
+        if (selectTitlePay.length === 0) {
+            alert('Vui lòng chọn sản phẩm!');
+            e.preventDefault();
+        } else {
+            dispatch({
+                type: 'PAY',
+                data: { selectTitlePay, selectPricePay, id_product: select, selectQuatity },
+            });
+        }
     };
     const func = {
         setSelect,
@@ -72,7 +81,7 @@ function Cart() {
                     </thead>
 
                     {cart.map((item, index) => (
-                        <CompCart data={item} key={index} func={func} value={value}/>
+                        <CompCart data={item} key={index} func={func} value={value} />
                     ))}
                 </Table>
             </div>

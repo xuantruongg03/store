@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import formatsMoney from 'src/Convert/ConvertMoneyVND';
 import slug from 'src/Convert/ConvertStringVNtoTitle';
@@ -7,6 +8,7 @@ import style from './Cart.module.scss';
 const selected = [];
 
 function CompCart(props) {
+    const dispatch = useDispatch();
     const [totalPrice, setTotalPrice] = useState(props.data.giaban);
     const [quatity, setQuatity] = useState(props.data.soluong);
     let selectedTitlePay = [];
@@ -20,6 +22,7 @@ function CompCart(props) {
     const handleAdd = () => {
         setQuatity((props.data.soluong += 1));
     };
+
     const handleMin = () => {
         setQuatity((props.data.soluong -= 1));
         if (props.data.soluong <= 0) {
@@ -53,9 +56,19 @@ function CompCart(props) {
         props.func.setSelectTitlePay([...selectedTitlePay]);
         props.func.setSelectPricePay([...selectedPricePay]);
         props.func.setSelectQuatity([...selectedQuatity]);
-        console.log(selected);
+        // console.log(selectedQuatity);
     };
-    
+
+    const getInf = () => {
+        dispatch({
+            type: 'GET_INFO',
+            data: {
+                title: props.data.tensanpham,
+                id_product: props.data.id_sanpham,
+            },
+        });
+    };
+
     return (
         <tbody className={clsx('cart-' + props.data.id_sanpham, style.box)}>
             <tr>
@@ -63,7 +76,7 @@ function CompCart(props) {
                     <img className={style.imgProduct} src={props.data.hinhanh} alt="sản phẩm" />
                 </th>
                 <th className={style.titleProduct}>
-                    <Link className={style.titleProduct} to={`/products/${slug(props.data.tensanpham)}`}>
+                    <Link className={style.titleProduct} to={`/products/${slug(props.data.tensanpham)}`} onClick={getInf}>
                         {props.data.tensanpham}
                     </Link>
                 </th>

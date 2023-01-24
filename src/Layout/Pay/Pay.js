@@ -8,14 +8,15 @@ function Pay() {
     // const [title, setTitle] = useState(localStorage.getItem('selectTitlePay').split(','));
     // const [price, setPrice] = useState(localStorage.getItem('selectPricePay').split(','));
     // const dispatch = useDispatch();
-    const [name, setName] = useState('');
-    const [phone, setPhone] = useState(0);
-    const [address, setAddress] = useState('');
-    const [conscious, setConscious] = useState('');
-    const [district, setDistrict] = useState('');
-    const [city, setCity] = useState('');
+    const [name, setName] = useState('example');
+    const [phone, setPhone] = useState('0123456');
+    const [address, setAddress] = useState('example');
+    const [conscious, setConscious] = useState('example');
+    const [district, setDistrict] = useState('example');
+    const [city, setCity] = useState('example');
     const [notes, setNotes] = useState('');
-    const [payment, setPayment] = useState('');
+    const [payment, setPayment] = useState('Thanh toán khi nhận hàng (COD)');
+    const [errorAddress, setErrorAddress] = useState(true);
 
     const state = useSelector((state) => state.cart);
     const product = [];
@@ -23,10 +24,10 @@ function Pay() {
         let ob = {
             id_product: element.id_product,
             soluong: 1,
-        }
-        return product.push(ob)
-    })
-    
+        };
+        return product.push(ob);
+    });
+
     const func = {
         setName,
         setPhone,
@@ -35,36 +36,60 @@ function Pay() {
         setDistrict,
         setCity,
         setNotes,
+        setErrorAddress,
+    };
+
+    const data = {
+        name,
+        phone,
+        conscious,
+        address,
+        district,
+        city,
+        errorAddress,
     };
 
     const dispatch = useDispatch();
 
-    const handleBuy = () => {
-        dispatch({
-            type: 'BUY',
-            data: {
-                //thông tin sản phẩm
-                product: product,
+    const handleBuy = (e) => {
+        if (
+            name === 'example' ||
+            phone === '0123456' ||
+            address === 'example' ||
+            conscious === 'example' ||
+            district === 'example' ||
+            city === 'example'
+        ) {
+            alert('Vui lòng kiểm tra lại!');
+            e.preventDefault()
+        } else {
+            dispatch({
+                type: 'BUY',
+                data: {
+                    //thông tin sản phẩm
+                    product: product,
 
-                //thông tin người mua
-                name: name,
-                phone: phone,
-                address: address,
-                conscious: conscious,
-                district: district,
-                city: city,
-                notes: notes,
-                payment: payment,
-            },
-        });
+                    //thông tin người mua
+                    name: name,
+                    phone: phone,
+                    address: address,
+                    conscious: conscious,
+                    district: district,
+                    city: city,
+                    notes: notes,
+                    payment: payment,
+                },
+            });
+        }
     };
 
     useEffect(() => {
         document.title = 'Thanh Toán';
     }, []);
+
     return (
         <div className={style.container}>
-            <PayInput func={func} />
+            <PayInput func={func} data={data} />
 
             <PayOutput setPayment={setPayment} buy={handleBuy} data={state} />
             <br />

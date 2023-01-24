@@ -82,7 +82,7 @@ function CompHeader(props) {
                         <Link to="/login" className={style.btnLogin}>
                             Đăng nhập
                         </Link>
-                        <Link to="/register" className={style.btnLogin}>
+                        <Link to="/register" className={style.btnRegister}>
                             Đăng ký
                         </Link>
                     </div>

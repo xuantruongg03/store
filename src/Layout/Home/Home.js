@@ -5,8 +5,7 @@ import CompTitle from '../../components/CompProducts/CompTitle';
 import CompBanner from './CompBanner/CompBanner';
 import ProductsHome from './ProductsHome';
 
-function Home(props) {
-    // const [sale, setSale] = useState([]);
+function Home (props) {
     const [computer, setComputer] = useState([]);
     const [banner, setBanner] = useState([])
     useEffect(() => {

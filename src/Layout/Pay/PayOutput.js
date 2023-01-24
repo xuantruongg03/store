@@ -13,9 +13,9 @@ function PayOutput(props) {
     const freeship = 0;
     let totalPrice = 0;
     props.data.map((element) => {
-        return totalPrice += element.price * element.quatity
+        return (totalPrice += element.price * element.quatity);
     });
-    totalPrice -= (sale + freeship);
+    totalPrice -= sale + freeship;
 
     const handleSelectpayment = (e) => {
         props.setPayment(e.target.value);
@@ -39,32 +39,28 @@ function PayOutput(props) {
                     <div>
                         {props.data.map((element, index) => (
                             <li key={index} style={{ padding: '0', display: 'block' }}>
-                                <Form.Label className={style.label}>{element.title} x {element.quatity}</Form.Label>
+                                <Form.Label className={style.label}>
+                                    {element.title} x {element.quatity}
+                                </Form.Label>
                             </li>
                         ))}
                     </div>
-                    <Form.Label className={clsx(style.label, style.provisional)}>
-                        {formatsMoney(totalPrice)}
-                    </Form.Label>
+                    <Form.Label className={clsx(style.label, style.provisional)}>{formatsMoney(totalPrice)}</Form.Label>
                 </Form.Group>
                 <div className={style.bri} />
             </Row>
-        
+
             <Row>
                 <Form.Group className={style.flex}>
                     <Form.Label className={style.label}>Mã giảm giá</Form.Label>
-                    <Form.Label className={clsx(style.label, style.provisional)}>
-                        {`-` + formatsMoney(sale)}
-                    </Form.Label>
+                    <Form.Label className={clsx(style.label, style.provisional)}>{`-` + formatsMoney(sale)}</Form.Label>
                 </Form.Group>
                 <div className={style.bri} />
             </Row>
             <Row>
                 <Form.Group className={style.flex}>
                     <Form.Label className={style.label}>Phí vận chuyển</Form.Label>
-                    <Form.Label className={clsx(style.label, style.provisional)}>
-                        {formatsMoney(freeship)}
-                    </Form.Label>
+                    <Form.Label className={clsx(style.label, style.provisional)}>{formatsMoney(freeship)}</Form.Label>
                 </Form.Group>
                 <div className={style.bri} />
             </Row>
@@ -91,6 +87,7 @@ function PayOutput(props) {
                         value="Thanh toán khi nhận hàng"
                         type="radio"
                         name="flexRadioDefault"
+                        defaultChecked
                         id="flexRadioDefault2"
                         label="Thanh toán bằng khi nhận hàng (COD)"
                     />
@@ -105,8 +102,8 @@ function PayOutput(props) {
                     />
                 </Form.Group>
             </Row>
-            <Button variant="primary" type="submit" className={style.button}>
-                <Link to={'/paycomplete'} className={style.link} onClick={props.buy}>
+            <Button variant="primary" className={style.button}>
+                <Link to={'/pay-complete'} className={style.link} onClick={props.buy}>
                     Xác Nhận Thanh Toán
                 </Link>
             </Button>

@@ -1,17 +1,31 @@
 .slick-prev:before {
     content: '<';
-    color: #233E92 !important;
+    font-weight: 700;
+    border-radius: 50%;
+    line-height: 25px;
     font-size: 25px !important;
+    display: block;
+    height: 30px !important;
+    width: 30px !important;
+    background-color: #233E92;
     margin-left: -15px !important;
 }
 
 .slick-next:before {
     content: '>';
-    color: #233E92 !important;
+    font-weight: 700;
+    border-radius: 50%;
+    line-height: 25px;
     font-size: 25px !important;
+    display: block;
+    height: 30px !important;
+    width: 30px !important;
+    background-color: #233E92;
+    margin-left: 10px !important;
 }
 
 .slick-next:hover, 
 .slick-prev:hover{
     opacity: 0.9;
+    transition: scale(1.5);
 }

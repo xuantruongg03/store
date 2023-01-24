@@ -29,10 +29,10 @@ function Home (props) {
             {/* <CompTitle title="Sản phẩm khuyến mãi" />
             <ProductsHome listProducts={computer} subkey="sale" /> */}
 
-            <CompTitle title="Máy tính xách tay" />
+            <CompTitle title="Máy tính xách tay" subkey="computer"/>
             <ProductsHome listProducts={computer} subkey="computer" />
 
-            <CompTitle title="Phụ kiện máy tính" />
+            <CompTitle title="Phụ kiện máy tính" subkey="computer"/>
             <ProductsHome listProducts={computer} subkey="computer" />
         </div>
     );

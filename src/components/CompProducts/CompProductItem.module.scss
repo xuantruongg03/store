@@ -42,10 +42,9 @@
     cursor: pointer;
     font-weight: 400;
     color: black;
-}
-
-.title:hover{
-    color: #CA0000;
+    &:hover{
+        color: #CA0000;
+    }
 }
 
 .boxPrice{
@@ -87,7 +86,7 @@
     text-align: center;
 }
 
-.btn-icon{
+.btnIcon{
     margin-top: 5px;
     cursor: pointer;;
 }
@@ -98,8 +97,8 @@
     cursor: pointer;
     color: #D20C2D;
     transition: transform .2s;
+    &:hover{
+        transform: scale(1.5);
+    }
 }
 
-.cartShopping:hover{
-    transform: scale(1.5);
-}

@@ -1,13 +1,16 @@
 import { faCartShopping, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 import formatsMoney from 'src/Convert/ConvertMoneyVND';
 import slug from '../../Convert/ConvertStringVNtoTitle';
-import './CompProductItem.css';
+import style from './CompProductItem.module.scss';
 
 function CompProductItem(props) {
+    const navigate = useNavigate();
+    const state = useSelector(state => state.login);
+    const [stateLogin, setStateLogin] = useState(state != null ? state.state : false);
     let sale = Number((100 - (props.price / props.cost) * 100).toFixed(0));
     const [amount, setAmount] = useState(1);
     const [isSales, setIsSales] = useState(true);
@@ -37,51 +40,55 @@ function CompProductItem(props) {
             setIsSales(false);
         }
     }, [sale]);
-    
+
     const dispatch = useDispatch();
     const handleBuy = () => {
-        dispatch({
-            type: 'ADD_TO_CARD',
-            data: {
-                id_product: props.id_product,
-                amount: amount,
-            },
-        });
+        if (stateLogin) {
+            dispatch({
+                type: 'ADD_TO_CARD',
+                data: {
+                    id_product: props.id_product,
+                    amount: amount,
+                },
+            });
+        } else {
+            navigate('/login');
+        }
     };
     const getInf = () => {
         dispatch({
             type: 'GET_INFO',
             data: {
                 title: props.title,
-                id_product: props.id_product
+                id_product: props.id_product,
             },
         });
     };
     return (
-        <div className="styles">
-            <div className={isSales === true ? 'sale' : 'disabled'}>
+        <div className={style.styles}>
+            <div className={isSales === true ? style.sale : 'disabled'}>
                 <span style={{ fontSize: '12px' }}>OFF</span>
                 <span>{sale + '%'}</span>
             </div>
 
-            <img src={props.item} alt="img" className="image" />
+            <img src={props.item} alt="img" className={style.image} />
             <br />
-            <Link to={"/products/" + slug(props.title)} className="title" onClick={getInf}>
+            <Link to={'/products/' + slug(props.title)} className={style.title} onClick={getInf}>
                 {props.title}
             </Link>
-            <div className="boxPrice">
-                <h3 className="price">{formatsMoney(props.price)}</h3>
-                <h4 className={isSales === true ? 'cost' : 'disabled'}>{formatsMoney(props.cost)}</h4>
+            <div className={style.boxPrice}>
+                <h3 className={style.price}>{formatsMoney(props.price)}</h3>
+                <h4 className={isSales === true ? style.cost : 'disabled'}>{formatsMoney(props.cost)}</h4>
             </div>
 
-            <div className="add">
-                <FontAwesomeIcon className="btn-icon" icon={faMinus} onClick={minusAmount} />
+            <div className={style.add}>
+                <FontAwesomeIcon className={style.btnIcon} icon={faMinus} onClick={minusAmount} />
 
-                <input className="input" value={amount} onChange={handleInput} disabled />
+                <input className={style.input} value={amount} onChange={handleInput} disabled />
 
-                <FontAwesomeIcon className="btn-icon" icon={faPlus} onClick={addAmount} />
+                <FontAwesomeIcon className={style.btnIcon} icon={faPlus} onClick={addAmount} />
 
-                <FontAwesomeIcon className="cartShopping" icon={faCartShopping} onClick={handleBuy} />
+                <FontAwesomeIcon className={style.cartShopping} icon={faCartShopping} onClick={handleBuy} />
             </div>
         </div>
     );

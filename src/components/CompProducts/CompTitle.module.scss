@@ -1,5 +1,5 @@
 
-.div-title{
+.divTitle{
     position: relative;
 }
 
@@ -25,9 +25,8 @@
     font-weight: 400;
     font-size: 14px;
     color: #ed1c24;
-}
-
-.span:hover{
-    cursor: pointer;
-    text-decoration: underline;
+    &:hover{
+        cursor: pointer;
+        text-decoration: underline;
+    }
 }

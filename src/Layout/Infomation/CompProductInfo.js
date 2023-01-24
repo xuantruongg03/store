@@ -13,9 +13,8 @@ function CompProductInfo(props) {
     const [description, setDescription] = useState();
     const [infomation, setInfomation] = useState([]);
     const [quatity, setQuatity] = useState();
-
     const id = useSelector((state) => state.item.id_product);
-    console.log(id);
+
     useEffect(() => {
         window.scrollTo(0, 0);
         axios.get(`http://localhost:8000/api/v1/products/${id}`).then((res) => {

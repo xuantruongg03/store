@@ -8,12 +8,14 @@ import slug from '../../Convert/ConvertStringVNtoTitle';
 import style from './CompProductItem.module.scss';
 
 function CompProductItem(props) {
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const state = useSelector(state => state.login);
-    const [stateLogin, setStateLogin] = useState(state != null ? state.state : false);
-    let sale = Number((100 - (props.price / props.cost) * 100).toFixed(0));
+    const stateLogin = state !== null ? state.state : false;
     const [amount, setAmount] = useState(1);
     const [isSales, setIsSales] = useState(true);
+    let sale = Number((100 - (props.price / props.cost) * 100).toFixed(0));
+
     const addAmount = () => {
         setAmount(amount + 1);
     };
@@ -41,11 +43,10 @@ function CompProductItem(props) {
         }
     }, [sale]);
 
-    const dispatch = useDispatch();
     const handleBuy = () => {
         if (stateLogin) {
             dispatch({
-                type: 'ADD_TO_CARD',
+                type: 'ADD_TO_CART',
                 data: {
                     id_product: props.id_product,
                     amount: amount,
@@ -55,6 +56,7 @@ function CompProductItem(props) {
             navigate('/login');
         }
     };
+
     const getInf = () => {
         dispatch({
             type: 'GET_INFO',
@@ -70,7 +72,6 @@ function CompProductItem(props) {
                 <span style={{ fontSize: '12px' }}>OFF</span>
                 <span>{sale + '%'}</span>
             </div>
-
             <img src={props.item} alt="img" className={style.image} />
             <br />
             <Link to={'/products/' + slug(props.title)} className={style.title} onClick={getInf}>
@@ -80,14 +81,10 @@ function CompProductItem(props) {
                 <h3 className={style.price}>{formatsMoney(props.price)}</h3>
                 <h4 className={isSales === true ? style.cost : 'disabled'}>{formatsMoney(props.cost)}</h4>
             </div>
-
             <div className={style.add}>
                 <FontAwesomeIcon className={style.btnIcon} icon={faMinus} onClick={minusAmount} />
-
                 <input className={style.input} value={amount} onChange={handleInput} disabled />
-
                 <FontAwesomeIcon className={style.btnIcon} icon={faPlus} onClick={addAmount} />
-
                 <FontAwesomeIcon className={style.cartShopping} icon={faCartShopping} onClick={handleBuy} />
             </div>
         </div>

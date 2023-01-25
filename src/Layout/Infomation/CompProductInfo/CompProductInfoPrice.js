@@ -1,15 +1,37 @@
 import clsx from 'clsx';
-import style from './CompProductInfoPrice.module.scss';
-import formatsMoney from '../../../Convert/ConvertMoneyVND';
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import formatsMoney from '../../../Convert/ConvertMoneyVND';
+import style from './CompProductInfoPrice.module.scss';
 
 function CompProductInfoPrice(props) {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const state = useSelector((state) => state.login);
+    const stateLogin = state != null ? state.state : false;
     const [config, setConfig] = useState('');
+    
+
     const handleSetConfig = (config) => {
         setConfig(config.target.value);
     };
-    const hanldeBuyNow = () => {
-        console.log('Buy Now');
+    const hanldeBuyNow = (e) => {
+        if (stateLogin) {
+            if (config === '') {
+                alert('Bạn chưa chọn cấu hình');
+            } else {
+                dispatch({
+                    type: 'ADD_TO_CART',
+                    data: {
+                        id_product: props.id,
+                        amount: 1
+                    },
+                });
+            }
+        } else {
+            navigate('/login');
+        }
     };
     const handleContact = () => {
         console.log('Contact');

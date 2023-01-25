@@ -1,9 +1,12 @@
 import { faPiggyBank, faScrewdriverWrench, faSearch, faShieldAlt, faTruck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import axios from 'axios';
+import { useMemo, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import avatar from '../../access/image/avatar.jpg';
+import ConvertMoneyVND from '../../Convert/ConvertMoneyVND';
+import ConvertStringVNtoTitle from '../../Convert/ConvertStringVNtoTitle';
 import style from './CompHeader.module.scss';
 
 const list = [
@@ -29,9 +32,12 @@ const list = [
     },
 ];
 
-function CompHeader(props) {
-    const state = useSelector(state => state.login);
+function CompHeader() {
+    const dispatch = useDispatch();
+    const state = useSelector((state) => state.login);
     const [stateLogin, setStateLogin] = useState(state != null ? state.state : false);
+    const [products, setProducts] = useState();
+    const [result, setResult] = useState();
     const [show, setShow] = useState(false);
     const handleLogout = () => {
         setStateLogin(false);
@@ -40,6 +46,37 @@ function CompHeader(props) {
     const showMenu = () => {
         setShow(!show);
     };
+
+    const search = (e) => {
+        if (e.target.value !== '') {
+            let result = products.filter((products) =>
+                products.tensanpham.toLowerCase().includes(e.target.value.toLowerCase()),
+            );
+            if (result.length === 0) {
+                setResult(null);
+            } else {
+                setResult(result);
+            }
+        } else {
+            setResult(null);
+        }
+    };
+
+    const getInf = (e) => {
+        dispatch({
+            type: 'GET_INFO',
+            data: {
+                title: e.target.title,
+                id_product: e.target.id,
+            },
+        });
+    };
+
+    useMemo(() => {
+        axios.get('http://localhost:8000/api/v1/get-product').then((res) => {
+            setProducts(res.data.data);
+        });
+    }, []);
 
     return (
         <div className={style.CompHeader}>
@@ -54,14 +91,41 @@ function CompHeader(props) {
                 </Link>
 
                 <div className={style.formSearch}>
-                    <input type="text" className={style.formSearchInput} placeholder="Tìm kiếm" />
+                    <input type="text" className={style.formSearchInput} placeholder="Tìm kiếm" onChange={search} />
                     <FontAwesomeIcon icon={faSearch} className={style.iconSearch} />
                 </div>
+                {(() => {
+                    if (result != null) {
+                        return (
+                            <div className={style.outputSearch}>
+                                <ul className={style.listSearch}>
+                                    {result.map((item, index) => (
+                                        <li className={style.itemSearch} key={index}>
+                                            <img src={item.hinhanh} alt="hình ảnh" className={style.img} />
+                                            <div>
+                                                <Link
+                                                    to={`/products/${ConvertStringVNtoTitle(item.tensanpham)}`}
+                                                    id={item.id_sanpham}
+                                                    title={item.tensanpham}
+                                                    className={style.linkSearch}
+                                                    onClick={getInf}
+                                                >
+                                                    {item.tensanpham}
+                                                </Link>
+                                                <p className={style.price}>Giá bán: {ConvertMoneyVND(item.giaban)}</p>
+                                            </div>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        );
+                    }
+                })()}
                 {stateLogin ? (
                     <div className={style.boxAccount}>
                         <img src={avatar} alt="Avatar" className={style.account} onClick={showMenu} />
                         <div className={style.accountName} onClick={showMenu}>
-                            {state.data[0].ho + " " + state.data[0].ten}
+                            {state.data[0].ho + ' ' + state.data[0].ten}
                         </div>
                         {show ? (
                             <div className={style.accountMenu}>

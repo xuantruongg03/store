@@ -37,7 +37,7 @@ function CompProductInfo(props) {
             <h2 className={style.titleProduct}>{title}</h2>
             <div style={{ display: 'flex', justifyContent: "space-around" }}>
                 <img src={img} alt="Hình ảnh sản phẩm" className={style.img} />
-                <CompProductInfoPrice price={price} cost={cost} quatity={quatity} />
+                <CompProductInfoPrice price={price} cost={cost} quatity={quatity} id={id}/>
             </div>
 
             <div style={{ display: 'flex' }}>

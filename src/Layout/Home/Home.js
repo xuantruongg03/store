@@ -7,23 +7,18 @@ import ProductsHome from './ProductsHome';
 
 function Home (props) {
     const [computer, setComputer] = useState([]);
-    const [banner, setBanner] = useState([])
     useEffect(() => {
         document.title = 'Computer Store';
         axios.get('http://localhost:8000/api/v1/get-product').then((res) => {
             setComputer(res.data.data);
         });
 
-        axios.get(`http://localhost:8000/api/v1/get-banners`).then((res) => {
-            const banners = res.data.data.banner;
-            setBanner(banners);
-        });
     }, []);
     return (
         <div>
             <div style={{ margin: '0 130px', display: 'flex' }}>
                 <CompListMenu setItem={props.setItem} />
-                <CompBanner data={banner}/>
+                <CompBanner />
             </div>
             <br />
             {/* <CompTitle title="Sản phẩm khuyến mãi" />

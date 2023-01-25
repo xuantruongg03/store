@@ -11,7 +11,6 @@ function CompProductInfoPrice(props) {
     const state = useSelector((state) => state.login);
     const stateLogin = state != null ? state.state : false;
     const [config, setConfig] = useState('');
-    
 
     const handleSetConfig = (config) => {
         setConfig(config.target.value);
@@ -25,7 +24,7 @@ function CompProductInfoPrice(props) {
                     type: 'ADD_TO_CART',
                     data: {
                         id_product: props.id,
-                        amount: 1
+                        amount: 1,
                     },
                 });
             }

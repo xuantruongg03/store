@@ -17,7 +17,7 @@ function itemReducer(state = initState, action) {
                 },
             };
 
-            fetch('http://localhost:8000/api/v1/add-to-cart', requestOptions).then((response) => {
+            fetch('http://localhost:8080/api/v1/add-to-cart', requestOptions).then((response) => {
                 if (response.status >= 200 && response.status < 300) {
                     alert('Đặt hàng thành công! Hãy kiểm tra giỏ hàng của bạn.');
                 } else if (response.status === 500) {

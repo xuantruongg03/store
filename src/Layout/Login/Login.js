@@ -22,7 +22,7 @@ function Login() {
     const handleLogin = () => {
         axios({
             method: 'post',
-            url: 'http://localhost:8000/api/v1/login',
+            url: 'http://localhost:8080/api/v1/login',
             data: {
                 user: user,
                 password: password,

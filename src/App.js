@@ -4,6 +4,8 @@ import './App.css';
 import CompFooter from './components/CompFooter/CompFooter';
 import CompHeader from './components/Header/CompHeader.js';
 import slug from './Convert/ConvertStringVNtoTitle';
+import Booking from './Layout/Booking/Booking';
+import BookingComplete from './Layout/Booking/BookingComplete';
 import Cart from './Layout/Cart/Cart';
 import Home from './Layout/Home/Home';
 import CompProductInfo from './Layout/Infomation/CompProductInfo';
@@ -54,8 +56,13 @@ function App() {
                 </Route>
                 
                 <Route path="/login" element={<Login />} />
+                
                 <Route path="/register" element={<Register />} />
                 
+                <Route path="/booking" element={<Booking/>} />
+
+                <Route path="/booking-complete" element={layout(<BookingComplete/>)} />
+
                 <Route path="*" element={<NoPage />} />
             </Routes>
         </div>

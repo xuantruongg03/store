@@ -52,7 +52,7 @@ function ListMenu(props) {
         {
             id: 10,
             name: 'Đặt lịch sửa chữa',
-            path: '/store',
+            path: '/booking',
         },
         {
             id: 11,

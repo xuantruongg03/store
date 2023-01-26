@@ -5,7 +5,7 @@ function cartReducer(state = initState, action) {
             // xoa sp
             const select = action.data;
             select.map((id) => {
-                fetch(`http://localhost:8000/api/v1/cart/delete-product-cart/`, {
+                fetch(`http://localhost:8080/api/v1/cart/delete-product-cart/`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

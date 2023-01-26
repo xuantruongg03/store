@@ -19,7 +19,7 @@ function Cart() {
 
     useEffect(() => {
         document.title = 'Giỏ Hàng';
-        axios.get(`http://localhost:8000/api/v1/cart/get-cart/${idCart}`).then((res) => {
+        axios.get(`http://localhost:8080/api/v1/cart/get-cart/${idCart}`).then((res) => {
             setCart(res.data.data.cart);
         });
     }, [idCart]);

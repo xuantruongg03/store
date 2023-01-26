@@ -73,7 +73,7 @@ function CompHeader() {
     };
 
     useMemo(() => {
-        axios.get('http://localhost:8000/api/v1/get-product').then((res) => {
+        axios.get('http://localhost:8080/api/v1/get-product').then((res) => {
             setProducts(res.data.data);
         });
     }, []);

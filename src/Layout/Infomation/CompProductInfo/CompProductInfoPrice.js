@@ -64,12 +64,12 @@ function CompProductInfoPrice(props) {
                 </p>
             </div>
             <button className={style.add} onClick={hanldeBuyNow}>
-                Mua ngay
+                Đặt Hàng
                 <br />
                 <span style={{ fontSize: '12px' }}>Giao hàng tận nơi</span>
             </button>
             <button onClick={handleContact} className={style.contact}>
-                Liên hệ đặt hàng
+                Liên hệ tư vấn
             </button>
         </div>
     );

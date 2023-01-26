@@ -12,6 +12,7 @@ function Register() {
     const [email, setEmail] = useState('');
     const [name, setName] = useState('example');
     const [sex, setSex] = useState('');
+    const [checkbox, setCheckbox] = useState(false);
     const [state, setState] = useState(true);
 
     const handleInputUser = (e) => {
@@ -37,16 +38,19 @@ function Register() {
     };
 
     const handleInputSex = (e) => {
-        console.log(e.target.value);
         setSex(e.target.value);
     };
 
+    const handleCheckbox = (e) => {
+        setCheckbox(!checkbox);
+    }
+
     const handleRegister = (e) => {
-        let ho = name.split(" ").slice(0, -1).join(" ");
-        let ten = name.split(" ").slice(-1).join(" ");
+        let ho = name.split(' ').slice(0, -1).join(' ');
+        let ten = name.split(' ').slice(-1).join(' ');
         axios({
             method: 'post',
-            url: 'http://localhost:8000/api/v1/register',
+            url: 'http://localhost:8080/api/v1/register',
             data: {
                 tendangnhap: user,
                 matkhau: password,
@@ -56,7 +60,7 @@ function Register() {
                 gioitinh: sex,
             },
         });
-        navigate("/login");
+        navigate('/login');
     };
 
     const validateEmail = (email) => {
@@ -111,7 +115,7 @@ function Register() {
     useMemo(async () => {
         await axios({
             method: 'post',
-            url: 'http://localhost:8000/api/v1/check-user',
+            url: 'http://localhost:8080/api/v1/check-user',
             data: {
                 user: user,
             },
@@ -186,23 +190,30 @@ function Register() {
                         {checkConfirmPassword() ? null : <p className={style.labelError}>Mật khẩu không khớp!</p>}
                     </div>
                 </div>
+                <div className={style.boxCheck}>
+                    <input type="checkbox" id="checkbox" className={style.checkbox} onClick={handleCheckbox}/>
+                    <label>
+                        Tôi đã đọc và đồng ý với{' '}
+                        <a href="/" rel="noopener" target="_blank" className={style.rules}>
+                            <b>điều khoản</b>
+                        </a>
+                    </label>
+                </div>
                 <div className={style.labelForgetPassword}>
                     <Link to="/login" className={style.labelForgetPassword}>
                         Đã có tài khoản?
                     </Link>
                 </div>
                 <div>
-                    {
-                        (validateEmail(email) === false || checkPassword(password) < 50 || name.length < 6 || state ) ? (
-                            <button className={style.button} disabled >
-                                Đăng ký
-                            </button>
-                        ) : (
-                            <button className={style.button} onClick={handleRegister}>
-                                Đăng ký
-                            </button>
-                        )
-                    }
+                    {validateEmail(email) === false || checkPassword(password) < 50 || name.length < 6 || state || checkbox === false ? (
+                        <button className={style.button} disabled>
+                            Đăng ký
+                        </button>
+                    ) : (
+                        <button className={style.button} onClick={handleRegister}>
+                            Đăng ký
+                        </button>
+                    )}
                     {/* <button className={style.button} onClick={handleRegister}>
                         Đăng ký
                     </button> */}

@@ -43,8 +43,8 @@ function payReducer(state = initState, action) {
                         }),
                     };
 
-                    fetch('http://localhost:8000/api/v1/buy', requestOptions).then((res) => {});
-                    fetch(`http://localhost:8000/api/v1/cart/delete-product-cart/`, {
+                    fetch('http://localhost:8080/api/v1/buy', requestOptions).then((res) => {});
+                    fetch(`http://localhost:8080/api/v1/cart/delete-product-cart/`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',

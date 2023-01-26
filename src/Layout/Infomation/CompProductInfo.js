@@ -17,7 +17,7 @@ function CompProductInfo(props) {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        axios.get(`http://localhost:8000/api/v1/products/${id}`).then((res) => {
+        axios.get(`http://localhost:8080/api/v1/products/${id}`).then((res) => {
             const data = res.data.data;
             setTitle(data.product[0].tensanpham);
             setPrice(data.product[0].giaban);

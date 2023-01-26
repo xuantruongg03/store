@@ -7,9 +7,10 @@ import ProductsHome from './ProductsHome';
 
 function Home (props) {
     const [computer, setComputer] = useState([]);
+    
     useEffect(() => {
         document.title = 'Computer Store';
-        axios.get('http://localhost:8000/api/v1/get-product').then((res) => {
+        axios.get('http://localhost:8080/api/v1/get-product').then((res) => {
             setComputer(res.data.data);
         });
 

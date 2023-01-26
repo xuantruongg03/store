@@ -7,7 +7,7 @@ function CompBanner() {
     const [banners, setBanners] = useState();
 
     useMemo(() => {
-        axios.get(`http://localhost:8000/api/v1/get-banners`).then((res) => {
+        axios.get(`http://localhost:8080/api/v1/get-banners`).then((res) => {
             const banners = res.data.data.banner;
             setBanners(banners);
         });

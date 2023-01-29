@@ -4,6 +4,7 @@ import './App.css';
 import CompFooter from './components/CompFooter/CompFooter';
 import CompHeader from './components/Header/CompHeader.js';
 import slug from './Convert/ConvertStringVNtoTitle';
+import Account from './Layout/Account/Account';
 import Booking from './Layout/Booking/Booking';
 import BookingComplete from './Layout/Booking/BookingComplete';
 import Cart from './Layout/Cart/Cart';
@@ -53,13 +54,15 @@ function App() {
                     <Route path="pay" element={layout(<Pay />)} />
 
                     <Route path="pay-complete" element={layout(<PayComplete />)} />
+
+                    <Route path="account" element={layout(<Account/>)} />
                 </Route>
                 
                 <Route path="/login" element={<Login />} />
                 
                 <Route path="/register" element={<Register />} />
                 
-                <Route path="/booking" element={<Booking/>} />
+                <Route path="/booking" element={layout(<Booking/>)} />
 
                 <Route path="/booking-complete" element={layout(<BookingComplete/>)} />
 

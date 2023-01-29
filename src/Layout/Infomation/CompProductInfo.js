@@ -1,9 +1,9 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
-import CompProductInfoPrice from './CompProductInfo/CompProductInfoPrice';
+import { getProductById } from '../../api/products';
 import style from './CompProductInfo.module.scss';
+import CompProductInfoPrice from './CompProductInfo/CompProductInfoPrice';
 
 function CompProductInfo(props) {
     const [title, setTitle] = useState();
@@ -17,8 +17,9 @@ function CompProductInfo(props) {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        axios.get(`http://localhost:8080/api/v1/products/${id}`).then((res) => {
-            const data = res.data.data;
+        const getInf = async () => {
+            const response = await getProductById(id)
+            const data = response.data;
             setTitle(data.product[0].tensanpham);
             setPrice(data.product[0].giaban);
             setCost(data.product[0].giaban);
@@ -29,7 +30,8 @@ function CompProductInfo(props) {
             detail.shift();
             setInfomation(detail);
             setQuatity(data.product[0].soluong);
-        });
+        }
+        getInf();
     }, [id]);
 
     return (

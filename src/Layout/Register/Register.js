@@ -2,6 +2,7 @@ import axios from 'axios';
 import clsx from 'clsx';
 import { useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { registerAPI } from '../../api/register';
 import style from './Register.module.scss';
 
 function Register() {
@@ -48,18 +49,18 @@ function Register() {
     const handleRegister = (e) => {
         let ho = name.split(' ').slice(0, -1).join(' ');
         let ten = name.split(' ').slice(-1).join(' ');
-        axios({
-            method: 'post',
-            url: 'http://localhost:8080/api/v1/register',
-            data: {
+        const register = async () => {
+            const params = {
                 tendangnhap: user,
                 matkhau: password,
                 email: email,
                 ho: ho,
                 ten: ten,
-                gioitinh: sex,
-            },
-        });
+                gioitinh: sex
+            }
+            await registerAPI(params);
+        }
+        register();
         navigate('/login');
     };
 
@@ -113,15 +114,17 @@ function Register() {
     };
 
     useMemo(async () => {
+        const baseURL = process.env.REACT_APP_API_URL
         await axios({
             method: 'post',
-            url: 'http://localhost:8080/api/v1/check-user',
+            url: `${baseURL}/check-user`,
             data: {
                 user: user,
             },
         }).then((res) => {
             setState(res.data.state);
         });
+        
     }, [user]);
 
     return (

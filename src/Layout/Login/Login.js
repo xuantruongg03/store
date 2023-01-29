@@ -1,8 +1,8 @@
-import axios from 'axios';
 import clsx from 'clsx';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import { loginAPI } from '../../api/login';
 import style from './Login.module.scss';
 
 function Login() {
@@ -10,6 +10,7 @@ function Login() {
     const dispatch = useDispatch();
     const [user, setUser] = useState('');
     const [password, setPassword] = useState('');
+    const [state, setState] = useState(true);
 
     const handleInputUser = (e) => {
         setUser(e.target.value);
@@ -18,21 +19,24 @@ function Login() {
     const handleInputPassword = (e) => {
         setPassword(e.target.value);
     };
-    const [state, setState] = useState(true)
+    
     const handleLogin = () => {
-        axios({
-            method: 'post',
-            url: 'http://localhost:8080/api/v1/login',
-            data: {
+        const login = async () => {
+            const params = {
                 user: user,
                 password: password,
-            },
-        }).then((res) => {
-            setState(res.data.state)
-            localStorage.setItem('id_khachhang', res.data.data[0].id_khachhang);
-            dispatch({ type: 'LOGIN', data: res.data });
-            res.data.state ? navigate('/') : navigate('/login');
-        });
+            };
+            const responsive = await loginAPI(params);
+            setState(responsive.state);
+            if (responsive.state) {
+                localStorage.setItem('id_khachhang', responsive.data[0].id_khachhang);
+                dispatch({ type: 'LOGIN', data: responsive });
+                navigate('/');
+            } else {
+                navigate('/login');
+            }
+        };
+        login();
     };
 
     return (

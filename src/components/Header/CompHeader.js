@@ -129,9 +129,9 @@ function CompHeader() {
                         </div>
                         {show ? (
                             <div className={style.accountMenu}>
-                                <a href="/" className={style.accountMenuItem}>
+                                <Link to="/account" className={style.accountMenuItem}>
                                     Tài khoản
-                                </a>
+                                </Link>
                                 <Link to="/cart" className={style.accountMenuItem}>
                                     Giỏ hàng
                                 </Link>

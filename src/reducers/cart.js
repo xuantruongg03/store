@@ -1,3 +1,5 @@
+import { deleteProductCart } from '../api/cart';
+
 const initState = [];
 function cartReducer(state = initState, action) {
     switch (action.type) {
@@ -5,6 +7,22 @@ function cartReducer(state = initState, action) {
             // xoa sp
             const select = action.data;
             select.map((id) => {
+                // const deleteProduct = async () => {
+                //     const params = {
+                //         id_sanpham: id,
+                //         id_khachhang: localStorage.getItem('id_khachhang'),
+                //     };
+                //     const res = await deleteProductCart(params);
+                //     if (res.message === 'ok') {
+                //         document.querySelector('.cart-' + id).remove();
+                //         for (let i = 0; i < select.length; i++) {
+                //             if (select[i] === id) {
+                //                 select.splice(i, 1);
+                //             }
+                //         }
+                //     }
+                // };
+                // deleteProduct();
                 fetch(`http://localhost:8080/api/v1/cart/delete-product-cart/`, {
                     method: 'POST',
                     headers: {
@@ -29,7 +47,7 @@ function cartReducer(state = initState, action) {
             });
             return state;
         case 'PAY':
-            let array = []
+            let array = [];
             const { selectTitlePay, selectPricePay, id_product, selectQuatity } = action.data;
             for (let i = 0; i < selectTitlePay.length; i++) {
                 let ob = {

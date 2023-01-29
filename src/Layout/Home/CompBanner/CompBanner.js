@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import axios from 'axios';
+import bannerAPI from 'src/api/banners';
 
 function CompBanner() {
     const [active, setActive] = useState(0);
@@ -7,10 +7,11 @@ function CompBanner() {
     const [banners, setBanners] = useState();
 
     useMemo(() => {
-        axios.get(`http://localhost:8080/api/v1/get-banners`).then((res) => {
-            const banners = res.data.data.banner;
-            setBanners(banners);
-        });
+        const getBanners = async () => {
+            const response = await bannerAPI.getBanners();
+            setBanners(response.data.banner);
+        }
+        getBanners();
     }, []);
 
     useEffect(() => {

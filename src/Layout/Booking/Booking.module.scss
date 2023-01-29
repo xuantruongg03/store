@@ -1,7 +1,8 @@
 .boxBooking {
-    position: absolute;
-    top: 3%;
-    left: 27%;
+    // position: absolute;
+    // top: 3%;
+    // left: 27%;
+    margin: 20px auto;
     width: 750px;
     height: 660px;
     border: 1px solid #333;
@@ -47,7 +48,7 @@
 .inputArea {
     width: 80%;
     height: 40px;
-    border: 1px solid #333;
+    border: 1px solid #000099;
     padding: 0 10px;
     font-size: 16px;
     color: #333;
@@ -71,6 +72,7 @@
     height: 20px;
     width: 20px;
     margin-right: 10px;
+    accent-color: #000099;
     cursor: pointer;
 }
 

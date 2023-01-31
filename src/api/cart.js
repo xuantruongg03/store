@@ -11,4 +11,9 @@ const addToCart = (params) => {
     return axiosClient.post(url, params)
 }
 
-export { deleteProductCart, addToCart }
+const buy = (params) => {
+    const url = "/buy"
+    return axiosClient.post(url, params)
+}
+
+export { deleteProductCart, addToCart, buy }

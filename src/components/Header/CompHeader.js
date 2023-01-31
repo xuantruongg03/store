@@ -1,10 +1,10 @@
 import { faPiggyBank, faScrewdriverWrench, faSearch, faShieldAlt, faTruck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import axios from 'axios';
-import { useMemo, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import avatar from '../../access/image/avatar.jpg';
+import { getAllProducts } from 'src/api/products';
+import avatarInit from '../../access/image/avatar.jpg';
 import ConvertMoneyVND from '../../Convert/ConvertMoneyVND';
 import ConvertStringVNtoTitle from '../../Convert/ConvertStringVNtoTitle';
 import style from './CompHeader.module.scss';
@@ -39,8 +39,14 @@ function CompHeader() {
     const [products, setProducts] = useState();
     const [result, setResult] = useState();
     const [show, setShow] = useState(false);
+    const avatar = state !== null ? (state.data[0].avatar !== null ? state.data[0].avatar : avatarInit) : avatarInit;
+
     const handleLogout = () => {
         setStateLogin(false);
+        dispatch({
+            type: 'LOGIN',
+            data: false
+        })
     };
 
     const showMenu = () => {
@@ -72,10 +78,15 @@ function CompHeader() {
         });
     };
 
-    useMemo(() => {
-        axios.get('http://localhost:8080/api/v1/get-product').then((res) => {
-            setProducts(res.data.data);
-        });
+    useEffect(() => {
+        const getData = async () => {
+            const resProducts = await getAllProducts();
+            // const resAvatar = await getUser();
+            setProducts(resProducts.data);
+            // console.log(resAvatar.data[0].hinhanh);
+            // setAvatar(resAvatar.data[0].hinhanh);
+        };
+        getData();
     }, []);
 
     return (

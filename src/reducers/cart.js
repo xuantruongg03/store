@@ -1,48 +1,26 @@
 import { deleteProductCart } from '../api/cart';
 
 const initState = [];
+
 function cartReducer(state = initState, action) {
     switch (action.type) {
         case 'DELETE_CART':
-            // xoa sp
             const select = action.data;
             select.map((id) => {
-                // const deleteProduct = async () => {
-                //     const params = {
-                //         id_sanpham: id,
-                //         id_khachhang: localStorage.getItem('id_khachhang'),
-                //     };
-                //     const res = await deleteProductCart(params);
-                //     if (res.message === 'ok') {
-                //         document.querySelector('.cart-' + id).remove();
-                //         for (let i = 0; i < select.length; i++) {
-                //             if (select[i] === id) {
-                //                 select.splice(i, 1);
-                //             }
-                //         }
-                //     }
-                // };
-                // deleteProduct();
-                fetch(`http://localhost:8080/api/v1/cart/delete-product-cart/`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
+                const deleteProduct = async () => {
+                    const params = {
                         id_sanpham: id,
                         id_khachhang: localStorage.getItem('id_khachhang'),
-                    }),
-                }).then(
-                    (res) => {
-                        document.querySelector('.cart-' + id).remove();
-                        // xóa id đã gửi yêu cầu delete
-                        for (let i = 0; i < select.length; i++) {
-                            if (select[i] === id) {
-                                select.splice(i, 1);
-                            }
+                    };
+                    await deleteProductCart(params);
+                    document.querySelector('.cart-' + id).remove();
+                    for (let i = 0; i < select.length; i++) {
+                        if (select[i] === id) {
+                            select.splice(i, 1);
                         }
-                    },
-                );
+                    }
+                };
+                deleteProduct();
                 return state;
             });
             return state;

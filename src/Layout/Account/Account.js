@@ -2,6 +2,7 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { updateUserAPI } from 'src/api/user';
 import image from '../../access/image/avatar.jpg';
 import style from './Account.module.scss';
 
@@ -46,27 +47,25 @@ function Account() {
         );
         myWidget.open();
     };
-
+    
     const handleSave = (e) => {
-        if (name !== data.ho + ' ' + data.ten || avatar !== undefined) {
-            let ho = name.split(' ').slice(0, -1).join(' ');
-            let ten = name.split(' ').slice(-1).join(' ');
-            const data = {
+        let ho = name.split(' ').slice(0, -1).join(' ');
+        let ten = name.split(' ').slice(-1).join(' ');
+        const update = async () => {
+            const params = {
                 id_khachhang: id,
                 ho: ho,
                 ten: ten,
                 avatar: avatar,
             };
-            axios
-                .post('http://localhost:8080/api/v1/update-user', data, {
-                    onUploadProgress: (event) => console.log(event),
-                })
-                .then((res) => {
-                    if (res.status === 200) {
-                        alert('Cập nhật thành công! Vui lòng đăng nhập lại.');
-                        // window.location.reload();
-                    }
-                });
+            const res = await updateUserAPI(params);
+            if (res.message === "ok") {
+                alert('Cập nhật thành công! Vui lòng đăng nhập lại.');
+                window.location.reload();
+            }
+        };
+        if (name !== data.ho + ' ' + data.ten || avatar !== data.avatar) {
+            update();
         }
     };
 
@@ -127,7 +126,7 @@ function Account() {
                                                 // style={{ border: '1px solid rgb(182, 181, 181)' }}
                                                 className={style.value}
                                                 name="name"
-                                                style={{border: '1px solid rgb(205, 204, 204)'}}
+                                                style={{ border: '1px solid rgb(205, 204, 204)' }}
                                                 onChange={handleInputName}
                                                 defaultValue={name}
                                             />
@@ -158,9 +157,11 @@ function Account() {
                             </div>
                         );
                     case 'bank':
-                        return <div className={style.boxBanking}>
-                            <h1 className={style.title}>Đang cập nhật</h1>
-                        </div>;
+                        return (
+                            <div className={style.boxBanking}>
+                                <h1 className={style.title}>Đang cập nhật</h1>
+                            </div>
+                        );
                     case 'password':
                         return (
                             <div className={style.boxChangePassword}>

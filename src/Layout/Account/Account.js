@@ -1,8 +1,8 @@
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { updateUserAPI } from 'src/api/user';
+import { useLocation } from 'react-router-dom';
+import { getUser, updateUserAPI } from 'src/api/user';
 import image from '../../access/image/avatar.jpg';
 import style from './Account.module.scss';
 
@@ -11,16 +11,13 @@ function Account() {
     const [data, setData] = useState({});
     const [avatar, setAvatar] = useState();
     const [name, setName] = useState('');
-    const id = localStorage.getItem('id_khachhang');
+    const location = useLocation();
+    const query = new URLSearchParams(location.search);
+    const id = query.get('q');
 
     const hideEmail = (email) => {
         email = email ? email : 'abc@gmail.com';
         return email.replace(/(\w{3})[\w.-]+@([\w.]+\w)/, '$1***@$2');
-    };
-
-    const hidePhoneNumber = (phone) => {
-        phone = phone ? phone : '';
-        return phone.replace(/(\w{3})\w+/, '$1***');
     };
 
     const hidePassword = (password) => {
@@ -47,7 +44,7 @@ function Account() {
         );
         myWidget.open();
     };
-    
+
     const handleSave = (e) => {
         let ho = name.split(' ').slice(0, -1).join(' ');
         let ten = name.split(' ').slice(-1).join(' ');
@@ -59,7 +56,7 @@ function Account() {
                 avatar: avatar,
             };
             const res = await updateUserAPI(params);
-            if (res.message === "ok") {
+            if (res.message === 'ok') {
                 alert('Cập nhật thành công! Vui lòng đăng nhập lại.');
                 window.location.reload();
             }
@@ -74,19 +71,20 @@ function Account() {
     };
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/v1/get-user/${id}`).then((res) => {
-            setData(res.data.data[0]);
-            setName(res.data.data[0].ho + ' ' + res.data.data[0].ten);
-            setAvatar(res.data.data[0].avatar);
-        });
+        const user = async () => {
+            const res = await getUser(id);
+            setData(res.data[0]);
+            setName(res.data[0].first_name + ' ' + res.data[0].last_name);
+            setAvatar(res.data[0].avatar);
+        };
+        user();
     }, [id]);
-
     return (
         <div className={style.boxAccount}>
             <div className={style.nav}>
                 <div className={style.boxAvatarLeft}>
                     <img src={avatar || image} alt="Avatar" className={style.img} id="avatar" />
-                    <label>{data.tendangnhap}</label>
+                    <label>{data.username}</label>
                 </div>
                 <div className={style.boxTitle}>
                     <FontAwesomeIcon icon={faUser} className={style.icon} />
@@ -118,7 +116,7 @@ function Account() {
                                     <div>
                                         <div className={style.item}>
                                             <label className={style.label}>Tên đăng nhập: </label>
-                                            <div className={style.value}>{data.tendangnhap}</div>
+                                            <div className={style.value}>{data.username}</div>
                                         </div>
                                         <div className={style.item}>
                                             <label className={style.label}>Họ tên: </label>
@@ -136,12 +134,8 @@ function Account() {
                                             <div className={style.value}>{hideEmail(data.email)}</div>
                                         </div>
                                         <div className={style.item}>
-                                            <label className={style.label}>Số điện thoại: </label>
-                                            <div className={style.value}>{hidePhoneNumber(data.dienthoai)}</div>
-                                        </div>
-                                        <div className={style.item}>
                                             <label className={style.label}>Mật khẩu: </label>
-                                            <div className={style.value}>{hidePassword(data.matkhau)}</div>
+                                            <div className={style.value}>{hidePassword(data.password)}</div>
                                         </div>
                                         <button className={style.btnSave} onClick={handleSave}>
                                             Lưu

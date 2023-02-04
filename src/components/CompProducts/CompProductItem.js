@@ -4,17 +4,18 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import formatsMoney from 'src/Convert/ConvertMoneyVND';
+import { addToCart } from 'src/api/cart';
 import slug from '../../Convert/ConvertStringVNtoTitle';
 import style from './CompProductItem.module.scss';
 
 function CompProductItem(props) {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const state = useSelector(state => state.login);
+    const state = useSelector((state) => state.login);
     const stateLogin = state !== null ? state.state : false;
     const [amount, setAmount] = useState(1);
     const [isSales, setIsSales] = useState(true);
-    let sale = Number((100 - (props.price / props.cost) * 100).toFixed(0));
+    let sale = Number(props.sale).toFixed();
 
     const addAmount = () => {
         setAmount(amount + 1);
@@ -44,14 +45,32 @@ function CompProductItem(props) {
     }, [sale]);
 
     const handleBuy = () => {
+        console.log(state);
         if (stateLogin) {
-            dispatch({
-                type: 'ADD_TO_CART',
-                data: {
-                    id_product: props.id_product,
-                    amount: amount,
-                },
-            });
+            // dispatch({
+            //     type: 'ADD_TO_CART',
+            //     data: {
+            //         product_id: props.product_id,
+            //         amount: amount,
+            //     },
+            // });
+            const product_id = props.product_id;
+            const quantity = amount;
+            const customer_id = localStorage.getItem('customer_id');
+            const add = async () => {
+                const params = {
+                    product_id,
+                    quantity,
+                    customer_id,
+                };
+                const res = await addToCart(params);
+                if (res.message === 'ok') {
+                    alert('Đặt hàng thành công! Hãy kiểm tra giỏ hàng của bạn.');
+                } else {
+                    alert('Lỗi phía Client! Thử lại sau.');
+                }
+            };
+            add();
         } else {
             navigate('/login');
         }
@@ -62,7 +81,7 @@ function CompProductItem(props) {
             type: 'GET_INFO',
             data: {
                 title: props.title,
-                id_product: props.id_product,
+                product_id: props.product_id,
             },
         });
     };

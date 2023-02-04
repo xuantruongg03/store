@@ -8,12 +8,12 @@ import style from './Login.module.scss';
 function Login() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const [user, setUser] = useState('');
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [state, setState] = useState(true);
 
-    const handleInputUser = (e) => {
-        setUser(e.target.value);
+    const handleInputUsername = (e) => {
+        setUsername(e.target.value);
     };
 
     const handleInputPassword = (e) => {
@@ -23,14 +23,15 @@ function Login() {
     const handleLogin = () => {
         const login = async () => {
             const params = {
-                user: user,
+                username: username,
                 password: password,
             };
             const responsive = await loginAPI(params);
             setState(responsive.state);
             if (responsive.state) {
-                localStorage.setItem('id_khachhang', responsive.data[0].id_khachhang);
-                dispatch({ type: 'LOGIN', data: responsive });
+                const token = responsive.token;
+                localStorage.setItem('token', token);
+                dispatch({ type: 'LOGIN', payload: responsive});
                 navigate('/');
             } else {
                 navigate('/login');
@@ -47,7 +48,7 @@ function Login() {
                 </div>
                 <div className={style.formGroup}>
                     <label className={style.lable}>Tên đăng nhập</label>
-                    <input type="text" name="user" className={style.input} onChange={handleInputUser} />
+                    <input type="text" name="username" className={style.input} onChange={handleInputUsername} />
                     {state === true ? null : <label className={style.lableAlert}>Sai thông tin đăng nhập!</label>}
                 </div>
                 <div className={style.formGroup}>

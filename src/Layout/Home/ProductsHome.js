@@ -30,13 +30,13 @@ function ProductsHome(props) {
                     <CompProductItem
                         subkey={props.subkey}
                         key={index}
-                        title={product.tensanpham}
-                        item={product.hinhanh}
-                        price={product.giaban}
-                        cost={product.giaban}
-                        des={product.mota}
-                        inf={product.mota}
-                        id_product={product.id_sanpham}
+                        title={product.product_name}
+                        item={product.product_images[0].file_path}
+                        price={product.product_price - product.product_sale_price * product.product_price/100}
+                        cost={product.product_price}
+                        sale={product.product_sale_price}
+                        des={product.product_description}
+                        product_id={product.product_id}
                     />
                 ))}
             </Slider>

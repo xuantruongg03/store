@@ -15,14 +15,18 @@ function CompBanner() {
     }, []);
 
     useEffect(() => {
-        setTimeout(() => {
-            if (active >= banners.length - 1) {
-                setActive(0);
-            } else {
-                setActive(active + 1);
-            }
-            setBannerActive(banners[active].hinhanh);
-        }, 5000);
+        try {
+            setTimeout(() => {
+                if (active >= banners.length - 1) {
+                    setActive(0);
+                } else {
+                    setActive(active + 1);
+                }
+                setBannerActive(banners[active].banner_image);
+            }, 5000);
+        } catch (error) {
+            console.log(error);
+        }
     });
 
     const styleBanners = {

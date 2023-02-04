@@ -42,7 +42,7 @@ function CompProductInfoPrice(props) {
             </p>
             <p className={style.cost}>{formatsMoney(props.cost)}</p>
             <p className={style.rate}>
-                Rate: <span className={style.rateNumber}>5.0</span>
+                Giảm giá: <span className={style.rateNumber}>{props.sale}%</span>
             </p>
             <br />
             <p className={style.configuration}>Cấu hình:</p>

@@ -8,6 +8,7 @@ import avatarInit from '../../access/image/avatar.jpg';
 import ConvertMoneyVND from '../../Convert/ConvertMoneyVND';
 import ConvertStringVNtoTitle from '../../Convert/ConvertStringVNtoTitle';
 import style from './CompHeader.module.scss';
+import { getUser } from 'src/api/user';
 
 const list = [
     {
@@ -35,18 +36,24 @@ const list = [
 function CompHeader() {
     const dispatch = useDispatch();
     const state = useSelector((state) => state.login);
+    const [data, setData] = useState(state !== null ? (state.state !== false ? state.data : null) : null);
     const [stateLogin, setStateLogin] = useState(state != null ? state.state : false);
     const [products, setProducts] = useState();
     const [result, setResult] = useState();
     const [show, setShow] = useState(false);
-    const avatar = state !== null ? (state.data[0].avatar !== null ? state.data[0].avatar : avatarInit) : avatarInit;
+    const [avatar, setAvatar] = useState(avatarInit);
 
     const handleLogout = () => {
         setStateLogin(false);
         dispatch({
             type: 'LOGIN',
-            data: false
-        })
+            payload: {
+                state: false,
+                data: null,
+            },
+        });
+        localStorage.removeItem('token');
+        localStorage.removeItem('customer_id');
     };
 
     const showMenu = () => {
@@ -81,13 +88,25 @@ function CompHeader() {
     useEffect(() => {
         const getData = async () => {
             const resProducts = await getAllProducts();
-            // const resAvatar = await getUser();
             setProducts(resProducts.data);
-            // console.log(resAvatar.data[0].hinhanh);
-            // setAvatar(resAvatar.data[0].hinhanh);
+            if (resProducts.login) {
+                setStateLogin(resProducts.login);
+                let data = await getUser(resProducts.customer_id);
+                setData(data.data[0]);
+                setAvatar(data.data[0].avatar);
+                dispatch({
+                    type: 'LOGIN',
+                    payload: {
+                        state: true,
+                        data: {
+                            customer_id: data.customer_id,
+                        },
+                    },
+                });
+            }
         };
         getData();
-    }, []);
+    }, [dispatch]);
 
     return (
         <div className={style.CompHeader}>
@@ -134,16 +153,21 @@ function CompHeader() {
                 })()}
                 {stateLogin ? (
                     <div className={style.boxAccount}>
-                        <img src={avatar} alt="Avatar" className={style.account} onClick={showMenu} />
+                        <img
+                            src={avatar === null ? avatarInit : avatar}
+                            alt="Avatar"
+                            className={style.account}
+                            onClick={showMenu}
+                        />
                         <div className={style.accountName} onClick={showMenu}>
-                            {state.data[0].ho + ' ' + state.data[0].ten}
+                            {data !== null ? data.first_name + ' ' + data.last_name : null}
                         </div>
                         {show ? (
                             <div className={style.accountMenu}>
-                                <Link to="/account" className={style.accountMenuItem}>
+                                <Link to={`/account?q=${data.customer_id}`} className={style.accountMenuItem}>
                                     Tài khoản
                                 </Link>
-                                <Link to="/cart" className={style.accountMenuItem}>
+                                <Link to={`/cart?q=${data.customer_id}`} className={style.accountMenuItem}>
                                     Giỏ hàng
                                 </Link>
                                 <div className={style.accountMenuItem} onClick={handleLogout}>

@@ -5,4 +5,9 @@ const loginAPI = (params) => {
     return axiosClient.post(url, params);
 }
 
-export { loginAPI };
+const checkTokenAPI = () => {
+    const url = '/check-token';
+    return axiosClient.get(url);
+}
+
+export { loginAPI, checkTokenAPI };

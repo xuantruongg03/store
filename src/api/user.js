@@ -11,10 +11,9 @@ const updateUserAPI = (params) => {
     return axiosClient.post(url, params)
 }
 
-const getUser = (params) => {
-    const { id } = params
-    const url = `/get-user/${id}`
-    return axiosClient.get(url, params)
+const getUser = (customer_id) => {
+    const url = `/get-user?customer_id=${customer_id}`
+    return axiosClient.get(url)
 }
 
 export { checkUserAPI, updateUserAPI, getUser }

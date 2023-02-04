@@ -47,14 +47,30 @@
     border-bottom: 1px solid #233E92;
     border-right: 1px solid #233E92;
 }
+
+.labelDes{
+    min-width: 35%;
+    font-weight: 600;
+    margin: 5px auto;
+    text-transform: uppercase;
+    padding: 3px;
+}
+
 .lable{
     max-width: 50%;
-    min-width: 30%;
+    min-width: 35%;
     font-weight: 600;
     border-right: 1px solid #233E92;
     border-left: 1px solid #233E92;
-    padding-left: 10px;
+    padding: 3px;
 }
+
+.value{
+    max-width: 50%;
+    min-width: 65%;
+    padding: 3px;
+}
+
 .inf{
     padding-left: 5px;
 }

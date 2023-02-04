@@ -1,10 +1,10 @@
-import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import clsx from 'clsx';
 import { useEffect, useState } from 'react';
 import Table from 'react-bootstrap/Table';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { getCart } from 'src/api/cart';
 import style from './Cart.module.scss';
 import CompCart from './CompCart';
 
@@ -15,14 +15,20 @@ function Cart() {
     const [selectTitlePay, setSelectTitlePay] = useState([]);
     const [selectPricePay, setSelectPricePay] = useState([]);
     const [selectQuatity, setSelectQuatity] = useState([]);
-    const idCart = localStorage.getItem('id_khachhang');
+    const location = useLocation();
+    const query = new URLSearchParams(location.search);
+    const customer_id = query.get('q');
 
     useEffect(() => {
         document.title = 'Giỏ Hàng';
-        axios.get(`http://localhost:8080/api/v1/cart/get-cart/${idCart}`).then((res) => {
-            setCart(res.data.data.cart);
-        });
-    }, [idCart]);
+        const cart = async () => {
+            const res = await getCart(customer_id);
+            console.log(res.data);
+            setCart(res.data);
+        };
+        cart();
+    }, [customer_id]);
+
     const handleDelete = (e) => {
         if (selectTitlePay.length === 0) {
             alert('Vui lòng chọn sản phẩm!');
@@ -34,6 +40,7 @@ function Cart() {
             });
         }
     };
+
     const handleBuy = (e) => {
         if (selectTitlePay.length === 0) {
             alert('Vui lòng chọn sản phẩm!');
@@ -45,6 +52,7 @@ function Cart() {
             });
         }
     };
+
     const func = {
         setSelect,
         setSelectTitlePay,
@@ -70,7 +78,6 @@ function Cart() {
                 <Table style={{ width: '100%' }} className={clsx(cart.length > 0 ? '' : 'disabled', 'cart')}>
                     <thead style={{ color: 'red' }}>
                         <tr>
-                            <th>Sản phẩm</th>
                             <th>Tên Sản phẩm</th>
                             <th>Thông tin sản phẩm</th>
                             <th>Giá tiền</th>

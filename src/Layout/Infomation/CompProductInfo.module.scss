@@ -1,4 +1,4 @@
-.titleProduct{
+.titleProduct {
     font-size: 25px;
     margin-top: 20px;
     font-weight: 600;
@@ -7,20 +7,49 @@
     margin-bottom: 20px;
 }
 
-.img{
-    height: 500px;
-    width: 500px;
+.img {
+    height: 400px;
+    // width: 460px;
 }
 
-.boxDes{
+.boxMini{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.boxMiniImage{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center !important;
+    max-width: 600px;
+    margin-top: 10px;
+    min-height: 100px;
+}
+
+.imageMini{
+    height: 100px !important;
+    width: 100px !important;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.activeImage {
+    border:  2px solid #233E92; 
+    border-radius: 5px;
+}
+
+.boxDes {
     max-width: 50%;
 }
 
-.des{
+.des {
     font-size: 17px;
 }
 
-.detail{
+.detail {
     margin: 0 50px;
     min-width: 500px;
     max-width: 500px;
@@ -28,7 +57,7 @@
     // max-height: 100px;
 }
 
-.title{
+.title {
     background-color: #233E92;
     color: #FFFFF8;
     padding: 10px;
@@ -48,7 +77,7 @@
     border-right: 1px solid #233E92;
 }
 
-.labelDes{
+.labelDes {
     min-width: 35%;
     font-weight: 600;
     margin: 5px auto;
@@ -56,7 +85,7 @@
     padding: 3px;
 }
 
-.lable{
+.lable {
     max-width: 50%;
     min-width: 35%;
     font-weight: 600;
@@ -65,25 +94,22 @@
     padding: 3px;
 }
 
-.value{
+.value {
     max-width: 50%;
     min-width: 65%;
     padding: 3px;
 }
 
-.inf{
+.inf {
     padding-left: 5px;
 }
 
-.ul{
-    // border: 1px solid rgb(247, 244, 244);
+.ul {
     margin: 0;
-    // padding-left: 10px;
     padding: 0;
-
 }
 
-.list{
+.list {
     list-style-type: circle;
     list-style-position: inside;
     text-align: left;
@@ -91,16 +117,17 @@
     padding-left: 5px;
 }
 
-.btn{
+.btn {
     width: 100%;
     height: 35px;
-    margin-top: 15px;   
+    margin-top: 15px;
     background-color: #FFFFF8;
     border: 1px solid #233E92;
     border-radius: 5px;
     cursor: pointer;
     color: #2368A4;
-    &:hover{
+
+    &:hover {
         opacity: 0.9;
     }
 }

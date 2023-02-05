@@ -17,7 +17,6 @@ function CompCart(props) {
 
     useEffect(() => {
         setTotalPrice(props.data.product_price * props.data.quantity);
-        console.log(props.data.product_price * props.data.quantity);
     }, [props.data.quantity, props.data.product_price]);
 
     const handleAdd = () => {
@@ -82,7 +81,7 @@ function CompCart(props) {
                         {props.data.product_name}
                     </Link>
                 </th>
-                <th className={style.infoProduct}>1TB</th>
+                <th className={style.infoProduct}>{props.info || ""}</th>
                 <th className={style.priceProduct}>{formatsMoney(props.data.product_price)}</th>
                 <th>
                     <form className={style.numberProductForm}>

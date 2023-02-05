@@ -7,7 +7,7 @@ const getAllProducts = (params) => {
 }
 
 const getProductById = (id) => {
-    const url = `/get-product-info?product_id=${id}`;
+    const url = `/get-product-info?search=${id}`;
     return axiosClient.get(url);
 }
 

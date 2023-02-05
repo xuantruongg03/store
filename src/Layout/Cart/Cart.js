@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import Table from 'react-bootstrap/Table';
 import { useDispatch } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
-import { getCart } from 'src/api/cart';
+import { deleteProductCart, getCart } from 'src/api/cart';
 import style from './Cart.module.scss';
 import CompCart from './CompCart';
 
@@ -23,7 +23,6 @@ function Cart() {
         document.title = 'Giỏ Hàng';
         const cart = async () => {
             const res = await getCart(customer_id);
-            console.log(res.data);
             setCart(res.data);
         };
         cart();
@@ -34,9 +33,22 @@ function Cart() {
             alert('Vui lòng chọn sản phẩm!');
             e.preventDefault();
         } else {
-            dispatch({
-                type: 'DELETE_CART',
-                data: select,
+            // eslint-disable-next-line array-callback-return
+            select.map((id) => {
+                const deleteProduct = async () => {
+                    const params = {
+                        product_id: id,
+                        customer_id: localStorage.getItem('customer_id'),
+                    };
+                    await deleteProductCart(params);
+                    document.querySelector('.cart-' + id).remove();
+                    for (let i = 0; i < select.length; i++) {
+                        if (select[i] === id) {
+                            select.splice(i, 1);
+                        }
+                    }
+                };
+                deleteProduct();
             });
         }
     };

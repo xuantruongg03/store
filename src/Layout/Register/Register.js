@@ -1,8 +1,8 @@
-import axios from 'axios';
 import clsx from 'clsx';
 import { useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { registerAPI } from '../../api/register';
+import { checkUserAPI } from '../../api/user';
 import style from './Register.module.scss';
 
 function Register() {
@@ -44,22 +44,22 @@ function Register() {
 
     const handleCheckbox = (e) => {
         setCheckbox(!checkbox);
-    }
+    };
 
     const handleRegister = (e) => {
-        let ho = name.split(' ').slice(0, -1).join(' ');
-        let ten = name.split(' ').slice(-1).join(' ');
+        let firt_name = name.split(' ').slice(0, -1).join(' ');
+        let last_name = name.split(' ').slice(-1).join(' ');
         const register = async () => {
             const params = {
-                tendangnhap: user,
-                matkhau: password,
+                username: user,
+                password: password,
                 email: email,
-                ho: ho,
-                ten: ten,
-                gioitinh: sex
-            }
+                first_name: firt_name,
+                last_name: last_name,
+                gender: sex,
+            };
             await registerAPI(params);
-        }
+        };
         register();
         navigate('/login');
     };
@@ -113,18 +113,16 @@ function Register() {
         return true;
     };
 
+    const handleCheck = () => {
+        alert('Vui lòng kiểm tra lại!');
+    };
+
     useMemo(async () => {
-        const baseURL = process.env.REACT_APP_API_URL
-        await axios({
-            method: 'post',
-            url: `${baseURL}/check-user`,
-            data: {
-                user: user,
-            },
-        }).then((res) => {
-            setState(res.data.state);
-        });
-        
+        const check = async () => {
+            const res = await checkUserAPI({ username: user });
+            setState(res.state);
+        };
+        check();
     }, [user]);
 
     return (
@@ -180,7 +178,7 @@ function Register() {
                             className={style.input}
                             onChange={handleInputPassword}
                         />
-                        <p className={style.labelError}>Độ mạnh mật khẩu: {checkPassword(password)}%</p>
+                        <p className={style.labelError}>Độ mạnh mật khẩu: {checkPassword(password)}% (Tổi thiểu 50%)</p>
                     </div>
                     <div className={style.formGroup}>
                         <label className={style.lable}>Nhập lại mật khẩu:</label>
@@ -194,7 +192,7 @@ function Register() {
                     </div>
                 </div>
                 <div className={style.boxCheck}>
-                    <input type="checkbox" id="checkbox" className={style.checkbox} onClick={handleCheckbox}/>
+                    <input type="checkbox" id="checkbox" className={style.checkbox} onClick={handleCheckbox} />
                     <label>
                         Tôi đã đọc và đồng ý với{' '}
                         <a href="/" rel="noopener" target="_blank" className={style.rules}>
@@ -208,8 +206,12 @@ function Register() {
                     </Link>
                 </div>
                 <div>
-                    {validateEmail(email) === false || checkPassword(password) < 50 || name.length < 6 || state || checkbox === false ? (
-                        <button className={style.button} disabled>
+                    {validateEmail(email) === false ||
+                    checkPassword(password) < 50 ||
+                    name.length < 6 ||
+                    state ||
+                    checkbox === false ? (
+                        <button type="button" className={style.button} onClick={handleCheck}>
                             Đăng ký
                         </button>
                     ) : (
@@ -217,9 +219,6 @@ function Register() {
                             Đăng ký
                         </button>
                     )}
-                    {/* <button className={style.button} onClick={handleRegister}>
-                        Đăng ký
-                    </button> */}
                 </div>
             </div>
         </div>

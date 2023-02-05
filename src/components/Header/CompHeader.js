@@ -63,7 +63,7 @@ function CompHeader() {
     const search = (e) => {
         if (e.target.value !== '') {
             let result = products.filter((products) =>
-                products.tensanpham.toLowerCase().includes(e.target.value.toLowerCase()),
+                products.product_name.toLowerCase().includes(e.target.value.toLowerCase()),
             );
             if (result.length === 0) {
                 setResult(null);
@@ -131,18 +131,18 @@ function CompHeader() {
                                 <ul className={style.listSearch}>
                                     {result.map((item, index) => (
                                         <li className={style.itemSearch} key={index}>
-                                            <img src={item.hinhanh} alt="hình ảnh" className={style.img} />
+                                            <img src={item.product_images[0].file_path} alt="hình ảnh" className={style.img} />
                                             <div>
                                                 <Link
-                                                    to={`/products/${ConvertStringVNtoTitle(item.tensanpham)}`}
-                                                    id={item.id_sanpham}
-                                                    title={item.tensanpham}
+                                                    to={`/products/${ConvertStringVNtoTitle(item.product_name)}?search=${item.product_id}`}
+                                                    id={item.product_id}
+                                                    title={item.product_name}
                                                     className={style.linkSearch}
                                                     onClick={getInf}
                                                 >
-                                                    {item.tensanpham}
+                                                    {item.product_name}
                                                 </Link>
-                                                <p className={style.price}>Giá bán: {ConvertMoneyVND(item.giaban)}</p>
+                                                <p className={style.price}>Giá bán: {ConvertMoneyVND(item.product_price)}</p>
                                             </div>
                                         </li>
                                     ))}
@@ -164,10 +164,10 @@ function CompHeader() {
                         </div>
                         {show ? (
                             <div className={style.accountMenu}>
-                                <Link to={`/account?q=${data.customer_id}`} className={style.accountMenuItem}>
+                                <Link to={`/account?q=${data.customer_id}`} className={style.accountMenuItem} onClick={showMenu}>
                                     Tài khoản
                                 </Link>
-                                <Link to={`/cart?q=${data.customer_id}`} className={style.accountMenuItem}>
+                                <Link to={`/cart?q=${data.customer_id}`} className={style.accountMenuItem} onClick={showMenu}>
                                     Giỏ hàng
                                 </Link>
                                 <div className={style.accountMenuItem} onClick={handleLogout}>

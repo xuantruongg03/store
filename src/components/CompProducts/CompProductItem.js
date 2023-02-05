@@ -45,15 +45,7 @@ function CompProductItem(props) {
     }, [sale]);
 
     const handleBuy = () => {
-        console.log(state);
         if (stateLogin) {
-            // dispatch({
-            //     type: 'ADD_TO_CART',
-            //     data: {
-            //         product_id: props.product_id,
-            //         amount: amount,
-            //     },
-            // });
             const product_id = props.product_id;
             const quantity = amount;
             const customer_id = localStorage.getItem('customer_id');
@@ -91,9 +83,13 @@ function CompProductItem(props) {
                 <span style={{ fontSize: '12px' }}>OFF</span>
                 <span>{sale + '%'}</span>
             </div>
-            <img src={props.item} alt="img" className={style.image} />
+                <img src={props.item} alt="img" className={style.image} />
             <br />
-            <Link to={'/products/' + slug(props.title)} className={style.title} onClick={getInf}>
+            <Link
+                to={'/products/' + slug(props.title) + `?search=${props.product_id}`}
+                className={style.title}
+                onClick={getInf}
+            >
                 {props.title}
             </Link>
             <div className={style.boxPrice}>

@@ -31,8 +31,10 @@ function Login() {
             if (responsive.state) {
                 const token = responsive.token;
                 localStorage.setItem('token', token);
+                localStorage.setItem('customer_id', responsive.data.customer_id);
                 dispatch({ type: 'LOGIN', payload: responsive});
-                navigate('/');
+                window.location.href = '/';
+                // navigate('/');
             } else {
                 navigate('/login');
             }

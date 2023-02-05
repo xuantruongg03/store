@@ -1,13 +1,11 @@
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { buy, deleteProductCart } from 'src/api/cart';
 import style from './Pay.module.scss';
 import PayInput from './PayInput';
 import PayOutput from './PayOutput';
 
 function Pay() {
-    // const [title, setTitle] = useState(localStorage.getItem('selectTitlePay').split(','));
-    // const [price, setPrice] = useState(localStorage.getItem('selectPricePay').split(','));
-    // const dispatch = useDispatch();
     const [name, setName] = useState('example');
     const [phone, setPhone] = useState('0123456');
     const [address, setAddress] = useState('example');
@@ -49,8 +47,6 @@ function Pay() {
         errorAddress,
     };
 
-    const dispatch = useDispatch();
-
     const handleBuy = (e) => {
         if (
             name === 'example' ||
@@ -61,24 +57,34 @@ function Pay() {
             city === 'example'
         ) {
             alert('Vui lòng kiểm tra lại!');
-            e.preventDefault()
+            e.preventDefault();
         } else {
-            dispatch({
-                type: 'BUY',
-                data: {
-                    //thông tin sản phẩm
-                    product: product,
-
-                    //thông tin người mua
-                    name: name,
-                    phone: phone,
-                    address: address,
-                    conscious: conscious,
-                    district: district,
-                    city: city,
-                    notes: notes,
-                    payment: payment,
-                },
+            product.map((element) => {
+                const Buy = async () => {
+                    const params = {
+                        customer_id: localStorage.getItem('customer_id'),
+                        product_id: element.id_product,
+                        first_name: name.split(' ').slice(0, -1).join(' '),
+                        last_name: name.split(' ').slice(-1).join(' '),
+                        number_phone: phone,
+                        address: `${address} - ${conscious} - ${district}`,
+                        notes: notes,
+                        payment: payment,
+                        total_amount: element.soluong,
+                    };
+                    await buy(params);
+                };
+                const deleteCart = async () => {
+                    const params = {
+                        product_id: element.id_product,
+                        customer_id: localStorage.getItem('customer_id'),
+                    };
+                    await deleteProductCart(params);
+                    document.querySelector('.cart-' + element.id_product).remove();
+                };
+                Buy();
+                deleteCart();
+                return state;
             });
         }
     };

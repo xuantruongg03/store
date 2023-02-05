@@ -14,22 +14,12 @@ const PrivateRoutes = () => {
             if (token) {
                 const res = await checkTokenAPI();
                 setIsAuthenticated(res.login);
-                localStorage.setItem('customer_id', res.data.customer_id);
             }
             setLoading(false);
         };
         checkLogin();
-        // dispatch({
-        //     type: 'LOGIN',
-        //     payload: {
-        //         state: isAuthenticated,
-        //         data: {
-        //             customer_id: localStorage.getItem('customer_id'),
-        //         },
-        //     },
-        // });
+        
     }, []);
-
     if (loading) {
         return <div>Loading...</div>;
     }

@@ -46,22 +46,22 @@ function Account() {
     };
 
     const handleSave = (e) => {
-        let ho = name.split(' ').slice(0, -1).join(' ');
-        let ten = name.split(' ').slice(-1).join(' ');
+        let first_name = name.split(' ').slice(0, -1).join(' ');
+        let last_name = name.split(' ').slice(-1).join(' ');
         const update = async () => {
             const params = {
-                id_khachhang: id,
-                ho: ho,
-                ten: ten,
+                customer_id: id,
+                first_name: first_name,
+                last_name: last_name,
                 avatar: avatar,
             };
             const res = await updateUserAPI(params);
             if (res.message === 'ok') {
-                alert('Cập nhật thành công! Vui lòng đăng nhập lại.');
+                alert('Cập nhật thành công!');
                 window.location.reload();
             }
         };
-        if (name !== data.ho + ' ' + data.ten || avatar !== data.avatar) {
+        if (name !== data.first_name + ' ' + data.last_name || avatar !== data.avatar) {
             update();
         }
     };
@@ -79,6 +79,7 @@ function Account() {
         };
         user();
     }, [id]);
+
     return (
         <div className={style.boxAccount}>
             <div className={style.nav}>

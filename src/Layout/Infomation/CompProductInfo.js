@@ -1,20 +1,26 @@
+import clsx from 'clsx';
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
+import Slider from 'react-slick';
 import { getProductById } from '../../api/products';
 import style from './CompProductInfo.module.scss';
 import CompProductInfoPrice from './CompProductInfo/CompProductInfoPrice';
 
-function CompProductInfo(props) {
+function CompProductInfo() {
     const [title, setTitle] = useState();
     const [cost, setCost] = useState();
     const [img, setImg] = useState();
+    const [allImages, setAllImages] = useState([]);
     const [price, setPrice] = useState();
     const [sale, setSale] = useState();
     const [description, setDescription] = useState();
     const [details, setDetails] = useState([]);
     const [quatity, setQuatity] = useState();
     const [isShow, setIsshow] = useState(false);
-    const id = useSelector((state) => state.item.product_id);
+    const [loading, setLoading] = useState(true);
+    const location = useLocation();
+    const query = new URLSearchParams(location.search);
+    const id = query.get('search');
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -27,8 +33,10 @@ function CompProductInfo(props) {
             setCost(data[0].product_price);
             setDescription(data[0].product_description);
             setImg(data[0].product_images[0].file_path);
+            setAllImages(data[0].product_images);
             setDetails(data[0].product_details);
             setQuatity(data[0].product_quantity);
+            setLoading(false);
         };
         getInf();
     }, [id]);
@@ -42,15 +50,49 @@ function CompProductInfo(props) {
         setIsshow(!isShow);
     };
 
+    const handleChooseImage = (e) => {
+        setImg(e.target.src);
+    };
+
+    const property = {
+        dots: true,
+        infinite: false,
+        speed: 500,
+        slidesToShow: 4,
+        slidesToScroll: 2,
+        // arrows: true,
+    };
+    
+    if (loading) {
+        return <div>loading</div>;
+    }
+
     return (
         <div style={{ margin: '0 130px' }}>
             <h2 className={style.titleProduct}>{title}</h2>
-            <div style={{ display: 'flex', justifyContent: 'space-around', marginBottom: "10px"}}>
-                <img src={img} alt="Hình ảnh sản phẩm" className={style.img} />
-                <CompProductInfoPrice price={price} cost={cost} quatity={quatity} id={id} sale={sale}/>
+            <div style={{ display: 'flex', justifyContent: 'space-around', marginBottom: '30px' }}>
+                <div>
+                    <div className={style.boxMini}>
+                        <img src={img || allImages[0].file_path} alt="Hình ảnh sản phẩm" className={style.img} />
+                    </div>
+                    <Slider {...property} className={style.boxMiniImage}>
+                        {allImages.map((element) => {
+                            return (
+                                <img
+                                    key={element.image_id}
+                                    src={element.file_path}
+                                    alt="img"
+                                    className={clsx(style.imageMini, element.file_path === img ? style.activeImage : "")}
+                                    onClick={handleChooseImage}
+                                />
+                            );
+                        })}
+                    </Slider>
+                </div>
+                <CompProductInfoPrice price={price} cost={cost} quatity={quatity} id={id} sale={sale} />
             </div>
 
-            <div style={{ display: 'flex', marginTop: "10px"}}>
+            <div style={{ display: 'flex', marginTop: '10px' }}>
                 <div className={style.boxDes}>
                     <h1 className={style.labelDes}>Giới thiệu sản phẩm</h1>
                     <p className={style.des}>{description}</p>

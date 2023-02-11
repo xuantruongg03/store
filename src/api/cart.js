@@ -1,7 +1,7 @@
 import axiosClient from './axiosClient';
 
 const getCart = (customer_id) => {
-    const url = `/cart/get-cart?customer_id=${customer_id}`;
+    const url = `/cart/get-cart`;
     return axiosClient.get(url);
 };
 

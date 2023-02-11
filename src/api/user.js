@@ -12,7 +12,7 @@ const updateUserAPI = (params) => {
 }
 
 const getUser = (customer_id) => {
-    const url = `/get-user?customer_id=${customer_id}`
+    const url = `/get-user`
     return axiosClient.get(url)
 }
 

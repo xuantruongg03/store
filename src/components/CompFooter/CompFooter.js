@@ -3,11 +3,11 @@ import slug from 'src/Convert/ConvertStringVNtoTitle';
 import style from "./Footer.module.scss";
 
 const inf = [
-    'Đơn vị chủ quản: Siêu thị điện tử Nhanh.vn',
+    'Đơn vị chủ quản: Siêu thị điện tử Computer Central',
     'Mobile: 0981793201',
-    'Email: contact@gmail.com',
-    'Địa chỉ: Số 1 Sao Hỏa, Hệ Thái Dương',
-    'Website: http://www.nhanh.vn/',
+    'Email: computercentralqn@gmail.com',
+    'Địa chỉ: Chưa có địa chỉ',
+    'Website: http://www.computercentralqn.vn/',
 ];
 
 const support = ['Giới thiệu', 'Chính sách đổi trả', 'Hỗ trợ mua hàng'];
@@ -18,7 +18,7 @@ function CompFooter() {
             <div>
                 <img
                     className={style.logoFooter}
-                    src="https://traffic-edge31.cdn.vncdn.io/nvn/ncdn/store3/96878/logo_1648529159_logo%200338.png"
+                    src={require("../../access/image/logo.png")}
                     alt='logo'
                 />
 

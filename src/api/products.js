@@ -11,4 +11,9 @@ const getProductById = (id) => {
     return axiosClient.get(url);
 }
 
-export { getAllProducts, getProductById }
+const getProductsByType = (type) => {
+    const url = `/get-product-type?type=${type}`
+    return axiosClient.get(url);
+}
+
+export { getAllProducts, getProductById, getProductsByType }

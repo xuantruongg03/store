@@ -1,4 +1,4 @@
-import { faPiggyBank, faScrewdriverWrench, faSearch, faShieldAlt, faTruck } from '@fortawesome/free-solid-svg-icons';
+import { faPiggyBank, faScrewdriverWrench, faShieldAlt, faTruck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -115,14 +115,15 @@ function CompHeader() {
                 <Link to={'/'}>
                     <img
                         className={style.logo}
-                        src="https://traffic-edge31.cdn.vncdn.io/nvn/ncdn/store3/96878/logo_1648529159_logo%200338.png"
+                        // src="https://res.cloudinary.com/dcweof28t/image/upload/v1675918594/logo_a2s7vf.png"
+                        src={require("../../access/image/logo.png")}
                         alt="logo"
                     />
                 </Link>
 
                 <div className={style.formSearch}>
                     <input type="text" className={style.formSearchInput} placeholder="Tìm kiếm" onChange={search} />
-                    <FontAwesomeIcon icon={faSearch} className={style.iconSearch} />
+                    {/* <FontAwesomeIcon icon={faSearch} className={style.iconSearch} /> */}
                 </div>
                 {(() => {
                     if (result != null) {
@@ -164,10 +165,10 @@ function CompHeader() {
                         </div>
                         {show ? (
                             <div className={style.accountMenu}>
-                                <Link to={`/account?q=${data.customer_id}`} className={style.accountMenuItem} onClick={showMenu}>
+                                <Link to={`/account`} className={style.accountMenuItem} onClick={showMenu}>
                                     Tài khoản
                                 </Link>
-                                <Link to={`/cart?q=${data.customer_id}`} className={style.accountMenuItem} onClick={showMenu}>
+                                <Link to={`/cart`} className={style.accountMenuItem} onClick={showMenu}>
                                     Giỏ hàng
                                 </Link>
                                 <div className={style.accountMenuItem} onClick={handleLogout}>

@@ -65,6 +65,7 @@ function ProductsHome(props) {
             <Slider {...property}>
                 {props.listProducts.map((product, index) => (
                     <CompProductItem
+                        product_id={product.product_id}
                         subkey={props.subkey}
                         key={index}
                         title={product.product_name}
@@ -72,8 +73,6 @@ function ProductsHome(props) {
                         price={product.product_price - (product.product_sale_price * product.product_price) / 100}
                         cost={product.product_price}
                         sale={product.product_sale_price}
-                        des={product.product_description}
-                        product_id={product.product_id}
                     />
                 ))}
             </Slider>

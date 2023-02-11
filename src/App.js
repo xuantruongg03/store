@@ -39,32 +39,40 @@ function App() {
                     <Route path={slug(title)} element={layout(<CompProductInfo />)} />
                 </Route>
 
+                <Route path="/new" element={layout(<Products subTitle="Sản phẩm mới" subkey="new" />)} />
+
+                <Route path="/laptop" element={layout(<Products subTitle="Máy tính xách tay" subkey="laptop" />)} />
+
+                <Route path="/pc" element={layout(<Products subTitle="Máy tính để bàn" subkey="pc" />)} />
+
+                <Route
+                    path="/accessories"
+                    element={layout(<Products subTitle="Phụ kiện máy tính" subkey="accessory" />)}
+                />
+                
+                <Route path="/monitor" element={layout(<Products subTitle="Màn hình máy tính" subkey="monitor" />)} />
+                <Route path="/chair" element={layout(<Products subTitle="Ghế Gaming" subkey="chair" />)} />
+                <Route path="/sale" element={layout(<Products subTitle="Sản phẩm khuyến mãi" subkey="sale" />)} />
+                {/* <Route path="/news" element={layout(<Products subTitle="Tin tức" subkey="pc" />)} /> */}
+                {/* <Route path="/about" element={layout(<Products subTitle="Giới thiệu" subkey="about" />)} /> */}
+                {/* <Route path="/order" element={layout(<Products subTitle="Tra cứu đơn hàng" subkey="order" />)} /> */}
+                {/* <Route path="/recruitment" element={layout(<Products subTitle="Tuyển dụng" subkey="recruitment" />)} /> */}
+                {/* <Route path="/complaint" element={layout(<Products subTitle="Phản ánh, Khiếu nại" subkey="complaint" />)} /> */}
+
                 <Route element={<PrivateRoutes />}>
-                    <Route path="/sale">
-                        <Route
-                            path={slug('sản phẩm khuyến mãi')}
-                            element={Products}
-                            subkey="sale"
-                            subTitle="Sản phẩm khuyến mãi"
-                        />
-                    </Route>
-
                     <Route path="cart" element={layout(<Cart />)} />
-
                     <Route path="pay" element={layout(<Pay />)} />
-
                     <Route path="pay-complete" element={layout(<PayComplete />)} />
-
-                    <Route path="account" element={layout(<Account/>)} />
+                    <Route path="account" element={layout(<Account />)} />
                 </Route>
-                
-                <Route path="/login" element={<Login />} />
-                
-                <Route path="/register" element={<Register />} />
-                
-                <Route path="/booking" element={layout(<Booking/>)} />
 
-                <Route path="/booking-complete" element={layout(<BookingComplete/>)} />
+                <Route path="/login" element={<Login />} />
+
+                <Route path="/register" element={<Register />} />
+
+                <Route path="/booking" element={layout(<Booking />)} />
+
+                <Route path="/booking-complete" element={layout(<BookingComplete />)} />
 
                 <Route path="*" element={<NoPage />} />
             </Routes>

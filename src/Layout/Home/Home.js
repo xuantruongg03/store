@@ -10,7 +10,6 @@ function Home(props) {
     const [accessory, setAccessory] = useState([]);
     const [sale, setSale] = useState([]);
     useEffect(() => {
-        document.title = 'Computer Store';
         const getProducts = async () => {
             const response = await getAllProducts();
             let computerData = response.data.filter(

@@ -79,7 +79,6 @@ function Cart() {
     return (
         <div style={{ backgroundColor: '#FAFAFA', overflow: 'auto' }}>
             <br />
-
             <div className={style.container}>
                 <h1
                     style={{ textAlign: 'center', fontSize: '100px', color: 'red', marginTop: '10px' }}

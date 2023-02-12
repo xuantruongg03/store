@@ -20,7 +20,6 @@ function Cart() {
     const customer_id = query.get('q');
 
     useEffect(() => {
-        document.title = 'Giỏ Hàng';
         const cart = async () => {
             const res = await getCart(customer_id);
             setCart(res.data);

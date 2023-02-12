@@ -1,6 +1,6 @@
-import axios from 'axios';
 import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import bookingApi from 'src/api/booking';
 import style from './Booking.module.scss';
 
 function Booking() {
@@ -15,25 +15,24 @@ function Booking() {
         let address = ref.current.address.value;
         let date = ref.current.date.value;
         let problem = ref.current.problem.value;
-        let ho = name.split(' ').slice(0, -1).join(' ');
-        let ten = name.split(' ').slice(-1).join(' ');
+        let first_name = name.split(' ').slice(0, -1).join(' ');
+        let last_name = name.split(' ').slice(-1).join(' ');
         if (name === '' || email === '' || phone === '' || address === '' || date === '' || problem === '') {
             alert('Vui lòng kiểm tra lại!');
         } else {
-            axios({
-                method: 'POST',
-                url: 'http://localhost:8080/api/v1/booking',
-                data: {
-                    ho: ho,
-                    ten: ten,
-                    gioitinh: gender,
-                    email: email,
-                    dienthoai: phone,
-                    diachi: address,
-                    ngayhen: date,
-                    vande: problem,
-                },
-            });
+            const booking = async () => {
+                await bookingApi({
+                    first_name: first_name,
+                    last_name: last_name,
+                    address: address,
+                    gender: gender,
+                    number_phone: phone,
+                    repair_date: date,
+                    problem: problem,
+                    email: email
+                })
+            }
+            booking();
             navigate('/booking-complete');
         }
     };

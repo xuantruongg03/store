@@ -14,6 +14,7 @@ import Login from './Layout/Login/Login';
 import Pay from './Layout/Pay/Pay';
 import PayComplete from './Layout/PayComplete/PayComplete';
 import Products from './Layout/Products/Products';
+import ProductsSale from './Layout/Products/ProductsSale';
 import Register from './Layout/Register/Register';
 import NoPage from './NoPage';
 import PrivateRoutes from './PrivateRoutes';
@@ -49,10 +50,10 @@ function App() {
                     path="/accessories"
                     element={layout(<Products subTitle="Phụ kiện máy tính" subkey="accessory" />)}
                 />
-                
+
                 <Route path="/monitor" element={layout(<Products subTitle="Màn hình máy tính" subkey="monitor" />)} />
                 <Route path="/chair" element={layout(<Products subTitle="Ghế Gaming" subkey="chair" />)} />
-                <Route path="/sale" element={layout(<Products subTitle="Sản phẩm khuyến mãi" subkey="sale" />)} />
+                <Route path="/sale" element={layout(<ProductsSale subTitle="Sản phẩm khuyến mãi" />)} />
                 {/* <Route path="/news" element={layout(<Products subTitle="Tin tức" subkey="pc" />)} /> */}
                 {/* <Route path="/about" element={layout(<Products subTitle="Giới thiệu" subkey="about" />)} /> */}
                 {/* <Route path="/order" element={layout(<Products subTitle="Tra cứu đơn hàng" subkey="order" />)} /> */}
@@ -64,15 +65,13 @@ function App() {
                     <Route path="pay" element={layout(<Pay />)} />
                     <Route path="pay-complete" element={layout(<PayComplete />)} />
                     <Route path="account" element={layout(<Account />)} />
+                    <Route path="/booking" element={layout(<Booking />)} />
+                    <Route path="/booking-complete" element={layout(<BookingComplete />)} />
                 </Route>
 
                 <Route path="/login" element={<Login />} />
 
                 <Route path="/register" element={<Register />} />
-
-                <Route path="/booking" element={layout(<Booking />)} />
-
-                <Route path="/booking-complete" element={layout(<BookingComplete />)} />
 
                 <Route path="*" element={<NoPage />} />
             </Routes>

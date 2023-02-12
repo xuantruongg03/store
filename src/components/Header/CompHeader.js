@@ -54,6 +54,7 @@ function CompHeader() {
         });
         localStorage.removeItem('token');
         localStorage.removeItem('customer_id');
+        window.location.href = '/';
     };
 
     const showMenu = () => {
@@ -113,12 +114,7 @@ function CompHeader() {
             <div className={style.contact}></div>
             <nav className={style.nav}>
                 <Link to={'/'}>
-                    <img
-                        className={style.logo}
-                        // src="https://res.cloudinary.com/dcweof28t/image/upload/v1675918594/logo_a2s7vf.png"
-                        src={require("../../access/image/logo.png")}
-                        alt="logo"
-                    />
+                    <img className={style.logo} src={require('../../access/image/logo.png')} alt="logo" />
                 </Link>
 
                 <div className={style.formSearch}>
@@ -132,10 +128,16 @@ function CompHeader() {
                                 <ul className={style.listSearch}>
                                     {result.map((item, index) => (
                                         <li className={style.itemSearch} key={index}>
-                                            <img src={item.product_images[0].file_path} alt="hình ảnh" className={style.img} />
+                                            <img
+                                                src={item.product_images[0].file_path}
+                                                alt="hình ảnh"
+                                                className={style.img}
+                                            />
                                             <div>
                                                 <Link
-                                                    to={`/products/${ConvertStringVNtoTitle(item.product_name)}?search=${item.product_id}`}
+                                                    to={`/products/${ConvertStringVNtoTitle(
+                                                        item.product_name,
+                                                    )}?search=${item.product_id}`}
                                                     id={item.product_id}
                                                     title={item.product_name}
                                                     className={style.linkSearch}
@@ -143,7 +145,9 @@ function CompHeader() {
                                                 >
                                                     {item.product_name}
                                                 </Link>
-                                                <p className={style.price}>Giá bán: {ConvertMoneyVND(item.product_price)}</p>
+                                                <p className={style.price}>
+                                                    Giá bán: {ConvertMoneyVND(item.product_price)}
+                                                </p>
                                             </div>
                                         </li>
                                     ))}

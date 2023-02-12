@@ -25,8 +25,7 @@ function CompProductInfo() {
     useEffect(() => {
         window.scrollTo(0, 0);
         const getInf = async () => {
-            const response = await getProductById(id);
-            const data = response.data;
+            const { data } = await getProductById(id);
             setTitle(data[0].product_name);
             setPrice(data[0].product_price - (data[0].product_sale_price / 100) * data[0].product_price);
             setSale(Number(data[0].product_sale_price).toFixed());

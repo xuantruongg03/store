@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { buy, deleteProductCart } from 'src/api/cart';
 import style from './Pay.module.scss';
@@ -88,10 +88,6 @@ function Pay() {
             });
         }
     };
-
-    useEffect(() => {
-        document.title = 'Thanh Toán';
-    }, []);
 
     return (
         <div className={style.container}>

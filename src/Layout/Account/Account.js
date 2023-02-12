@@ -1,7 +1,6 @@
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import { getUser, updateUserAPI } from 'src/api/user';
 import image from '../../access/image/avatar.jpg';
 import style from './Account.module.scss';
@@ -11,9 +10,6 @@ function Account() {
     const [data, setData] = useState({});
     const [avatar, setAvatar] = useState();
     const [name, setName] = useState('');
-    const location = useLocation();
-    const query = new URLSearchParams(location.search);
-    const id = query.get('q');
 
     const hideEmail = (email) => {
         email = email ? email : 'abc@gmail.com';
@@ -32,12 +28,13 @@ function Account() {
     const handleInputAvatar = (e) => {
         var myWidget = window.cloudinary.createUploadWidget(
             {
-                cloudName: 'dcweof28t',
-                uploadPreset: 'uwkwlwgp',
+                cloudName: 'dvyutdqkj',
+                uploadPreset: 'ol04pjez',
+                multiple: false,
+                folder: "image_users"
             },
             (error, result) => {
                 if (!error && result && result.event === 'success') {
-                    // console.log('Done! Here is the image info: ', result.info);
                     setAvatar(result.info.secure_url);
                 }
             },
@@ -50,7 +47,6 @@ function Account() {
         let last_name = name.split(' ').slice(-1).join(' ');
         const update = async () => {
             const params = {
-                customer_id: id,
                 first_name: first_name,
                 last_name: last_name,
                 avatar: avatar,
@@ -72,13 +68,13 @@ function Account() {
 
     useEffect(() => {
         const user = async () => {
-            const res = await getUser(id);
+            const res = await getUser();
             setData(res.data[0]);
             setName(res.data[0].first_name + ' ' + res.data[0].last_name);
             setAvatar(res.data[0].avatar);
         };
         user();
-    }, [id]);
+    }, []);
 
     return (
         <div className={style.boxAccount}>

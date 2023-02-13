@@ -1,0 +1,11 @@
+
+.container {
+    margin: 0 130px;
+    display: flex;
+}
+
+@media screen and (max-width: 1200px) {
+    .container {
+        margin: 0 50px;
+    }
+}

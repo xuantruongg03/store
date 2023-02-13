@@ -215,8 +215,7 @@
 
 .li {
     list-style: none;
-    // line-height: 25px;
-    padding: 0 100px;
+    padding: 0 7%;
     display: flex;
     align-items: center;
 }
@@ -232,4 +231,13 @@
     color: white;
     cursor: default;
     position: relative;
+}
+
+@media screen and (max-width: 1200px) {
+    .li {
+        list-style: none;
+        padding: 0 5%;
+        display: flex;
+        align-items: center;
+    }
 }

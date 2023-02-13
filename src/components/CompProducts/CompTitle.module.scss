@@ -1,9 +1,8 @@
-
-.divTitle{
+.divTitle {
     position: relative;
 }
 
-.style{
+.style {
     background-color: #233E92;
     color: white;
     font-size: 16px;
@@ -18,15 +17,29 @@
     margin-bottom: 0;
 }
 
-.span{
+.span {
     position: absolute;
     top: 0;
     right: 10%;
     font-weight: 400;
     font-size: 14px;
     color: #ed1c24;
-    &:hover{
+
+    &:hover {
         cursor: pointer;
         text-decoration: underline;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .divTitle {
+        left: 0;
+    }
+    .style{
+        margin-left: 45px;
+    }
+
+    .span{
+        right: 5%;
     }
 }

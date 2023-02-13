@@ -71,7 +71,7 @@ const lists = [
 function ListMenu() {
     return (
         <div>
-            <ul className="list-group">
+            <ul className={style.listGroup}>
                 {lists.map((item, index) => (
                     <li key={index} className={style.listGroupItem}>
                         <Link to={`${item.path}`} className={style.item}>

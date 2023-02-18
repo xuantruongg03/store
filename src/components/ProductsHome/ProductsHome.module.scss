@@ -2,7 +2,7 @@
 .container {
     border-top: 1px solid gray;
     margin: 0 142px 30px 130px;
-    // min-width: 1200px;
+    min-width: 1200px;
     position: relative;
 }
 
@@ -23,3 +23,64 @@
         margin: 0 30px 0 30px;
     }
 }
+
+@media screen and (max-width: 1080px) {
+    .container {
+        margin: 0 20px 30px 20px;
+    }
+    .showProduct{
+        margin: 0 30px 0 30px;
+    }
+}
+
+// .container {
+//     border-top: 1px solid gray;
+//     margin: 0 1%;
+//     min-width: 320px; /* Giá trị tối thiểu cho độ rộng của trang web */
+//     position: relative;
+// }
+
+// .slider {
+//     height: 40vw; /* Thay đổi độ cao của slider để phù hợp với mọi màn hình */
+// }
+
+// .showProduct {
+//     display: flex;
+//     flex-wrap: wrap;
+//     margin: 0 -1%; /* Giảm padding của showProduct để tránh hiển thị tràn nội dung */
+// }
+
+// .showProduct > * {
+//     box-sizing: border-box;
+//     width: 48%; /* Thay đổi chiều rộng sản phẩm trong showProduct để tránh hiển thị tràn nội dung */
+//     margin: 1%; /* Thêm margin giữa các sản phẩm */
+// }
+
+// @media (min-width: 768px) {
+//     .container {
+//         margin: 0 10%;
+//     }
+
+//     .slider {
+//         height: 30vw;
+//     }
+
+//     .showProduct > * {
+//         width: 23%; /* Tăng kích thước sản phẩm trên màn hình lớn */
+//     }
+// }
+
+// @media (min-width: 1200px) {
+//     .container {
+//         margin: 0 auto;
+//         max-width: 1200px; /* Sử dụng độ rộng tối đa cho trang web của bạn */
+//     }
+
+//     .slider {
+//         height: 500px;
+//     }
+
+//     .showProduct > * {
+//         width: 25%; /* Giữ nguyên kích thước sản phẩm trên màn hình lớn */
+//     }
+// }

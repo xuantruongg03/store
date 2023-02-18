@@ -134,7 +134,12 @@ function Register() {
                 <div className={style.form}>
                     <div className={style.formGroup}>
                         <label className={style.lable}>Họ tên:</label>
-                        <input type="text" name="user" className={style.input} onChange={handleInputName} />
+                        <input
+                            type="text"
+                            name="user"
+                            className={clsx(style.input, name.length < 1 || name.length > 50 ? style.error : '')}
+                            onChange={handleInputName}
+                        />
                         {(() => {
                             if (name.length < 1) {
                                 return <p className={style.labelError}>Họ tên phải lớn hơn 6 kí tự!</p>;
@@ -154,7 +159,12 @@ function Register() {
                 <div className={style.form}>
                     <div className={style.formGroup}>
                         <label className={style.lable}>Tên đăng nhập:</label>
-                        <input type="text" name="user" className={style.input} onChange={handleInputUser} />
+                        <input
+                            type="text"
+                            name="user"
+                            className={clsx(style.input, state || user.length > 50 ? style.error : '')}
+                            onChange={handleInputUser}
+                        />
                         {(() => {
                             if (state) {
                                 return <p className={style.labelError}>Tên đăng nhập đã tồn tại!</p>;
@@ -165,7 +175,12 @@ function Register() {
                     </div>
                     <div className={style.formGroup}>
                         <label className={style.lable}>Email:</label>
-                        <input type="Email" name="email" className={style.input} onChange={handleInputEmail} />
+                        <input
+                            type="Email"
+                            name="email"
+                            className={clsx(style.input, !validateEmail(email) ? style.error : '')}
+                            onChange={handleInputEmail}
+                        />
                         {validateEmail(email) ? null : <p className={style.labelError}>Đây không phải địa chỉ email</p>}
                     </div>
                 </div>
@@ -175,7 +190,7 @@ function Register() {
                         <input
                             type="password"
                             name="firstPassword"
-                            className={style.input}
+                            className={clsx(style.input, !checkPassword(password) < 50 ? style.error : '')}
                             onChange={handleInputPassword}
                         />
                         <p className={style.labelError}>Độ mạnh mật khẩu: {checkPassword(password)}% (Tổi thiểu 50%)</p>
@@ -185,7 +200,7 @@ function Register() {
                         <input
                             type="password"
                             name="lastPassword"
-                            className={style.input}
+                            className={clsx(style.input, !checkConfirmPassword() ? style.error : '')}
                             onChange={handleConfirmPassword}
                         />
                         {checkConfirmPassword() ? null : <p className={style.labelError}>Mật khẩu không khớp!</p>}

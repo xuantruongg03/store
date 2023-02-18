@@ -8,6 +8,7 @@ import Account from './Layout/Account/Account';
 import Booking from './Layout/Booking/Booking';
 import BookingComplete from './Layout/Booking/BookingComplete';
 import Cart from './Layout/Cart/Cart';
+import ForgotPassword from './Layout/ForgotPassword/ForgotPassword';
 import Home from './Layout/Home/Home';
 import CompProductInfo from './Layout/Infomation/CompProductInfo';
 import Login from './Layout/Login/Login';
@@ -70,6 +71,8 @@ function App() {
                 </Route>
 
                 <Route path="/login" element={<Login />} />
+
+                <Route path="/forgot-password" element={<ForgotPassword />} />
 
                 <Route path="/register" element={<Register />} />
 

@@ -1,6 +1,7 @@
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { getUser, updateUserAPI } from 'src/api/user';
 import image from '../../access/image/avatar.jpg';
 import style from './Account.module.scss';
@@ -78,7 +79,7 @@ function Account() {
 
     return (
         <div className={style.boxAccount}>
-            <div className={style.nav}>
+            <nav className={style.nav}>
                 <div className={style.boxAvatarLeft}>
                     <img src={avatar || image} alt="Avatar" className={style.img} id="avatar" />
                     <label>{data.username}</label>
@@ -102,7 +103,7 @@ function Account() {
                 <label className={style.labelItem} onClick={handleChangePath} id="phone">
                     Đổi Số điện thoại
                 </label>
-            </div>
+            </nav>
             {(() => {
                 switch (path) {
                     case 'profile':
@@ -161,7 +162,7 @@ function Account() {
                                     <div className={style.group}>
                                         <label className={style.labelChangePass}>Nhập mật khẩu cũ:</label>
                                         <input className={style.inputChangePass} />
-                                        <label className={style.forgetPass}>Quên mật khẩu?</label>
+                                        <Link to="/forgot-password" className={style.forgetPass}>Quên mật khẩu?</Link>
                                     </div>
                                     <div className={style.group}>
                                         <label className={style.labelChangePass}>Nhập mật khẩu mới:</label>

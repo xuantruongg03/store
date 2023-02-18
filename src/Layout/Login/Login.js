@@ -58,7 +58,7 @@ function Login() {
                     <input type="password" name="password" className={style.input} onChange={handleInputPassword} />
                     {state === true ? null : <label className={style.lableAlert}>Sai thông tin đăng nhập!</label>}
                     <div className={style.boxLable}>
-                        <Link to="/forget-password" className={style.labelForgetPassword}>
+                        <Link to="/forgot-password" className={style.labelForgetPassword}>
                             Quên mật khẩu?
                         </Link>
                         <Link to="/register" className={style.labelForgetPassword}>

@@ -58,9 +58,18 @@ function ProductsHome(props) {
     };
     window.addEventListener('resize', handleWindowResize);
 
+    if (width <= 768) {
+        property.prevArrow = null;
+        property.nextArrow = null;
+    }
+
+    if (width <= 1200) {
+        property.slidesToShow = 3;
+        property.slidesToScroll = 1;
+    }
+
     return (
         <div className={style.container} id="product">
-            {width > 1300 ? (
                 <Slider {...property} className={style.slider}>
                     {props.listProducts.map((product, index) => (
                         <CompProductItem
@@ -75,6 +84,7 @@ function ProductsHome(props) {
                         />
                     ))}
                 </Slider>
+            {/* {width > 1300 ? (
             ) : (
                 <div className={style.showProduct}>
                     {props.listProducts.map((product, index) => (
@@ -90,7 +100,7 @@ function ProductsHome(props) {
                         />
                     ))}
                 </div>
-            )}
+            )} */}
         </div>
     );
 }

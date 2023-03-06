@@ -159,7 +159,7 @@
 .inputChangePass, .inputCapcha{
     margin: 5px 0 5px 25px;
     width: 50%;
-    padding: 5px    ;
+    padding: 5px 10px;
     border: 1px solid rgb(205, 204, 204);
     border-radius: 5px;
     outline: none;
@@ -176,4 +176,18 @@
     width: fit-content;
     padding: 5px 10px;
     letter-spacing: 3px;
+}
+
+.btnGetCapcha{
+    margin: 5px 0 5px 25px;
+    border: none;
+    cursor: pointer;
+    padding: 7px 15px;
+    min-width: 90px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 5px;
+    color: #fff;
+    background-color: #000099;
+    text-align: center;
 }

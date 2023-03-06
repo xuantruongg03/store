@@ -21,7 +21,7 @@ const PrivateRoutes = () => {
         
     }, []);
     if (loading) {
-        return <div>Loading...</div>;
+        return <div className='box-loader'><span className="loader"></span></div>;
     }
     return isAuthenticated ? <Outlet /> : <Navigate to="/login" />;
 };

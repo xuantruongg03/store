@@ -1,8 +1,8 @@
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { getUser, updateUserAPI } from 'src/api/user';
+import { getUserAPI, updateUserAPI, getCapchaAPI, updateEmailAPI } from 'src/api/user';
 import image from '../../access/image/avatar.jpg';
 import style from './Account.module.scss';
 
@@ -11,6 +11,8 @@ function Account() {
     const [data, setData] = useState({});
     const [avatar, setAvatar] = useState();
     const [name, setName] = useState('');
+    // const phoneRef = useRef();
+    const emailRef = useRef();
 
     const hideEmail = (email) => {
         email = email ? email : 'abc@gmail.com';
@@ -67,9 +69,73 @@ function Account() {
         setPath(e.target.id);
     };
 
+    const changeEmail = (e) => {
+        const oldEmail = emailRef.current.children[0].children[1].value;
+        const newEmail = emailRef.current.children[1].children[1].value;
+        const capcha = emailRef.current.children[2].children[1].value;
+        if (oldEmail === '' || newEmail === '' || capcha === '') {
+            alert('Vui lòng nhập đầy đủ thông tin!');
+        } else {
+            const updateEmail = async () => {
+                const params = {
+                    oldEmail: oldEmail,
+                    newEmail: newEmail,
+                    capcha: capcha,
+                };
+                const res = await updateEmailAPI(params);
+                if (res.status === 200) {
+                    alert('Cập nhật thành công!');
+                    window.location.reload();
+                } else {
+                    alert('Cập nhật thất bại! Vui lòng kiểm tra lại thông tin!');
+                }
+            };
+            updateEmail();
+        }
+    }
+
+    // const changePhone = (e) => {
+        // const phoneOld = phoneRef.current.children[0].children[1].value;
+        // const phoneNew = phoneRef.current.children[1].children[1].value;
+        // const capcha = phoneRef.current.children[2].children[1].value;
+        // if (phoneOld === '' || phoneNew === '' || capcha === '') {
+        //     alert('Vui lòng nhập đầy đủ thông tin!');
+        // } else {
+        //     const update = async () => {
+        //         const params = {
+        //             phone: phoneNew,
+        //         };
+        //         const res = await updateUserAPI(params);
+        //         if (res.message === 'ok') {
+        //             alert('Cập nhật thành công!');
+        //             window.location.reload();
+        //         }
+        //     };
+        //     update();
+        // }
+    // }
+
+    const getCapchaFunc = (e) => {
+        e.target.disabled = true;
+        const getCapchaCode = async () => {
+            await getCapchaAPI();
+        }
+        let time = 120;
+        const interval = setInterval(() => {
+            time -= 1;
+            e.target.innerText = `Gửi lại sau ${time} giây`;
+            if (time === 0) {
+                e.target.innerText = `Gửi lại mã`;
+                e.target.disabled = false;
+                window.clearInterval(interval);
+            }
+        }, 1000);
+        getCapchaCode();
+    }
+
     useEffect(() => {
         const user = async () => {
-            const res = await getUser();
+            const res = await getUserAPI();
             setData(res.data[0]);
             setName(res.data[0].first_name + ' ' + res.data[0].last_name);
             setAvatar(res.data[0].avatar);
@@ -180,7 +246,7 @@ function Account() {
                         return (
                             <div className={style.boxChangeEmail}>
                                 <h1 className={style.title}>Đổi điạ chỉ Email</h1>
-                                <div>
+                                <div ref={emailRef}>
                                     <div className={style.group}>
                                         <label className={style.labelChangePass}>Nhập Email cũ:</label>
                                         <input className={style.inputChangePass} />
@@ -192,31 +258,42 @@ function Account() {
                                     <div className={style.group}>
                                         <label className={style.labelChangePass}>Nhập mã xác minh:</label>
                                         <input className={style.inputCapcha} />
+                                        <button className={style.btnGetCapcha} onClick={getCapchaFunc}>Lấy mã</button>
+                                    </div>
+                                    <div>
+                                        <label className={style.labelChangePass}>Chúng tôi sẽ gửi cho bạn một mã xác minh qua địa chỉ email đã đăng ký! Mã có hiệu lực trong 2 phút.</label>
                                     </div>
                                 </div>
-                                <button className={style.btnSave}>Lưu</button>
+                                <button className={style.btnSave} onClick = {changeEmail}>Lưu</button>
                             </div>
                         );
                     case 'phone':
                         return (
-                            <div className={style.boxChangePhone}>
-                                <h1 className={style.title}>Đổi số điện thoại</h1>
-                                <div>
-                                    <div className={style.group}>
-                                        <label className={style.labelChangePass}>Nhập số điện thoại cũ:</label>
-                                        <input className={style.inputChangePass} />
-                                    </div>
-                                    <div className={style.group}>
-                                        <label className={style.labelChangePass}>Nhập số điện thoại mới:</label>
-                                        <input className={style.inputChangePass} />
-                                    </div>
-                                    <div className={style.group}>
-                                        <label className={style.labelChangePass}>Nhập mã xác minh:</label>
-                                        <input className={style.inputCapcha} />
-                                    </div>
-                                </div>
-                                <button className={style.btnSave}>Lưu</button>
+                            <div className={style.boxBanking}>
+                                <h1 className={style.title}>Đang cập nhật</h1>
                             </div>
+                            // <div className={style.boxChangePhone}>
+                            //     <h1 className={style.title}>Đổi số điện thoại</h1>
+                            //     <div ref={phoneRef}>
+                            //         <div className={style.group}>
+                            //             <label className={style.labelChangePass} >Nhập số điện thoại cũ:</label>
+                            //             <input className={style.inputChangePass} name='phoneOld'/>
+                            //         </div>
+                            //         <div className={style.group}>
+                            //             <label className={style.labelChangePass} >Nhập số điện thoại mới:</label>
+                            //             <input className={style.inputChangePass} name='phoneNew'/>
+                            //         </div>
+                            //         <div className={style.group}>
+                            //             <label className={style.labelChangePass} >Nhập mã xác minh:</label>
+                            //             <input className={style.inputCapcha} name='capcha'/> 
+                            //             <button className={style.btnGetCapcha} onClick={getCapchaFunc}>Lấy mã</button>
+                            //         </div>
+                            //         <div>
+                            //             <label className={style.labelChangePass}>Chúng tôi sẽ gửi cho bạn một mã xác minh qua địa chỉ email đã đăng ký! Mã có hiệu lực trong 2 phút.</label>
+                            //         </div>
+                            //     </div>
+                            //     <button className={style.btnSave} onClick={changePhone} >Lưu</button>
+                            // </div>
                         );
                     default:
                         return <div>No Page</div>;

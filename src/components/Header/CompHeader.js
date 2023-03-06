@@ -8,7 +8,7 @@ import avatarInit from '../../access/image/avatar.jpg';
 import ConvertMoneyVND from '../../Convert/ConvertMoneyVND';
 import ConvertStringVNtoTitle from '../../Convert/ConvertStringVNtoTitle';
 import style from './CompHeader.module.scss';
-import { getUser } from 'src/api/user';
+import { getUserAPI } from 'src/api/user';
 
 const list = [
     {
@@ -92,7 +92,7 @@ function CompHeader() {
             setProducts(resProducts.data);
             if (resProducts.login) {
                 setStateLogin(resProducts.login);
-                let data = await getUser(resProducts.customer_id);
+                let data = await getUserAPI(resProducts.customer_id);
                 setData(data.data[0]);
                 setAvatar(data.data[0].avatar);
                 dispatch({

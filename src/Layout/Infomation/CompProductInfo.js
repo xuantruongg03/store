@@ -63,7 +63,7 @@ function CompProductInfo() {
     };
     
     if (loading) {
-        return <div>loading</div>;
+        return <div className='box-loader'><span className="loader"></span></div>;
     }
 
     return (
@@ -94,7 +94,7 @@ function CompProductInfo() {
             <div style={{ display: 'flex', marginTop: '10px' }}>
                 <div className={style.boxDes}>
                     <h1 className={style.labelDes}>Giới thiệu sản phẩm</h1>
-                    <p className={style.des}>{description}</p>
+                    <div dangerouslySetInnerHTML={{ __html: description }} className={style.des} />
                     <br />
                 </div>
                 <br />

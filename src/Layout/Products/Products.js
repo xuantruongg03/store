@@ -7,7 +7,9 @@ const styles = {
     margin: '0 5% 2% 5%',
     display: 'flex',
     flexWrap: 'wrap',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
+
+
 };
 
 const subTitle = {

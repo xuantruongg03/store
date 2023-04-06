@@ -1,306 +1,62 @@
-import { faUser } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { getUserAPI, updateUserAPI, getCapchaAPI, updateEmailAPI } from 'src/api/user';
-import image from '../../access/image/avatar.jpg';
-import style from './Account.module.scss';
+import clsx from 'clsx';
+import React, { useEffect, useState } from 'react';
+import { getUserAPI } from '../../api/user';
+import Address from './ListAddress';
+import ChangePass from './ChangePass';
+import Orders from './Orders';
+import User from './User';
 
 function Account() {
-    const [path, setPath] = useState('profile');
-    const [data, setData] = useState({});
-    const [avatar, setAvatar] = useState();
-    const [name, setName] = useState('');
-    // const phoneRef = useRef();
-    const emailRef = useRef();
 
-    const hideEmail = (email) => {
-        email = email ? email : 'abc@gmail.com';
-        return email.replace(/(\w{3})[\w.-]+@([\w.]+\w)/, '$1***@$2');
-    };
-
-    const hidePassword = (password) => {
-        password = password ? password : '';
-        return password.replace(/./g, '*');
-    };
-
-    const handleInputName = (e) => {
-        setName(e.target.value);
-    };
-
-    const handleInputAvatar = (e) => {
-        var myWidget = window.cloudinary.createUploadWidget(
-            {
-                cloudName: 'dvyutdqkj',
-                uploadPreset: 'ol04pjez',
-                multiple: false,
-                folder: "image_users"
-            },
-            (error, result) => {
-                if (!error && result && result.event === 'success') {
-                    setAvatar(result.info.secure_url);
-                }
-            },
-        );
-        myWidget.open();
-    };
-
-    const handleSave = (e) => {
-        let first_name = name.split(' ').slice(0, -1).join(' ');
-        let last_name = name.split(' ').slice(-1).join(' ');
-        const update = async () => {
-            const params = {
-                first_name: first_name,
-                last_name: last_name,
-                avatar: avatar,
-            };
-            const res = await updateUserAPI(params);
-            if (res.message === 'ok') {
-                alert('Cập nhật thành công!');
-                window.location.reload();
-            }
-        };
-        if (name !== data.first_name + ' ' + data.last_name || avatar !== data.avatar) {
-            update();
-        }
-    };
-
-    const handleChangePath = (e) => {
-        setPath(e.target.id);
-    };
-
-    const changeEmail = (e) => {
-        const oldEmail = emailRef.current.children[0].children[1].value;
-        const newEmail = emailRef.current.children[1].children[1].value;
-        const capcha = emailRef.current.children[2].children[1].value;
-        if (oldEmail === '' || newEmail === '' || capcha === '') {
-            alert('Vui lòng nhập đầy đủ thông tin!');
-        } else {
-            const updateEmail = async () => {
-                const params = {
-                    oldEmail: oldEmail,
-                    newEmail: newEmail,
-                    capcha: capcha,
-                };
-                const res = await updateEmailAPI(params);
-                if (res.status === 200) {
-                    alert('Cập nhật thành công!');
-                    window.location.reload();
-                } else {
-                    alert('Cập nhật thất bại! Vui lòng kiểm tra lại thông tin!');
-                }
-            };
-            updateEmail();
-        }
-    }
-
-    // const changePhone = (e) => {
-        // const phoneOld = phoneRef.current.children[0].children[1].value;
-        // const phoneNew = phoneRef.current.children[1].children[1].value;
-        // const capcha = phoneRef.current.children[2].children[1].value;
-        // if (phoneOld === '' || phoneNew === '' || capcha === '') {
-        //     alert('Vui lòng nhập đầy đủ thông tin!');
-        // } else {
-        //     const update = async () => {
-        //         const params = {
-        //             phone: phoneNew,
-        //         };
-        //         const res = await updateUserAPI(params);
-        //         if (res.message === 'ok') {
-        //             alert('Cập nhật thành công!');
-        //             window.location.reload();
-        //         }
-        //     };
-        //     update();
-        // }
-    // }
-
-    const getCapchaFunc = (e) => {
-        e.target.disabled = true;
-        const getCapchaCode = async () => {
-            await getCapchaAPI();
-        }
-        let time = 120;
-        const interval = setInterval(() => {
-            time -= 1;
-            e.target.innerText = `Gửi lại sau ${time} giây`;
-            if (time === 0) {
-                e.target.innerText = `Gửi lại mã`;
-                e.target.disabled = false;
-                window.clearInterval(interval);
-            }
-        }, 1000);
-        getCapchaCode();
-    }
+    const [user, setUser] = useState();
+    const [loading, setLoading] = useState(true);
+    const [show, setShow] = useState('user');
 
     useEffect(() => {
-        const user = async () => {
-            const res = await getUserAPI();
-            setData(res.data[0]);
-            setName(res.data[0].first_name + ' ' + res.data[0].last_name);
-            setAvatar(res.data[0].avatar);
-        };
-        user();
-    }, []);
+      const user = async () => {
+          const res = await getUserAPI();
+        //   setData(res.data[0]);
+        //   setName(res.data[0].first_name + ' ' + res.data[0].last_name);
+        //   setAvatar(res.data[0].avatar);
+        setUser(res.data[0]);
+        setLoading(false);
+      };
+      user();
+  }, []);
 
-    return (
-        <div className={style.boxAccount}>
-            <nav className={style.nav}>
-                <div className={style.boxAvatarLeft}>
-                    <img src={avatar || image} alt="Avatar" className={style.img} id="avatar" />
-                    <label>{data.username}</label>
+    if (loading) {
+        return (
+          <div className="box-loader">
+            <span className="loader"></span>
+          </div>
+        );
+      }
+
+    return ( 
+        <div className="container-custom my-10 flex">
+            <nav className="flex flex-col w-80" >
+                <h1 className="text-xl font-semibold uppercase">Trang tài khoản</h1>
+                <p className="font-semibold mt-2 mb-2" >Xin chào, <span className="text-red-500">Xuân Trường</span> !</p>
+                <div className='flex flex-col'>
+                    <div className='my-3'><label className={clsx(' cursor-pointer hover:text-yellow-400', show === 'user' ? 'text-yellow-400' : '')}  onClick={() => {setShow('user')}}>Thông tin tài khoản</label></div>
+                    <div className='my-3'><label className={clsx(' cursor-pointer hover:text-yellow-400', show === 'orders' ? 'text-yellow-400' : '')}  onClick={() => {setShow('orders')}}>Đơn hàng của bạn</label></div>
+                    <div className='my-3'><label className={clsx(' cursor-pointer hover:text-yellow-400', show === 'changePass' ? 'text-yellow-400' : '')}  onClick={() => {setShow('changePass')}}>Đổi mật khẩu</label></div>
+                    <div className='my-3'><label className={clsx(' cursor-pointer hover:text-yellow-400', show === 'address' ? 'text-yellow-400' : '')} onClick={() => {setShow('address')}}>Sổ địa chỉ</label></div>
                 </div>
-                <div className={style.boxTitle}>
-                    <FontAwesomeIcon icon={faUser} className={style.icon} />
-                    <label className={style.title}>Thông tin tài khoản</label>
-                </div>
-                <label className={style.labelItem} onClick={handleChangePath} id="profile">
-                    Hồ sơ
-                </label>
-                <label className={style.labelItem} onClick={handleChangePath} id="bank">
-                    Liên kết ngân hàng
-                </label>
-                <label className={style.labelItem} onClick={handleChangePath} id="password">
-                    Đổi mật khẩu
-                </label>
-                <label className={style.labelItem} onClick={handleChangePath} id="email">
-                    Đổi Email
-                </label>
-                <label className={style.labelItem} onClick={handleChangePath} id="phone">
-                    Đổi Số điện thoại
-                </label>
             </nav>
-            {(() => {
-                switch (path) {
-                    case 'profile':
-                        return (
-                            <div className={style.inf}>
-                                <div className={style.boxInf}>
-                                    <h1 className={style.title}>Hồ sơ của tôi</h1>
-                                    <div>
-                                        <div className={style.item}>
-                                            <label className={style.label}>Tên đăng nhập: </label>
-                                            <div className={style.value}>{data.username}</div>
-                                        </div>
-                                        <div className={style.item}>
-                                            <label className={style.label}>Họ tên: </label>
-                                            <input
-                                                // style={{ border: '1px solid rgb(182, 181, 181)' }}
-                                                className={style.value}
-                                                name="name"
-                                                style={{ border: '1px solid rgb(205, 204, 204)' }}
-                                                onChange={handleInputName}
-                                                defaultValue={name}
-                                            />
-                                        </div>
-                                        <div className={style.item}>
-                                            <label className={style.label}>Email: </label>
-                                            <div className={style.value}>{hideEmail(data.email)}</div>
-                                        </div>
-                                        <div className={style.item}>
-                                            <label className={style.label}>Mật khẩu: </label>
-                                            <div className={style.value}>{hidePassword(data.password)}</div>
-                                        </div>
-                                        <button className={style.btnSave} onClick={handleSave}>
-                                            Lưu
-                                        </button>
-                                    </div>
-                                </div>
-                                <div className={style.boxAvatar}>
-                                    <img src={avatar || image} alt="Avatar" className={style.avatar} id="avatar" />
-                                    <button className={style.btnSelect} onClick={handleInputAvatar}>
-                                        Chọn Ảnh
-                                    </button>
-                                </div>
-                            </div>
-                        );
-                    case 'bank':
-                        return (
-                            <div className={style.boxBanking}>
-                                <h1 className={style.title}>Đang cập nhật</h1>
-                            </div>
-                        );
-                    case 'password':
-                        return (
-                            <div className={style.boxChangePassword}>
-                                <h1 className={style.title}>Đổi mật khẩu</h1>
-                                <div>
-                                    <div className={style.group}>
-                                        <label className={style.labelChangePass}>Nhập mật khẩu cũ:</label>
-                                        <input className={style.inputChangePass} />
-                                        <Link to="/forgot-password" className={style.forgetPass}>Quên mật khẩu?</Link>
-                                    </div>
-                                    <div className={style.group}>
-                                        <label className={style.labelChangePass}>Nhập mật khẩu mới:</label>
-                                        <input className={style.inputChangePass} />
-                                    </div>
-                                    <div className={style.group}>
-                                        <label className={style.labelChangePass}>Nhập lại mật khẩu:</label>
-                                        <input className={style.inputChangePass} />
-                                    </div>
-                                </div>
-                                <button className={style.btnSave}>Lưu</button>
-                            </div>
-                        );
-                    case 'email':
-                        return (
-                            <div className={style.boxChangeEmail}>
-                                <h1 className={style.title}>Đổi điạ chỉ Email</h1>
-                                <div ref={emailRef}>
-                                    <div className={style.group}>
-                                        <label className={style.labelChangePass}>Nhập Email cũ:</label>
-                                        <input className={style.inputChangePass} />
-                                    </div>
-                                    <div className={style.group}>
-                                        <label className={style.labelChangePass}>Nhập Email mới:</label>
-                                        <input className={style.inputChangePass} />
-                                    </div>
-                                    <div className={style.group}>
-                                        <label className={style.labelChangePass}>Nhập mã xác minh:</label>
-                                        <input className={style.inputCapcha} />
-                                        <button className={style.btnGetCapcha} onClick={getCapchaFunc}>Lấy mã</button>
-                                    </div>
-                                    <div>
-                                        <label className={style.labelChangePass}>Chúng tôi sẽ gửi cho bạn một mã xác minh qua địa chỉ email đã đăng ký! Mã có hiệu lực trong 2 phút.</label>
-                                    </div>
-                                </div>
-                                <button className={style.btnSave} onClick = {changeEmail}>Lưu</button>
-                            </div>
-                        );
-                    case 'phone':
-                        return (
-                            <div className={style.boxBanking}>
-                                <h1 className={style.title}>Đang cập nhật</h1>
-                            </div>
-                            // <div className={style.boxChangePhone}>
-                            //     <h1 className={style.title}>Đổi số điện thoại</h1>
-                            //     <div ref={phoneRef}>
-                            //         <div className={style.group}>
-                            //             <label className={style.labelChangePass} >Nhập số điện thoại cũ:</label>
-                            //             <input className={style.inputChangePass} name='phoneOld'/>
-                            //         </div>
-                            //         <div className={style.group}>
-                            //             <label className={style.labelChangePass} >Nhập số điện thoại mới:</label>
-                            //             <input className={style.inputChangePass} name='phoneNew'/>
-                            //         </div>
-                            //         <div className={style.group}>
-                            //             <label className={style.labelChangePass} >Nhập mã xác minh:</label>
-                            //             <input className={style.inputCapcha} name='capcha'/> 
-                            //             <button className={style.btnGetCapcha} onClick={getCapchaFunc}>Lấy mã</button>
-                            //         </div>
-                            //         <div>
-                            //             <label className={style.labelChangePass}>Chúng tôi sẽ gửi cho bạn một mã xác minh qua địa chỉ email đã đăng ký! Mã có hiệu lực trong 2 phút.</label>
-                            //         </div>
-                            //     </div>
-                            //     <button className={style.btnSave} onClick={changePhone} >Lưu</button>
-                            // </div>
-                        );
-                    default:
-                        return <div>No Page</div>;
-                }
-            })()}
+            <div className="flex flex-col w-3/4">
+                {(() => {
+                    switch (show) {
+                        case 'user': return <User data={user} />;
+                        case 'orders': return <Orders />;
+                        case 'changePass': return <ChangePass />;
+                        case 'address': return <Address />;
+                        default: return <User data={user}/>;
+                    }
+                })()}    
+            </div>
         </div>
-    );
+     );
 }
 
 export default Account;

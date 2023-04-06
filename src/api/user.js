@@ -16,9 +16,9 @@ const getUserAPI = () => {
     return axiosClient.get(url)
 }
 
-const getCapchaAPI = () => {
+const getCapchaAPI = (params) => {
     const url = `/get-capcha`
-    return axiosClient.get(url)
+    return axiosClient.post(url, params)
 }
 
 const updateEmailAPI = (params) => {
@@ -26,4 +26,9 @@ const updateEmailAPI = (params) => {
     return axiosClient.post(url, params)
 }
 
-export { checkUserAPI, updateUserAPI, getUserAPI, getCapchaAPI, updateEmailAPI }
+const changePassAPI = (params) => {
+    const url = "/change-password"
+    return axiosClient.post(url, params)
+}
+
+export { checkUserAPI, updateUserAPI, getUserAPI, getCapchaAPI, updateEmailAPI, changePassAPI }

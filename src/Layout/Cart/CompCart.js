@@ -2,9 +2,8 @@ import clsx from 'clsx';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import formatsMoney from 'src/Convert/ConvertMoneyVND';
-import slug from 'src/Convert/ConvertStringVNtoTitle';
-import style from './Cart.module.scss';
+import slug from '../../Convert/ConvertStringVNtoTitle'
+import formatsMoney from "../../Convert/ConvertMoneyVND";
 const selected = [];
 
 function CompCart(props) {
@@ -70,35 +69,35 @@ function CompCart(props) {
     };
 
     return (
-        <tbody className={clsx('cart-' + props.data.product_id, style.box)}>
+        <tbody className={clsx('cart-' + props.data.product_id, "align-middle")}>
             <tr>
-                <th className={style.titleProduct}>
+                <th className="max-w-xs min-w-full text-center no-underline hover:tex-red-500  w-96">
                     <Link
-                        className={style.titleProduct}
+                        className="max-w-xs min-w-full text-center no-underline hover:tex-red-500"
                         to={`/products/${slug(props.data.product_name)}`}
                         onClick={getInf}
                     >
                         {props.data.product_name}
                     </Link>
                 </th>
-                <th className={style.infoProduct}>{props.info || ""}</th>
-                <th className={style.priceProduct}>{formatsMoney(props.data.product_price)}</th>
+                <th className="text-center">{props.info || ""}</th>
+                <th>{formatsMoney(props.data.product_price)}</th>
                 <th>
-                    <form className={style.numberProductForm}>
-                        <button type="button" className={style.btn} onClick={handleMin}>
+                    <form >
+                        <button type="button" className="py-7 px-5 mx-1 text-lg border-none bg-transparent" onClick={handleMin}>
                             -
                         </button>
-                        <input className={style.numberProduct} value={quantity} disabled></input>
-                        <button type="button" className={style.btn} onClick={handleAdd}>
+                        <input className="h-8 w-8 text-base text-center" value={quantity} disabled></input>
+                        <button type="button" className="py-7 px-5 mx-1 text-lg border-none bg-transparent" onClick={handleAdd}>
                             +
                         </button>
                     </form>
                 </th>
-                <th className={style.totalPrice}>{formatsMoney(totalPrice)}</th>
+                <th>{formatsMoney(totalPrice)}</th>
                 <th>
                     <input
                         type="checkbox"
-                        className={clsx(style.btnSelect, 'checkbox')}
+                        className={clsx('checkbox')}
                         value={props.data.product_id}
                         onClick={handleSelection}
                     />

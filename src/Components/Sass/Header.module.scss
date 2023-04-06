@@ -1,0 +1,15 @@
+@keyframes zoomAnimation {
+    0% {
+        scale: 1.2;
+    }
+    50% {
+        scale: 1;
+    }
+    100% {
+        scale: 1.2;
+    }
+}
+
+.zoom {
+    animation: zoomAnimation 1s infinite;
+}

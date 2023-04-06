@@ -15,9 +15,6 @@ function Account() {
     useEffect(() => {
       const user = async () => {
           const res = await getUserAPI();
-        //   setData(res.data[0]);
-        //   setName(res.data[0].first_name + ' ' + res.data[0].last_name);
-        //   setAvatar(res.data[0].avatar);
         setUser(res.data[0]);
         setLoading(false);
       };

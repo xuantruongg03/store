@@ -1,0 +1,114 @@
+.boxBooking {
+    // position: absolute;
+    // top: 3%;
+    // left: 27%;
+    margin: 20px auto;
+    width: 750px;
+    height: 660px;
+    border: 1px solid #333;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.title {
+    font-size: 30px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #000099;
+    margin-top: 20px;
+}
+
+.form {
+    // margin-top: 20px;
+    width: 100%;
+    padding: 15px;
+}
+
+.group {
+    display: flex;
+    min-height: 50px;
+    margin: 10px 0;
+    align-items: center;
+}
+
+.label {
+    display: block;
+    font-size: 16px;
+    font-weight: 600;
+    color: #000099;
+    // margin-bottom: 10px;
+    width: 25%;
+}
+
+.input,
+.inputArea {
+    width: 80%;
+    height: 40px;
+    border: 1px solid #000099;
+    padding: 0 10px;
+    font-size: 16px;
+    color: #333;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+
+    &:focus {
+        outline: none;
+    }
+}
+
+.radio {
+    margin: 0 5px;
+    display: flex;
+    align-items: center;
+
+}
+
+.boxRadio {
+    height: 20px;
+    width: 20px;
+    margin-right: 10px;
+    accent-color: #000099;
+    cursor: pointer;
+}
+
+.inputArea {
+    height: 100px;
+    resize: none;
+}
+
+.checkbox {
+    margin: 0 5px;
+}
+
+.boxBtn {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.btn {
+    width: 200px;
+    height: 40px;
+    background-color: #000099;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: all .3s;
+    border-radius: 5px;
+
+    &:hover {
+        background-color: #333;
+    }
+}
+
+.status {
+    color: red;
+}

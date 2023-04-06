@@ -1,11 +1,9 @@
 
 import axiosClient from "./axiosClient";
 
-const bannerAPI = {
-  getBanners: (params) => {
+const getBannersAPI = () => {
     const url = '/get-banners';
-    return axiosClient.get(url, { params });
-  },
+    return axiosClient.get(url);
 }
 
-export default bannerAPI;
+export { getBannersAPI };

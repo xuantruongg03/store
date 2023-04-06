@@ -81,6 +81,7 @@ function Detail() {
               title={title}
               sale={sale}
               quantity={quantity}
+              id={id}
             />
           </div>
           <div className="flex my-8 items-center">

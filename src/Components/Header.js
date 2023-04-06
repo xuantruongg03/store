@@ -13,6 +13,8 @@ import { Link } from "react-router-dom";
 import { getAllProducts } from "../api/products";
 import { getUserAPI } from "../api/user";
 import style from "./Sass/Header.module.scss";
+import formatsMoney from "../Convert/ConvertMoneyVND";
+import slug from "../Convert/ConvertStringVNtoTitle";
 
 const type = [
   {
@@ -104,6 +106,7 @@ function Header() {
     } else {
       setResult(null);
     }
+    console.log(result);
   };
 
   useEffect(() => {
@@ -130,7 +133,7 @@ function Header() {
   }, [dispatch]);
 
   return (
-    <header>
+    <header className="relative">
       <div className="flex justify-around mx-20 items-center">
         <div className="flex flex-row items-center">
           <Link to={"/"}>
@@ -151,11 +154,36 @@ function Header() {
             type="search"
             placeholder="Tìm kiếm sản phẩm"
             className="border border-red-500 p-1 pl-2 rounded text-gray-500 focus:outline-none w-72"
+            onChange={search}
+            id="search"
           />
-          <FontAwesomeIcon
+          {/* <FontAwesomeIcon
             icon={faMagnifyingGlass}
             className=" text-black p-2 float-right absolute right-0 top-0"
-          />
+          /> */}
+          <div>
+            {result ? (
+                <div className="absolute top-10 z-30 left-0 w-72 text-xs bg-white border border-red-500 rounded">
+                    {result.splice(0, 5).map((item) => (
+                        <Link to={`/${slug(item.product_name)}?search=${item.product_id}`} key={item.product_id} onClick={() => { document.getElementById('search').value = ''; setResult(null) }}>
+                            <div className="flex flex-row items-center p-2 hover:bg-gray-200 cursor-pointer">
+                                <img
+                                    src={item.product_images[0].file_path}
+                                    alt="Avatar"
+                                    className="h-11 w-11 mr-3 border rounded-full border-red-500"
+                                />
+                                <div className="flex flex-col">
+                                    <label className="cursor-pointer">{item.product_name}</label>
+                                    <label className="text-red-500 font-bold mt-1">
+                                        {formatsMoney(item.product_price)} VNĐ
+                                    </label>
+                                </div>
+                            </div>
+                        </Link>
+                    ))}
+                    </div>
+            ) : null}
+          </div>
         </div>
         <div className="flex flex-row items-center">
           <FontAwesomeIcon

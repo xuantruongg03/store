@@ -37,7 +37,7 @@ function InfoDetail(props) {
                     quantity: quantity,
                 }
                 const response = await addToCart(params);
-                if(response.status === 200) {
+                if(response.message === "ok") {
                     alert('Thêm vào giỏ hàng thành công');
                 } else {
                     alert('Thêm vào giỏ hàng thất bại');

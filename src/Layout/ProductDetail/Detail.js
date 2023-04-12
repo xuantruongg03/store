@@ -64,10 +64,10 @@ function Detail() {
     );
   }
   return (
-    <div className="container-custom">
-      <div className="flex justify-between my-8">
-        <div className="w-3/4 justify-between">
-          <div className="flex my-5 justify-between items-center">
+    <div className="container-custom sm:mx-10 sm:items-center lg:px-24">
+      <div className="lg:flex justify-between my-8  sm:block">
+        <div className="w-3/4 sm:w-full justify-between">
+          <div className="flex lg:flex-row my-5 justify-between items-center sm:flex-col">
             <DetailImage
               setCheck={setCheck}
               img={img}
@@ -84,10 +84,10 @@ function Detail() {
               id={id}
             />
           </div>
-          <div className="flex my-8 items-center">
+          <div className="flex my-8 items-center sm:flex-col md:flex-row">
             <DetailInfo details={details} />
             <iframe
-              className="ml-5"
+              className="md:ml-5 ms:mt-5"
               width="560"
               height="315"
               src="https://www.youtube.com/embed/A99m4HaPpmI?start=2"

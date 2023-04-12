@@ -39,7 +39,7 @@ function Product(props) {
   };
 
   return (
-    <div className="relative flex flex-col mx-7 mb-5 border py-3 px-7">
+    <div className="relative flex flex-col mb-5 border py-3 lg:px-7 sm:mx-3 sm:px-1 items-center md:w-48 sm:w-44 lg:w-64">
       {Number(props.sale) !== 0 ? (
         <div
           style={{
@@ -53,19 +53,19 @@ function Product(props) {
       ) : (
         ""
       )}
-      <Link to={`/${slug(props.name)}?search=${props.productID}`}>
+      <Link to={`/${slug(props.name)}?search=${props.productID}`} className="mt-2">
         <img
           src={props.img.file_path}
           alt={`product-${props.productID}`}
           id={`product-${props.productID}`}
-          className="w-48 h-48 hover:transform hover:scale-110 -z-10"
+          className="lg:w-48 lg:h-48 hover:transform hover:scale-110 -z-10 sm:w-40 sm:h-40"
           style={{ transition: "transform 0.2s" }}
           title={props.name}
         />
       </Link>
       <Link
         to={`/${slug(props.name)}?search=${props.productID}`}
-        className="w-48 h-24 mt-2 font-bold text-center"
+        className="lg:w-48 md:h-24 mt-2 font-bold text-center md:w-40 md:text-sm sm:text-xs sm:h-16"
       >
         <p
           htmlFor={`product-${props.productID}`}
@@ -76,17 +76,17 @@ function Product(props) {
         </p>
       </Link>
       <div className="flex items-center justify-center h-12">
-        <div>
+        <div className="sm:pl-2">
           <p
             htmlFor={`product-${props.productID}`}
-            className="text-red-500 font-semibold text-lg"
+            className="text-red-500 font-semibold lg:text-lg md:text-base sm:text-sm"
           >
             {formatsMoney(props.price - (props.price * props.sale) / 100)}
           </p>
           {Number(props.sale) !== 0 ? (
             <p
               htmlFor={`product-${props.productID}`}
-              className="text-gray-500 text-sm line-through"
+              className="text-gray-500 lg:text-sm line-through md:text-xs"
             >
               {formatsMoney(props.price)}
             </p>

@@ -11,7 +11,6 @@
 
     Với tất cả những ưu điểm trên, Nhanh Computer chính là một trang web bán hàng tốt nhất cho những ai muốn mua các sản phẩm máy tính chính hãng với giá cả hợp lý và dịch vụ tốt nhất. Hãy truy cập trang web của họ ngay hôm nay để tìm hiểu thêm về sản phẩm và dịch vụ của họ.
 
-
 # II. Công nghệ sử dụng
     ReactJS, SCSS,...
 
@@ -38,27 +37,24 @@
 
 # V. Demo
 - Home
-![Home](./src/access/image/home1.png)
-![Home](./src/access/image/home2.png)
-![Home](./src/access/image/home3.png)
-
-- Product
-![Product](./src/access/image/sale.png)
+![Home](./src/access/demo/home1.png)
+![Home](./src/access/demo/home2.png)
+![Home](./src/access/demo/home3.png)
 
 - Login
-![Login](./src/access/image/login.png)
+![Login](./src/access/demo/login.png)
 
 - Register
-![Register](./src/access/image/register.png)
+![Register](./src/access/demo/register.png)
 
-- Logged
-![Logged](./src/access/image/logged.png)
+- Account
+![Logged](./src/access/demo/account.png)
 
 - Cart
-![Cart](./src/access/image/cart.png)
+![Cart](./src/access/demo/cart.png)
 
 - Pay
-![Order](./src/access/image/pay.png)
+![Order](./src/access/demo/pay.png)
 
 # Features
 - Login/ Logout

@@ -13,15 +13,15 @@ const support = ["Giới thiệu", "Chính sách đổi trả", "Hỗ trợ mua 
 
 function Footer() {
   return (
-    <footer>
+    <footer className="sm:text-sm md:text-base">
       <div className="border-t h-64 bg-white flex justify-evenly">
         <div>
           <img
-            className="mt-9 w-48 h-24"
+            className="mt-9 md:w-48 md:h-24 sm:w-24 sm:h-20"
             src={require("../access/image/logo.png")}
             alt="logo"
           />
-          <h3 className="text-center text-red-500 uppercase text-xl font-semibold">
+          <h3 className="text-center text-red-500 uppercase text-xl font-semibold sm:text-sm">
             Hotline: 0981793201
           </h3>
         </div>
@@ -45,7 +45,7 @@ function Footer() {
             </li>
           ))}
         </div>
-        <div className="m-1">
+        <div className="m-1 sm:hidden md:block">
           <p className="mt-9 text-red-500 uppercase font-semibold">
             Hình thức thanh toán
           </p>

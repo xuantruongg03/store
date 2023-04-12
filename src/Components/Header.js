@@ -134,43 +134,39 @@ function Header() {
 
   return (
     <header className="relative">
-      <div className="flex justify-around mx-20 items-center">
+      <div className="flex justify-around lg:mx-20 md:mx-5 items-center">
         <div className="flex flex-row items-center">
           <Link to={"/"}>
             <img
               src={require("../access/image/logo.png")}
               alt="Logo"
-              className="h-20"
+              className="lg:h-20 md:h-16"
             />
           </Link>
           <Link to={"/"}>
-            <h1 className="text-xl font-bold ml-4 uppercase text-red-400 no-underline ">
+            <h1 className="lg:text-xl md:text-base font-bold ml-4 uppercase text-red-400 no-underline ">
               Computer Central
             </h1>
           </Link>
         </div>
-        <div className="flex flex-row items-center relative">
+        <div className="flex flex-row items-center relative sm:hidden md:block">
           <input
             type="search"
             placeholder="Tìm kiếm sản phẩm"
-            className="border border-red-500 p-1 pl-2 rounded text-gray-500 focus:outline-none w-72"
+            className="border border-red-500 p-1 pl-2 rounded text-gray-500 focus:outline-none lg:w-72 md:w-40 md:text-sm md:ml-1"
             onChange={search}
             id="search"
           />
-          {/* <FontAwesomeIcon
-            icon={faMagnifyingGlass}
-            className=" text-black p-2 float-right absolute right-0 top-0"
-          /> */}
           <div>
             {result ? (
-                <div className="absolute top-10 z-30 left-0 w-72 text-xs bg-white border border-red-500 rounded">
+                <div className="absolute top-10 z-30 left-0 lg:w-72 md:w-54 text-xs bg-white border border-red-500 rounded">
                     {result.splice(0, 5).map((item) => (
                         <Link to={`/${slug(item.product_name)}?search=${item.product_id}`} key={item.product_id} onClick={() => { document.getElementById('search').value = ''; setResult(null) }}>
                             <div className="flex flex-row items-center p-2 hover:bg-gray-200 cursor-pointer">
                                 <img
                                     src={item.product_images[0].file_path}
                                     alt="Avatar"
-                                    className="h-11 w-11 mr-3 border rounded-full border-red-500"
+                                    className="lg:h-11 md:h-8 lg:w-11 md:w-8 mr-3 border rounded-full border-red-500"
                                 />
                                 <div className="flex flex-col">
                                     <label className="cursor-pointer">{item.product_name}</label>
@@ -185,11 +181,11 @@ function Header() {
             ) : null}
           </div>
         </div>
-        <div className="flex flex-row items-center">
+        <div className="flex-row items-center sm:hidden lg:flex">
           <FontAwesomeIcon
             icon={faPhone}
             className={clsx(
-              "h-6 w-6 mr-4 text-red-500 border p-2 rounded-full border-red-500",
+              "lg:h-6 lg:w-6 lg:mx-4 md:mx-2 text-red-500 border p-2 rounded-full border-red-500",
               style.zoom
             )}
           />
@@ -211,8 +207,8 @@ function Header() {
               className="h-6 w-6 mr-4 text-red-500 border p-2 rounded-full border-red-500"
             />
           )}
-          <div className="flex flex-col">
-            <label>Xin chào!</label>
+          <div className="flex flex-col md:test-sm lg:text-base">
+            <label className="">Xin chào!</label>
             {stateLogin || data ? (
               <p
                 className="text-red-500 font-bold cursor-pointer"
@@ -226,7 +222,40 @@ function Header() {
           </div>
         </div>
       </div>
-      <nav className="flex flex-row justify-around p-2 bg-red-500 relative">
+      <div className="flex flex-row items-center relative md:hidden mx-24 my-3">
+          <input
+            type="search"
+            placeholder="Tìm kiếm sản phẩm"
+            className="border border-red-500 p-2 pl-2 rounded text-gray-500 focus:outline-none w-full"
+            onChange={search}
+            id="search"
+          />
+          <div>
+            {result ? (
+                <div className="absolute top-10 z-30 left-0 w-full bg-white border border-red-500 rounded">
+                    {result.splice(0, 5).map((item) => (
+                        <Link to={`/${slug(item.product_name)}?search=${item.product_id}`} key={item.product_id} onClick={() => { document.getElementById('search').value = ''; setResult(null) }}>
+                            <div className="flex flex-row items-center p-2 hover:bg-gray-200 cursor-pointer">
+                                <img
+                                    src={item.product_images[0].file_path}
+                                    alt="Avatar"
+                                    className="h-20 w-20 mr-3 border rounded-full border-red-500"
+                                />
+                                <div className="flex flex-col text-base">
+                                    <label className="cursor-pointer">{item.product_name}</label>
+                                    <label className="text-red-500 font-bold mt-1">
+                                        {formatsMoney(item.product_price)} VNĐ
+                                    </label>
+                                </div>
+                            </div>
+                        </Link>
+                    ))}
+                    </div>
+            ) : null}
+          </div>
+        </div>
+
+      <nav className="flex-row justify-around p-2 bg-red-500 relative sm:hidden lg:flex">
         <div className="flex flex-row items-center ml-32 relative">
           <FontAwesomeIcon
             icon={faBars}

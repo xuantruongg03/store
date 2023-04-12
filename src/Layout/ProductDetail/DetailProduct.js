@@ -56,7 +56,7 @@ function InfoDetail(props) {
     }
 
     return ( 
-        <div className="flex flex-col" style={{minWidth: '400px'}}>
+        <div className="flex flex-col sm:mt-5 sm:w-full md:ml-5" style={{minWidth: '400px'}}>
             <h1 className="font-bold text-lg">{props.title}</h1>
             <div className="flex my-2">
                 <label className="text-sm">Thương hiệu: <span className="font-bold">Apple</span></label>

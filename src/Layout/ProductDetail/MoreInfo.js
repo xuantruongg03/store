@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 function MoreInfo(props) {
     return ( 
-        <div>
+        <div className="md:hidden lg:block w-80 ml-5">
             <div className="flex flex-col bg-gray-100 py-2 px-5">
                 <h1 className="text-lg">Thông tin hữu ích</h1>
                 <Link to={'/repair'} className="my-2 border-b-2"> <FontAwesomeIcon icon={faScrewdriverWrench}/> <span className="ml-3">Sữa chữa tại nhà</span></Link>

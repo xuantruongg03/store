@@ -18,7 +18,6 @@ const PrivateRoutes = () => {
             setLoading(false);
         };
         checkLogin();
-        
     }, []);
     if (loading) {
         return <div className='box-loader'><span className="loader"></span></div>;

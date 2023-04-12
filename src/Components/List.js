@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import { A11y, Navigation, Pagination, Scrollbar } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 const type = [
     {
@@ -47,15 +49,28 @@ const type = [
 
 function List() {
     return ( 
-        <div className="w-full overflow-hidden flex flex-row mt-5 justify-between">
-            {type.map((item, index) => {
-              return (
-                <Link to={`/${item.key}`} key={index} className="flex flex-col items-center hover:text-red-500">
-                    <img src={item.image} alt="Hình ảnh" className="w-16 h-16 rounded-full"/>
-                    <p className="text-center">{item.name}</p>
-                </Link>
-              )  
-            })}
+        <div className="w-full flex flex-row mt-5 justify-between overflow-hidden">
+            <Swiper
+                spaceBetween={10}
+                slidesPerView={7}
+                // onSlideChange={() => console.log("slide change")}
+                modules={[Navigation, Pagination, Scrollbar, A11y]}
+                className="border mt-3"
+            >
+                {type.map((item, index) => {
+                    return (
+                        <SwiperSlide
+                            key={index}
+                            className="border rounded flex justify-center items-center py-1"
+                        >
+                            <Link to={`/${item.key}`} key={index} className="flex flex-col items-center hover:text-red-500">
+                                <img src={item.image} alt="Hình ảnh" className="lg:w-16 sm:w-10 lg:h-16 sm:h-10 rounded-full"/>
+                                <p className="text-center md:text-sm">{item.name}</p>
+                            </Link>
+                        </SwiperSlide>
+                    );
+                })}
+            </Swiper>
         </div>
      );
 }

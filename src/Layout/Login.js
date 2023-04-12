@@ -60,9 +60,9 @@ function Login() {
   const handleLoginWithGoogle = () => {};
 
   return (
-    <div className="flex justify-center items-center my-10">
+    <div className="flex justify-center items-center my-10 sm:mx-20">
       <div className="flex border border-red-500">
-        <div className="p-5">
+        <div className="p-5 sm:w-2/3">
           <h1 className="font-semibold text-lg mb-3">Đăng nhập tài khoản</h1>
           {state ? (
             ""
@@ -101,13 +101,13 @@ function Login() {
             </button>
           </form>
           <div className="text-center relative my-4">
-            <label htmlFor="" className="text-gray-300 absolute -top-1 left-16">
+            <label htmlFor="" className="text-gray-300 absolute -top-1 left-16 sm:hidden lg:block">
               _________________
             </label>
             <label>Hoặc đăng nhập bằng</label>
             <label
               htmlFor=""
-              className="text-gray-300 absolute -top-1 right-16"
+              className="text-gray-300 absolute -top-1 right-16 sm:hidden lg:block"
             >
               _________________
             </label>

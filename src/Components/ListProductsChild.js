@@ -3,18 +3,17 @@ function ListProductsChild(props) {
   return (
     <div className="my-8">
       <div className="border-b border-red-500">
-        <div className="p-3 bg-red-500 border rounded-lg w-56">
-          <h1 className="font-bold text-lg text-center text-white tracking-wider">
+        <div className="p-3 bg-red-500 border rounded-lg lg:w-56 md:w-40">
+          <h1 className="font-bold lg:text-lg md:text-base text-center text-white tracking-wider">
             {props.title}
           </h1>
         </div>
       </div>
-      <div className="mt-3 flex flex-row justify-between ">
+      <div className="mt-3 flex flex-row justify-between  ">
         <img
           src={`${props.image_banner}`}
           alt="Banner colums"
-          className="w-60"
-          style={{ height: "800px" }}
+          className="w-60 h-auto sm:hidden lg:block"
         />
         <div className="flex flex-wrap ml-2">
           {props.list.map((element) => {

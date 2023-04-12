@@ -4,26 +4,26 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 function DetailImage(props) {
     return ( 
-        <div className="w-96 ">
+        <div className="sm:w-full lg:w-96">
         <img src={props.img} alt="Hình ảnh sản phẩm" className="h-96 w-full" />
         <Swiper
           spaceBetween={10}
           slidesPerView={3}
-          onSlideChange={() => console.log("slide change")}
+        //   onSlideChange={() => console.log("slide change")}
           modules={[Navigation, Pagination, Scrollbar, A11y]}
-          className="border mt-3"
+          className="border mt-3  sm:w-full"
         >
           {props.allImages.map((item, index) => {
             return (
               <SwiperSlide
                 key={index}
                 className={clsx(
-                  "border rounded w-16 h-16 flex justify-center items-center",
+                  "border rounded w-16 h-16",
                   index === props.check ? "border-red-500" : ""
                 )}
               >
                 <img
-                className="w-24 h-16 ml-3"
+                className="w-24 h-16 ml-3 sm:w-full sm:px-10"
                   key={index}
                   src={item.file_path}
                   alt="Hình ảnh sản phẩm"

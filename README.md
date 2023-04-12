@@ -12,7 +12,7 @@
     Với tất cả những ưu điểm trên, Nhanh Computer chính là một trang web bán hàng tốt nhất cho những ai muốn mua các sản phẩm máy tính chính hãng với giá cả hợp lý và dịch vụ tốt nhất. Hãy truy cập trang web của họ ngay hôm nay để tìm hiểu thêm về sản phẩm và dịch vụ của họ.
 
 # II. Công nghệ sử dụng
-    ReactJS, SCSS,...
+    ReactJS, Redux, Tailwind, SASS, ...
 
 # III. Các chức năng
     1. Đăng nhập 

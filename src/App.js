@@ -28,7 +28,7 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div className="App ">
       {/* <Header /> */}
       <Routes>
         <Route path="/" index element={layout(<Home />)} />

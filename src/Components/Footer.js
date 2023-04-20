@@ -17,7 +17,7 @@ function Footer() {
       <div className="border-t h-64 bg-white flex justify-evenly">
         <div>
           <img
-            className="mt-9 md:w-48 md:h-24 sm:w-24 sm:h-20"
+            className="mt-9 md:wr-48 md:h-24 sm:w-24 sm:h-20"
             src={require("../access/image/logo.png")}
             alt="logo"
           />

@@ -48,6 +48,7 @@ function Checkout() {
     };
 
     const handleBuy = (e) => {
+        e.preventDefault();
         if (
             name === 'example' ||
             phone === '0123456' ||
@@ -58,7 +59,6 @@ function Checkout() {
             product.length === 0
         ) {
             alert('Vui lòng kiểm tra lại!');
-            e.preventDefault();
         } else {
             product.map((element) => {
                 const Buy = async () => {
@@ -73,8 +73,13 @@ function Checkout() {
                         payment: payment,
                         total_amount: element.soluong,
                     };
-                    await buy(params);
-
+                    const res = await buy(params);
+                    console.log(res);
+                    if (res.message !== 'ok') {
+                        e.preventDefault();
+                        alert('Đặt hàng thất bại!');
+                        return;
+                    }
                 };
                 const deleteCart = async () => {
                     const params = {

@@ -14,7 +14,7 @@ function Banner() {
   useEffect(() => {
     const getBanners = async () => {
       const response = await getBannersAPI();
-      setBanners(response.data.banner);
+      setBanners(response.data.banner.filter((item) => item.banner_type === 'width'));
     };
     getBanners();
   }, []);

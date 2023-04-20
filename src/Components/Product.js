@@ -69,7 +69,7 @@ function Product(props) {
       >
         <p
           htmlFor={`product-${props.productID}`}
-          className="hover:text-red-500 hover:cursor-pointer "
+          className="hover:text-red-500 hover:cursor-pointer truncate "
           title={props.name}
         >
           {props.name}

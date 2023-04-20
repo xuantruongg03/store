@@ -15,7 +15,7 @@ function PayOutput(props) {
         props.setPayment(e.target.value);
     };
     return (
-        <form action='' method='post' className={clsx(style.output)}>
+        <form className={clsx(style.output)}>
             <h1 className={clsx(style.label, 'my-2 text-center text-red-500', style.title)}>Thông Tin Đơn Hàng</h1>
             <div>
                 <div className={style.flex}>

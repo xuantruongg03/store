@@ -40,10 +40,13 @@ function Register() {
                     };
                    const res = await registerAPI(params);
                    console.log(res);
-                   if(!res.state) {
+                   if(res.message === 'Username already exists') {
                        setState(false);
                        alert('Tên đăng nhập đã tồn tại!');
-                   } else {
+                   } else if (res.message === 'Error') {
+                          alert('Đăng ký thất bại!');
+                   }    
+                    else if (res.message === 'Success') {
                         alert('Đăng ký thành công!');
                         navigate('/login');
                    }

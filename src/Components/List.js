@@ -1,6 +1,8 @@
+import clsx from "clsx";
 import { Link } from "react-router-dom";
 import { A11y, Navigation, Pagination, Scrollbar } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+import style from "./Sass/List.module.scss"
 
 const type = [
     {
@@ -49,7 +51,7 @@ const type = [
 
 function List() {
     return ( 
-        <div className="w-full flex flex-row mt-5 justify-between overflow-hidden">
+        <div className={clsx("w-full flex flex-row mt-5 justify-between overflow-hidden", style.list)}>
             <Swiper
                 spaceBetween={10}
                 slidesPerView={7}

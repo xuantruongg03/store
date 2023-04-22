@@ -13,6 +13,7 @@ import Cart from "./Layout/Cart/Cart";
 import Checkout from "./Layout/Checkout/Checkout";
 import PayComplete from "./Layout/PayComplete";
 import Account from "./Layout/Account/Account";
+import NavMobile from "./Components/NavMobile";
 // import Booking from "./Layout/Booking/Booking";
 // import BookingComplete from "./Layout/BookingComplete/BookingComplete";
 
@@ -23,6 +24,7 @@ function App() {
         <Header />
         {childern}
         <Footer />
+        <NavMobile/>
       </div>
     );
   };
@@ -32,14 +34,14 @@ function App() {
       {/* <Header /> */}
       <Routes>
         <Route path="/" index element={layout(<Home />)} />
-        <Route path="/:title" element={layout(<Detail />)} />
+        <Route path="/product/:title" element={layout(<Detail />)} />
 
         <Route element={<PrivateRoutes />}>
           <Route path="cart" element={layout(<Cart />)} />
           <Route path="pay" element={layout(<Checkout />)} />
           <Route path="pay-complete" element={layout(<PayComplete />)} />
           <Route path="account" element={layout(<Account />)} />
-          {/* <Route path="account" element={layout(<Account />)} />
+          {/* 
           <Route path="/booking" element={layout(<Booking />)} />
           <Route
             path="/booking-complete"

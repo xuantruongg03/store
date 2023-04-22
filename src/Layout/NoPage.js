@@ -1,9 +1,5 @@
-import { useEffect } from 'react';
 import image from '../access/image/404.jpg';
 const NoPage = () => {
-    useEffect(() => {
-        document.title = 'Không tìm thấy yêu cầu';
-    }, []);
 
     const style = {
         width: '100%',

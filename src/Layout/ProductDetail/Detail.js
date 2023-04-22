@@ -10,7 +10,8 @@ import DetailInfo from "./DetailInfo";
 import InfoDetail from "./DetailProduct";
 import MoreInfo from "./MoreInfo";
 import "swiper/swiper-bundle.css";
-
+import clsx from "clsx";
+import style from "./Detail.module.scss";
 
 function Detail() {
   const [title, setTitle] = useState();
@@ -64,10 +65,10 @@ function Detail() {
     );
   }
   return (
-    <div className="container-custom sm:mx-10 sm:items-center lg:px-24">
-      <div className="lg:flex justify-between my-8  sm:block">
-        <div className="w-3/4 sm:w-full justify-between">
-          <div className="flex lg:flex-row my-5 justify-between items-center sm:flex-col">
+    <div className={clsx("container-custom sm:mx-10 sm:items-center lg:px-24", style.container)}>
+      <div className="lg:flex justify-between my-8 sm:block">
+        <div className={clsx("w-3/4 sm:w-full justify-between", style.detailsbox)}>
+          <div className={clsx("flex lg:flex-row my-5 justify-between items-center sm:flex-col", style.box1)}>
             <DetailImage
               setCheck={setCheck}
               img={img}
@@ -84,10 +85,10 @@ function Detail() {
               id={id}
             />
           </div>
-          <div className="flex my-8 items-center sm:flex-col md:flex-row">
+          <div className={clsx("flex my-8 items-center sm:flex-col md:flex-row", style.boxInf)}>
             <DetailInfo details={details} />
             <iframe
-              className="md:ml-5 ms:mt-5"
+              className={clsx("md:ml-5 ms:mt-5", style.video)}
               width="560"
               height="315"
               src="https://www.youtube.com/embed/A99m4HaPpmI?start=2"
@@ -108,11 +109,7 @@ function Detail() {
         <Swiper
             modules={[Navigation, Pagination, Scrollbar, A11y]}
             spaceBetween={10}
-            slidesPerView={4}
-            // pagination={{ clickable: true }}
-            onSwiper={(swiper) => console.log(swiper)}
-            onSlideChange={() => console.log("slide change")}
-
+            slidesPerView={2}
         >
             {products.map((item, index) => {
                 if (item.product_id !== id) {
@@ -133,24 +130,6 @@ function Detail() {
                 return null;
             })}
         </Swiper>
-        {/* <div className="flex flex-wrap">
-          {products.splice(0, 3).map((item, index) => {
-            if (item.product_id !== id) {
-              return (
-                <Product
-                    className="w-1/3"
-                  key={item.product_id}
-                  productID={item.product_id}
-                  sale={item.product_sale_price}
-                  img={item.product_images[0]}
-                  name={item.product_name}
-                  price={item.product_price}
-                />
-              );
-            }
-            return null;
-          })}
-        </div> */}
       </div>
     </div>
   );

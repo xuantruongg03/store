@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { getCart } from "../../api/cart";
 import CompCart from "./CompCart";
 import { deleteProductCart } from "../../api/cart";
+import style from "../../Components/Sass/Cart.module.scss";
 
 function Cart() {
   const dispatch = useDispatch();
@@ -53,6 +54,7 @@ function Cart() {
           }
         };
         deleteProduct();
+        window.location.reload();
       });
     }
   };
@@ -78,20 +80,20 @@ function Cart() {
   }, [customer_id]);
 
   return (
-    <div className="container-custom my-5">
+    <div className={clsx("container-custom my-5", style.container)}>
       <h1 className="py-3 border-b-2 text-xl uppercase font-semibold border-red-500">
         Giỏ hàng của bạn
       </h1>
-      <div className=" bg-slate-50 mt-5 px-3" style={{ minHeight: "220px" }}>
+      <div className={clsx(" bg-slate-50 mt-5 px-3", style.parent)} style={{ minHeight: "220px" }}>
         <br />
         {cart.length === 0 ? (
           <div className="flex justify-center items-center flex-col">
-            <h1 className="text-center text-8xl text-red-500 mt-3 font-semibold">
+            <h1 className={clsx("text-center text-8xl text-red-500 mt-3 font-semibold", style.alert)}>
               GIỎ HÀNG TRỐNG
             </h1>
             <Link
               to={"/"}
-              className="text-center hover:text-red-500 hover:underline font-semibold mt-10"
+              className={clsx("text-center hover:text-red-500 hover:underline font-semibold mt-10", style.alert_2)}
             >
               Tiếp tục mua sắm
             </Link>
@@ -100,7 +102,7 @@ function Cart() {
           ""
         )}
         <table
-          className={clsx(cart.length > 0 ? "" : "disabled", "cart w-full")}
+          className={clsx(cart.length > 0 ? "" : "disabled", "cart w-full", style.box_cart)}
         >
           <thead style={{ color: "red" }}>
             <tr>
@@ -117,17 +119,22 @@ function Cart() {
             <CompCart data={item} key={index} func={func} value={value} />
           ))}
         </table>
+        <div className={style.box_2}>
+            {cart.map((item, index) => (
+                <CompCart data={item} key={index} func={func} value={value}/>
+            ))}
+        </div>
         {cart.length > 0 ? (
           <div>
             <Link
               to={"/pay"}
-              className="h-10 w-40 pt-2 font-semibold bg-red-500 hover:bg-white hover:text-red-500 hover:border-red-500 border text-white text-center no-underline rounded-md mb-3                          float-right mr-4 mt-5 cursor pointer"
+              className={clsx("h-10 w-40 pt-2 font-semibold bg-red-500 hover:bg-white hover:text-red-500 hover:border-red-500 border text-white text-center no-underline rounded-md mb-3 float-right mr-4 mt-5 cursor pointer", style.btnbuy)}
               onClick={handleBuy}
             >
               Thanh Toán
             </Link>
             <button
-              className="h-10 w-28 font-semibold bg-yellow-500 hover:bg-white hover:text-yellow-500 hover:border-yellow-500 border text-white text-center no-underline rounded-md  mb-3 float-right mr-2 mt-5 cursor pointer"
+              className={clsx("h-10 w-28 font-semibold bg-yellow-500 hover:bg-white hover:text-yellow-500 hover:border-yellow-500 border text-white text-center no-underline rounded-md  mb-3 float-right mr-2 mt-5 cursor pointer")}
               onClick={handleDelete}
             >
               Xóa SP

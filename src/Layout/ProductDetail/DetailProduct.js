@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import formatsMoney from "../../Convert/ConvertMoneyVND";
 import { addToCart } from "../../api/cart";
+import style from './Detail.module.scss'
 import clsx from "clsx";
 
 function InfoDetail(props) {
@@ -56,8 +57,8 @@ function InfoDetail(props) {
     }
 
     return ( 
-        <div className="flex flex-col sm:mt-5 sm:w-full md:ml-5" style={{minWidth: '400px'}}>
-            <h1 className="font-bold text-lg">{props.title}</h1>
+        <div className={clsx("flex flex-col sm:mt-5 sm:w-full md:ml-5", style.box_2)} style={{minWidth: '400px'}}>
+            <h1 className={clsx("font-bold text-lg", style.title)}>{props.title}</h1>
             <div className="flex my-2">
                 <label className="text-sm">Thương hiệu: <span className="font-bold">Apple</span></label>
             </div>
@@ -86,10 +87,10 @@ function InfoDetail(props) {
             </div>
             <div className="my-2">
                 <button 
-                    className="bg-red-500 text-white py-1 px-10 rounded border uppercase mr-2 hover:bg-white hover:text-red-500 hover:border hover:border-red-500" 
+                    className={clsx("bg-red-500 text-white py-1 px-10 rounded border uppercase mr-2 hover:bg-white hover:text-red-500 hover:border hover:border-red-500", style.btnadd)} 
                     onClick={handleAddToCart}>Thêm vào giỏ hàng <br /> <span className="text-sm normal-case">Cam kết chính hãng/đổi trả 24h</span> </button>
                 <button 
-                    className="uppercase text-center bg-green-500 text-white rounded border py-1 px-8 hover:border hover:border-orange-500 hover:text-orange-500 hover:bg-white" 
+                    className={clsx("uppercase text-center bg-green-500 text-white rounded border py-1 px-8 hover:border hover:border-orange-500 hover:text-orange-500 hover:bg-white", style.btnbuy)} 
                     onClick={handleBuyNow}>Mua ngay <br /> <span className="text-sm normal-case">Thanh toán nhanh chóng</span> </button>
             </div>
             <div className="my-2 flex items-center">

@@ -79,3 +79,45 @@
         color: white;
     }
 }
+
+@media screen and (max-width: 500px) {
+    .container {
+        margin: 0 20px;
+        flex-direction: column;
+        font-size: small;
+    }
+    .formNote {
+        min-height: 100px;
+    }
+    .button {
+        margin: 50px 20px;
+    }
+    .formInput{
+        width: 100%;
+        margin-top: 10px;
+        border: 1px solid red;
+        padding: 15px;
+    }
+    .form_child_1{
+        flex-direction: column;
+    }
+    .boxPhone{
+        margin-top: 10px;
+    }
+    .formInputName{
+        width: 100%;
+        padding: 7px 10px;
+    }
+    .outputName{
+        padding-right: 10px;
+    }
+    .complete{
+        margin: 10px 20px;
+    }
+    .font_small{
+        font-size: small;
+    }
+    .title_com{
+        font-size: 20px;
+    }
+}

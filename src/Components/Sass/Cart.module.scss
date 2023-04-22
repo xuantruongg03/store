@@ -1,0 +1,37 @@
+@media screen and (max-width: 500px) {
+    .box_cart{
+        display:none;
+    }
+    .container{
+        margin: 0 20px;
+    }
+    .parent{
+        padding: 0;
+    }
+    .box{
+        display: none;
+    }
+    .btn{
+        padding: 2px;
+        font-size: 12px;
+    }
+    .img{
+        height: 50px;
+        width: 50px;
+    }
+    .alert{
+        font-size: 30px;
+    }
+    .alert_2{
+        text-decoration: underline;
+    }
+}
+
+@media screen and (min-width: 501px) {
+    .img{
+        display: none;
+    }
+    .box_2{
+        display: none;
+    }
+}

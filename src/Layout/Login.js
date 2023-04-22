@@ -5,6 +5,8 @@ import { Link, } from "react-router-dom";
 import fb from "../access/image/fb-login-btn.svg";
 import gg from "../access/image/gg-login-btn.svg";
 import { loginAPI } from "../api/login";
+import style from "../Components/Sass/Login.module.scss";
+import clsx from "clsx";
 
 function Login() {
 //   const navigate = useNavigate();
@@ -47,7 +49,7 @@ function Login() {
         //   navigate('/');
         }
       } catch (error) {
-        console.log(error);
+        // console.log(error);
         alert("Thông tin đăng nhập không chính xác!");
         setState(false);
       }
@@ -60,8 +62,8 @@ function Login() {
   const handleLoginWithGoogle = () => {};
 
   return (
-    <div className="flex justify-center items-center my-10 sm:mx-20">
-      <div className="flex border border-red-500">
+    <div className={clsx("flex justify-center items-center my-10 sm:mx-20", style.container)}>
+      <div className={clsx("flex border border-red-500", style.box)}>
         <div className="p-5 sm:w-2/3">
           <h1 className="font-semibold text-lg mb-3">Đăng nhập tài khoản</h1>
           {state ? (
@@ -101,13 +103,13 @@ function Login() {
             </button>
           </form>
           <div className="text-center relative my-4">
-            <label htmlFor="" className="text-gray-300 absolute -top-1 left-16 sm:hidden lg:block">
+            <label htmlFor="" className={clsx("text-gray-300 absolute -top-1 left-16 sm:hidden lg:block", style.left)}>
               _________________
             </label>
             <label>Hoặc đăng nhập bằng</label>
             <label
               htmlFor=""
-              className="text-gray-300 absolute -top-1 right-16 sm:hidden lg:block"
+              className={clsx("text-gray-300 absolute -top-1 right-16 sm:hidden lg:block", style.right)}
             >
               _________________
             </label>
@@ -128,14 +130,14 @@ function Login() {
           </div>
           <div className="flex justify-center items-center text-sm">
             <p>
-              Bạn quên mật khẩu bấm{" "}
+              Bạn quên mật khẩu bấm vào{" "}
               <Link to={"/forgot-password"} className="underline text-blue-500">
-                vào đây
-              </Link>{" "}
+                đây
+              </Link>{"."}
             </p>
           </div>
         </div>
-        <div className="w-1/2 bg-red-500 text-white flex items-center">
+        <div className={clsx("w-1/2 bg-red-500 text-white flex items-center", style.box_child_2)}>
           <div className="w-full">
             <h1 className="text-xl font-semibold text-center uppercase">
               Quyền lợi thành viên

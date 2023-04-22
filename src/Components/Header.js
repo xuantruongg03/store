@@ -1,7 +1,6 @@
 import {
   faBars,
   faCaretDown,
-  faMagnifyingGlass,
   faPhone,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
@@ -106,7 +105,7 @@ function Header() {
     } else {
       setResult(null);
     }
-    console.log(result);
+    // console.log(result);
   };
 
   useEffect(() => {
@@ -134,8 +133,8 @@ function Header() {
 
   return (
     <header className="relative">
-      <div className="flex justify-around lg:mx-20 md:mx-5 items-center">
-        <div className="flex flex-row items-center">
+      <div className={clsx("flex justify-around lg:mx-20 md:mx-5 items-center", style.logo_login)}>
+        <div className={clsx("flex flex-row items-center", style.logo)}>
           <Link to={"/"}>
             <img
               src={require("../access/image/logo.png")}
@@ -144,12 +143,12 @@ function Header() {
             />
           </Link>
           <Link to={"/"}>
-            <h1 className="lg:text-xl md:text-base font-bold ml-4 uppercase text-red-400 no-underline ">
+            <h1 className={clsx("lg:text-xl md:text-base font-bold ml-4 uppercase text-red-400 no-underline ", style.name)}>
               Computer Central
             </h1>
           </Link>
         </div>
-        <div className="flex flex-row items-center relative sm:hidden md:block">
+        <div className={clsx("flex flex-row items-center relative sm:hidden md:block ", style.input)}>
           <input
             type="search"
             placeholder="Tìm kiếm sản phẩm"
@@ -181,7 +180,7 @@ function Header() {
             ) : null}
           </div>
         </div>
-        <div className="flex-row items-center sm:hidden lg:flex">
+        <div className={clsx("flex-row items-center sm:hidden lg:flex", style.contact)}>
           <FontAwesomeIcon
             icon={faPhone}
             className={clsx(
@@ -207,7 +206,7 @@ function Header() {
               className="h-6 w-6 mr-4 text-red-500 border p-2 rounded-full border-red-500"
             />
           )}
-          <div className="flex flex-col md:test-sm lg:text-base">
+          <div className="flex flex-col md:test-sm lg:text-base relative">
             <label className="">Xin chào!</label>
             {stateLogin || data ? (
               <p
@@ -219,10 +218,34 @@ function Header() {
                 Đăng nhập
               </Link>
             )}
+                {show ? (
+            <div className="absolute top-12 -right-5 w-36 dropdown_menu bg-white border border-red-500 flex flex-col justify-center text-sm z-20">
+                <Link
+                to={`/account`}
+                className="no-underline p-3 cursor-pointer hover:text-white hover:bg-red-500"
+                onClick={showMenu}
+                >
+                Tài khoản
+                </Link>
+                <Link
+                to={`/cart`}
+                className="no-underline p-3 cursor-pointer hover:text-white hover:bg-red-500"
+                onClick={showMenu}
+                >
+                Giỏ hàng
+                </Link>
+                <div
+                className="no-underline p-3 cursor-pointer hover:text-white hover:bg-red-500"
+                onClick={handleLogout}
+                >
+                Đăng xuất
+                </div>
+            </div>
+            ) : null}
           </div>
         </div>
       </div>
-      <div className="flex flex-row items-center relative md:hidden mx-24 my-3">
+      <div className={clsx("flex flex-row items-center relative md:hidden mx-24 my-3", style.input_res)}>
           <input
             type="search"
             placeholder="Tìm kiếm sản phẩm"
@@ -255,7 +278,7 @@ function Header() {
           </div>
         </div>
 
-      <nav className="flex-row justify-around p-2 bg-red-500 relative sm:hidden lg:flex">
+      <nav className={clsx("flex-row justify-around p-2 bg-red-500 relative sm:hidden lg:flex", style.nav)}>
         <div className="flex flex-row items-center ml-32 relative">
           <FontAwesomeIcon
             icon={faBars}
@@ -339,30 +362,7 @@ function Header() {
             </Link>
           </li>
         </ul>
-        {show ? (
-          <div className="absolute top-0 right-28 w-36 dropdown_menu bg-white border border-red-500 flex flex-col justify-center text-sm z-20">
-            <Link
-              to={`/account`}
-              className="no-underline p-3 cursor-pointer hover:text-white hover:bg-red-500"
-              onClick={showMenu}
-            >
-              Tài khoản
-            </Link>
-            <Link
-              to={`/cart`}
-              className="no-underline p-3 cursor-pointer hover:text-white hover:bg-red-500"
-              onClick={showMenu}
-            >
-              Giỏ hàng
-            </Link>
-            <div
-              className="no-underline p-3 cursor-pointer hover:text-white hover:bg-red-500"
-              onClick={handleLogout}
-            >
-              Đăng xuất
-            </div>
-          </div>
-        ) : null}
+        
       </nav>
     </header>
   );

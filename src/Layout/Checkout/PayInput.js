@@ -37,23 +37,23 @@ function PayInput(props) {
     };
 
     return (
-        <form action='' method='post' className='w-1/2 mt-7'>
-            <div className='mb-3 flex justify-between '>
+        <form action='' method='post' className={clsx('w-1/2 mt-7', style.formInput)}>
+            <div className={clsx('mb-3 flex justify-between ', style.form_child_1)}>
                 <div className='flex flex-col'>
                     <label className={style.label}>
                         Họ tên<span style={{ color: 'red' }}>*</span>{' '}
                     </label>
-                    <input className='border focus:outline-none border-gray-400 w-64 pl-3 py-1 mt-2 rounded-md' type="text" placeholder="VD: Nguyễn Văn A" onChange={handleInputName} />
+                    <input className={clsx('border focus:outline-none border-gray-400 w-64 pl-3 py-1 mt-2 rounded-md', style.formInputName)} type="text" placeholder="VD: Nguyễn Văn A" onChange={handleInputName} />
                     {props.data.name === '' ? (
                         <label className={style.labelError}>Vui lòng nhập thông tin!</label>
                     ) : null}
                 </div>
 
-                <div className='flex flex-col'>
+                <div className={clsx('flex flex-col', style.boxPhone)}>
                     <label className={style.label}>
                         Số điện thoại<span style={{ color: 'red' }}>*</span>
                     </label>
-                    <input type="text" className='border focus:outline-none border-gray-400 w-64 pl-3 py-1 mt-2 rounded-md' placeholder="VD: 0981793201" onChange={handleInputPhone} />
+                    <input type="text" className={clsx('border focus:outline-none border-gray-400 w-64 pl-3 py-1 mt-2 rounded-md', style.formInputName)} placeholder="VD: 0981793201" onChange={handleInputPhone} />
                     {props.data.phone === '' ? (
                         <label className={style.labelError}>Vui lòng nhập thông tin!</label>
                     ) : (

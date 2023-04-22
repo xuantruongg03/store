@@ -4,6 +4,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import fb from '../access/image/fb-login-btn.svg';
 import gg from '../access/image/gg-login-btn.svg';
 import { registerAPI } from '../api/register';
+import style from "../Components/Sass/Register.module.scss"
+import clsx from 'clsx';
 
 function Register() {
     const navigate = useNavigate();
@@ -39,7 +41,7 @@ function Register() {
                         gender
                     };
                    const res = await registerAPI(params);
-                   console.log(res);
+                //    console.log(res);
                    if(res.message === 'Username already exists') {
                        setState(false);
                        alert('Tên đăng nhập đã tồn tại!');
@@ -63,10 +65,10 @@ function Register() {
     const handleLoginWithGoogle = () => {}
 
     return ( 
-        <div className='container-custom'>
-            <div className="flex justify-center items-center my-10">
-                <div className="flex border border-red-500 mx-40" >
-                    <div className='p-5 w-3/4'>
+        <div className={clsx('container-custom', style.container)}>
+            <div className={clsx("flex justify-center items-center my-10", style.box_parent)}>
+                <div className={clsx("flex border border-red-500 mx-40", style.box)} >
+                    <div className={clsx('p-5 w-3/4', style.box_child_1)}>
                         <h1 className='font-semibold text-lg mb-3'>Đăng nhập tài khoản</h1>
                         {state === false ? <p className='text-red-500 my-2'>Tên đăng nhập đã tồn tại!</p> : ''}
                         <form action="" ref={ref}>
@@ -95,16 +97,16 @@ function Register() {
                             <button type='submit' className="bg-red-600 hover:bg-yellow-400 uppercase font-semibold tracking-widest text-white p-2 rounded-md w-full mt-4" onClick={handleRegister}>Đăng ký</button>
                         </form>                
                         <div className='text-center relative my-4'>
-                            <label htmlFor="" className='text-gray-300 absolute -top-1 left-16'>_________________</label>
+                            <label htmlFor="" className={clsx('text-gray-300 absolute -top-1 left-16', style.left)}>_________________</label>
                             <label>Hoặc đăng nhập bằng</label>
-                            <label htmlFor="" className='text-gray-300 absolute -top-1 right-16'>_________________</label>
+                            <label htmlFor="" className={clsx('text-gray-300 absolute -top-1 right-16', style.right)}>_________________</label>
                         </div>
                         <div className='flex justify-center items-center'>
                             <img src={fb} alt="Login with Facebook" className='h-16 w-32 mr-1 cursor-pointer' onClick={handleLoginWithFacebook}/>
                             <img src={gg} alt="Login with Google" className='h-16 w-32 ml-1 cursor-pointer' onClick={handleLoginWithGoogle}/>
                         </div>
                     </div>
-                    <div className='w-1/2 bg-red-500 text-white flex items-center'>
+                    <div className={clsx('w-1/2 bg-red-500 text-white flex items-center', style.box_child_2)}>
                         <div className='w-full'>
                             <h1 className='text-xl font-semibold text-center uppercase'>Quyền lợi thành viên</h1>
                             <ul className='list-disc list-inside ml-5 my-5'>
@@ -115,7 +117,7 @@ function Register() {
                                 <li className='my-2'>Tích điểm đổi quà</li>
                             </ul>
                             <div className='flex justify-center mt-3'>
-                                <Link to={'/register'} className='py-2 px-4 border border-white rounded hover:bg-yellow-400 font-semibold'>Đăng nhập</Link>
+                                <Link to={'/login'} className='py-2 px-4 border border-white rounded hover:bg-yellow-400 font-semibold'>Đăng nhập</Link>
                             </div>
                         </div>
                     </div>

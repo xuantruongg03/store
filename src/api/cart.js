@@ -1,6 +1,6 @@
 import axiosClient from './axiosClient';
 
-const getCart = (customer_id) => {
+const getCart = () => {
     const url = `/cart/get-cart`;
     return axiosClient.get(url);
 };

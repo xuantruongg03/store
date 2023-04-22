@@ -2,8 +2,10 @@ import clsx from 'clsx';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import slug from '../../Convert/ConvertStringVNtoTitle'
+import style from "../../Components/Sass/Cart.module.scss";
 import formatsMoney from "../../Convert/ConvertMoneyVND";
+import slug from '../../Convert/ConvertStringVNtoTitle';
+
 const selected = [];
 
 function CompCart(props) {
@@ -67,11 +69,10 @@ function CompCart(props) {
             },
         });
     };
-
     return (
         <tbody className={clsx('cart-' + props.data.product_id, "align-middle")}>
-            <tr>
-                <th className="max-w-xs min-w-full text-center no-underline hover:tex-red-500  w-96">
+            <tr className={style.box}>
+                <th className="max-w-xs min-w-full text-center no-underline hover:tex-red-500 w-96">
                     <Link
                         className="max-w-xs min-w-full text-center no-underline hover:tex-red-500"
                         to={`/products/${slug(props.data.product_name)}`}
@@ -81,14 +82,14 @@ function CompCart(props) {
                     </Link>
                 </th>
                 <th className="text-center">{props.info || ""}</th>
-                <th>{formatsMoney(props.data.product_price)}</th>
+                <th >{formatsMoney(props.data.product_price)}</th>
                 <th>
                     <form >
-                        <button type="button" className="py-7 px-5 mx-1 text-lg border-none bg-transparent" onClick={handleMin}>
+                        <button type="button" className={clsx("py-7 px-5 mx-1 text-lg border-none bg-transparent", style.btn)} onClick={handleMin}>
                             -
                         </button>
-                        <input className="h-8 w-8 text-base text-center" value={quantity} disabled></input>
-                        <button type="button" className="py-7 px-5 mx-1 text-lg border-none bg-transparent" onClick={handleAdd}>
+                        <input className={clsx("h-8 w-8 text-base text-center")} value={quantity} disabled></input>
+                        <button type="button" className={clsx("py-7 px-5 mx-1 text-lg border-none bg-transparent", style.btn)} onClick={handleAdd}>
                             +
                         </button>
                     </form>
@@ -103,6 +104,38 @@ function CompCart(props) {
                     />
                 </th>
             </tr>
+            <div className={clsx('my-3', style.box_2)}>
+                <div className='flex justify-between items-center'>
+                    <img src={props.data.product_images[0].file_path} alt="Hình ảnh sản phẩm" className={style.img}/>
+                    <div className='pl-5'>
+                        <Link
+                            className="text-center text-xs no-underline hover:tex-red-500"
+                            to={`/product/${slug(props.data.product_name)}?search=${props.data.product_id}`}
+                            onClick={getInf}
+                        >
+                            {props.data.product_name}
+                        </Link>
+                        <form >
+                            <button type="button" className={clsx("py-7 px-5 mx-1 text-lg border-none bg-transparent", style.btn)} onClick={handleMin}>
+                                -
+                            </button>
+                            <input className={clsx("h-8 w-8 text-base text-center")} value={quantity} disabled></input>
+                            <button type="button" className={clsx("py-7 px-5 mx-1 text-lg border-none bg-transparent", style.btn)} onClick={handleAdd}>
+                                +
+                            </button>
+                        </form>
+                    </div>
+                    <div className='flex flex-col items-end pl-2'>
+                        <p className='font-semibold text-red-500'>{formatsMoney(totalPrice)}</p>
+                        <input
+                        type="checkbox"
+                        className={clsx('checkbox')}
+                        value={props.data.product_id}
+                        onClick={handleSelection}
+                    />
+                    </div>
+                </div>
+            </div>
         </tbody>
     );
 }

@@ -59,6 +59,7 @@ function Checkout() {
             product.length === 0
         ) {
             alert('Vui lòng kiểm tra lại!');
+            return;
         } else {
             product.map((element) => {
                 const Buy = async () => {

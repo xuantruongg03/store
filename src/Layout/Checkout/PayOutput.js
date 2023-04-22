@@ -30,7 +30,7 @@ function PayOutput(props) {
             </div>
             <div>
                 <div className={style.flex}>
-                    <div className=' min-h-fit w-64'>
+                    <div className={clsx(' min-h-fit w-64', style.outputName)}>
                         {props.data.map((element, index) => (
                             <li key={index} style={{ padding: '0', display: 'block' }}>
                                 <label className={style.label}>

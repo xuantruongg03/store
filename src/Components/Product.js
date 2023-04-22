@@ -39,7 +39,7 @@ function Product(props) {
   };
 
   return (
-    <div className="relative flex flex-col mb-5 border py-3 lg:px-7 sm:mx-3 sm:px-1 items-center md:w-48 sm:w-44 lg:w-64">
+    <div className={clsx("relative flex flex-col mb-5 border py-3 lg:px-7 sm:mx-3 sm:px-1 items-center md:w-48 sm:w-44 lg:w-64", style.box)}>
       {Number(props.sale) !== 0 ? (
         <div
           style={{
@@ -53,7 +53,7 @@ function Product(props) {
       ) : (
         ""
       )}
-      <Link to={`/${slug(props.name)}?search=${props.productID}`} className="mt-2">
+      <Link to={`/product/${slug(props.name)}?search=${props.productID}`} className="mt-2">
         <img
           src={props.img.file_path}
           alt={`product-${props.productID}`}
@@ -64,12 +64,12 @@ function Product(props) {
         />
       </Link>
       <Link
-        to={`/${slug(props.name)}?search=${props.productID}`}
-        className="lg:w-48 md:h-24 mt-2 font-bold text-center md:w-40 md:text-sm sm:text-xs sm:h-16"
+        to={`/product/${slug(props.name)}?search=${props.productID}`}
+        className={clsx("lg:w-48 md:h-24 mt-2 font-bold text-center md:w-40 md:text-sm sm:text-xs sm:h-16", style.title)}
       >
         <p
           htmlFor={`product-${props.productID}`}
-          className="hover:text-red-500 hover:cursor-pointer truncate "
+          className="hover:text-red-500 hover:cursor-pointer overflow-hidden truncate"
           title={props.name}
         >
           {props.name}
@@ -79,14 +79,14 @@ function Product(props) {
         <div className="sm:pl-2">
           <p
             htmlFor={`product-${props.productID}`}
-            className="text-red-500 font-semibold lg:text-lg md:text-base sm:text-sm"
+            className={clsx("text-red-500 font-semibold lg:text-lg md:text-base sm:text-sm", style.price)}
           >
             {formatsMoney(props.price - (props.price * props.sale) / 100)}
           </p>
           {Number(props.sale) !== 0 ? (
             <p
               htmlFor={`product-${props.productID}`}
-              className="text-gray-500 lg:text-sm line-through md:text-xs"
+              className={clsx("text-gray-500 lg:text-sm line-through md:text-xs", style.price)}
             >
               {formatsMoney(props.price)}
             </p>

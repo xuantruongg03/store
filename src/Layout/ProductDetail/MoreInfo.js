@@ -1,11 +1,13 @@
 import { faCertificate, faReceipt, faScrewdriverWrench } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import clsx from "clsx";
 import { Link } from "react-router-dom";
+import style from "./Detail.module.scss"
 
 function MoreInfo(props) {
     return ( 
-        <div className="md:hidden lg:block w-80 ml-5">
-            <div className="flex flex-col bg-gray-100 py-2 px-5">
+        <div className={clsx("md:hidden lg:block w-80 ml-5", style.boxMore)}>
+            <div className={clsx("flex flex-col bg-gray-100 py-2 px-5", style.box_4)}>
                 <h1 className="text-lg">Thông tin hữu ích</h1>
                 <Link to={'/repair'} className="my-2 border-b-2"> <FontAwesomeIcon icon={faScrewdriverWrench}/> <span className="ml-3">Sữa chữa tại nhà</span></Link>
                 <Link to={'/repair'} className="my-2 border-b-2"> <FontAwesomeIcon icon={faCertificate}/> <span className="ml-3">Chính sách bảo hành</span></Link>
@@ -27,15 +29,15 @@ function MoreInfo(props) {
                 <div className="flex flex-col">
                     <div className="flex justify-between items-center my-3">
                         <img src="https://bizweb.dktcdn.net/thumb/medium/100/429/689/articles/apple-ihome-concept-1.jpg?v=1623602544500" alt="Tin tức-1" className="h-16 w-16"/>
-                        <h1 className="w-40">Hàng loạt thiết bị mới của Apple bị cháy hàng ở Việt Nam</h1>
+                        <h1 className={clsx("w-40", style.titleMore)}>Hàng loạt thiết bị mới của Apple bị cháy hàng ở Việt Nam</h1>
                     </div>
                     <div className="flex justify-between items-center my-3">
                         <img src="https://bizweb.dktcdn.net/thumb/medium/100/429/689/articles/apple-ihome-concept-1.jpg?v=1623602544500" alt="Tin tức-1" className="h-16 w-16"/>
-                        <h1 className="w-40">Hàng loạt thiết bị mới của Apple bị cháy hàng ở Việt Nam</h1>
+                        <h1 className={clsx("w-40", style.titleMore)}>Hàng loạt thiết bị mới của Apple bị cháy hàng ở Việt Nam</h1>
                     </div>
                     <div className="flex justify-between items-center my-3">
                         <img src="https://bizweb.dktcdn.net/thumb/medium/100/429/689/articles/apple-ihome-concept-1.jpg?v=1623602544500" alt="Tin tức-1" className="h-16 w-16"/>
-                        <h1 className="w-40">Hàng loạt thiết bị mới của Apple bị cháy hàng ở Việt Nam</h1>
+                        <h1 className={clsx("w-40", style.titleMore)}>Hàng loạt thiết bị mới của Apple bị cháy hàng ở Việt Nam</h1>
                     </div>
                 </div>
             </div>

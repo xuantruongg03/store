@@ -5,3 +5,17 @@
         transform: scale(1.1);
     }
 }
+
+@media screen and (max-width: 520px) {
+    .title{
+        width: 100%;
+        margin-left: 15px;
+    }
+    .price{
+        width: 100%;
+        margin-left: 15px;
+    }
+    .animationZoom{
+        margin-left: 3px;
+    }
+}

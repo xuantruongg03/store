@@ -75,6 +75,10 @@ function Checkout() {
                         total_amount: element.soluong,
                     };
                     const res = await buy(params);
+                    let newToken = res.refreshToken;
+                    if (newToken) {
+                        localStorage.setItem('token', newToken);
+                    }
                     console.log(res);
                     if (res.message !== 'ok') {
                         e.preventDefault();

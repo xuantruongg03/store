@@ -37,21 +37,17 @@ function Login() {
         username: username,
         password: password,
       };
-      try {
-        const res = await loginAPI(params);
-        // setState(res.state);
-        if (res.state) {
-          const token = res.token;
-          localStorage.setItem("token", token);
-          localStorage.setItem("customer_id", res.data.customer_id);
-          dispatch({ type: "LOGIN", payload: res });
-          window.location.href = "/";
-        //   navigate('/');
-        }
-      } catch (error) {
-        // console.log(error);
-        alert("Thông tin đăng nhập không chính xác!");
-        setState(false);
+      const res = await loginAPI(params);
+      if (res.state) {
+        const token = res.token;
+        localStorage.setItem("token", token);
+        localStorage.setItem("refresh_token", res.refreshToken);
+        localStorage.setItem("customer_id", res.data.customer_id);
+        dispatch({ type: "LOGIN", payload: res });
+        window.location.href = "/";
+      } else {
+          alert("Thông tin đăng nhập không chính xác!");
+          setState(false);
       }
     };
     login();

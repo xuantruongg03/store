@@ -16,6 +16,10 @@ const token = localStorage.getItem('token');
 if (token) {
     axiosClient.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 }
+const refresh_token = localStorage.getItem('refresh_token');
+if (refresh_token) {
+    axiosClient.defaults.headers.common['refresh_token'] = refresh_token;
+}
 
 axiosClient.interceptors.request.use(async (config) => {
     // Handle token here ...

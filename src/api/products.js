@@ -16,4 +16,9 @@ const getProductsByType = (type) => {
     return axiosClient.get(url);
 }
 
-export { getAllProducts, getProductById, getProductsByType }
+const getProductsSale = () => {
+    const url = `/get-product-sale`
+    return axiosClient.get(url);
+}
+
+export { getAllProducts, getProductById, getProductsByType, getProductsSale }

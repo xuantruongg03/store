@@ -1,0 +1,40 @@
+@media screen and (max-width: 500px) {
+    .container{
+        flex-direction: column;
+        margin-top: 20px;
+        font-size: small;
+    }   
+    .box{
+        width: 100%;
+    }
+    .box_user{
+        padding: 10px;
+    }
+    .box_avatar{
+        height: 50px;
+        width: 50px;
+    }
+    .label{
+        font-size: small;
+        width: 100%;
+    }
+    .box_user_input{
+        width: 130px;
+    }
+    .table{
+        display: none;
+    }
+    .img{
+        height: 50px;
+        width: 50px;
+    }
+}
+
+@media screen and (min-width: 501px) {
+    .img{
+        display: none;
+    }
+    .box_2{
+        display: none;
+    }
+}

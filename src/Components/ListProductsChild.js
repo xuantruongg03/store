@@ -4,25 +4,26 @@ import { A11y, Navigation, Pagination, Scrollbar } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import style from './Sass/ListProductsChild.module.scss'
 import clsx from "clsx";
+import ProductMobile from "./ProductMobile";
 
 function ListProductsChild(props) {
   return (
     <div className="my-8">
       <div className="border-b border-red-500 flex flex-row justify-between items-end">
-        <div className="p-3 bg-red-500 border rounded-lg lg:w-56 md:w-40">
+        <div className="p-3 bg-red-500 border rounded-lg lg:w-44 md:w-40">
           <h1 className="font-bold lg:text-lg md:text-base text-center text-white tracking-wider">
             {props.title}
           </h1>
         </div>
-      <Link to={`/${props.word}`} className="text-red-500 hover:text-yellow-500 hover:underline ">Xem tất cả &gt;&gt; </Link>
+      <Link to={`/product/type/${props.word}`} className="text-red-500 hover:text-yellow-500 hover:underline ">Xem tất cả &gt;&gt; </Link>
       </div>
       <div className="mt-3 flex flex-row justify-between ">
         <img
           src={`${props.image_banner}`}
           alt="Banner colums"
-          className={clsx("w-60 h-auto sm:hidden lg:block", style.banner)}
+          className={clsx("w-44 h-auto sm:hidden lg:block", style.banner)}
         />
-        <div className={clsx("flex flex-wrap ml-2", style.banner)}>
+        <div className={clsx("grid grid-cols-4 gap-1", style.banner)}>
           {props.list.splice(0, 8).map((element) => {
             return (
               <Product
@@ -39,7 +40,7 @@ function ListProductsChild(props) {
          
         <Swiper
                 spaceBetween={5}
-                slidesPerView={1}
+                slidesPerView={2}
                 modules={[Navigation, Pagination, Scrollbar, A11y]}
                 pagination={{ clickable: true }}
                 className={clsx("sm:hidden", style.swiper)}
@@ -47,7 +48,7 @@ function ListProductsChild(props) {
                 {props.list.map((element) => {
                     return (
                         <SwiperSlide key={element.product_id} className={clsx("sm:hidden", style.swiper)}>
-                            <Product
+                            <ProductMobile
                                  key={element.product_id}
                                  productID={element.product_id}
                                  sale={element.product_sale_price}

@@ -22,7 +22,7 @@
         width: 100% !important;
     }
     .box1{
-        flex-direction: column;
+        flex-direction: column-reverse;
         // width: 100% !important;
         margin: 0 20px;
     }
@@ -54,15 +54,15 @@
     .titleInf{
         margin: 5px;
     }
-    .boxDes, .boxMore{
+    .boxDes{
         margin: 0 20px;
     }
     .boxMore{
-        margin-top: 10px;
+        width: auto;
+        margin-right: 1.25rem;
+        margin-top: 1.25rem;
     }
-    .box_4{
-        width: 310px;
-    }
+
     .titleMore{
         width: 100%;
         margin-left: 10px;

@@ -52,7 +52,7 @@ function ListProducts() {
       <ListProductsChild
         list={computer}
         title="Máy tính xách tay"
-        word="computer"
+        word="Laptop"
         image_banner="https://bizweb.dktcdn.net/100/429/689/themes/869367/assets/banner_1.jpg?1677379323227"
       />
       <ListProductsChild

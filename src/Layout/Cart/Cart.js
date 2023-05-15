@@ -45,7 +45,11 @@ function Cart() {
             product_id: id,
             customer_id: localStorage.getItem("customer_id"),
           };
-          await deleteProductCart(params);
+          const res = await deleteProductCart(params);
+          let newToken = res.refreshToken;
+            if (newToken) {
+                localStorage.setItem('token', newToken);
+            }
           document.querySelector(".cart-" + id).remove();
           for (let i = 0; i < select.length; i++) {
             if (select[i] === id) {
@@ -74,6 +78,10 @@ function Cart() {
   useEffect(() => {
     const cart = async () => {
       const res = await getCart(customer_id);
+      let newToken = res.refreshToken;
+            if (newToken) {
+                localStorage.setItem('token', newToken);
+            }
       setCart(res.data);
     };
     cart();

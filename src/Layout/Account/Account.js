@@ -5,6 +5,7 @@ import Address from './ListAddress';
 import ChangePass from './ChangePass';
 import Orders from './Orders';
 import User from './User';
+import style from "./Account.module.scss"
 
 function Account() {
 
@@ -30,7 +31,7 @@ function Account() {
       }
 
     return ( 
-        <div className="container-custom my-10 flex">
+        <div className={clsx("container-custom my-10 flex", style.container)}>
             <nav className="flex flex-col w-80" >
                 <h1 className="text-xl font-semibold uppercase">Trang tài khoản</h1>
                 <p className="font-semibold mt-2 mb-2" >Xin chào, <span className="text-red-500">Xuân Trường</span> !</p>
@@ -41,7 +42,7 @@ function Account() {
                     <div className='my-3'><label className={clsx(' cursor-pointer hover:text-yellow-400', show === 'address' ? 'text-yellow-400' : '')} onClick={() => {setShow('address')}}>Sổ địa chỉ</label></div>
                 </div>
             </nav>
-            <div className="flex flex-col w-3/4">
+            <div className={clsx("flex flex-col w-3/4", style.box)}>
                 {(() => {
                     switch (show) {
                         case 'user': return <User data={user} />;

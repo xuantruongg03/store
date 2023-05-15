@@ -14,44 +14,7 @@ import { getUserAPI } from "../api/user";
 import style from "./Sass/Header.module.scss";
 import formatsMoney from "../Convert/ConvertMoneyVND";
 import slug from "../Convert/ConvertStringVNtoTitle";
-
-const type = [
-  {
-    id: 1,
-    name: "Máy tính để bàn",
-    image: require("../access/image/types/pc.jpg"),
-  },
-  {
-    id: 2,
-    name: "Máy tính xách tay",
-    image: require("../access/image/types/laptop.jpg"),
-  },
-  {
-    id: 3,
-    name: "Màn hình máy tính",
-    image: require("../access/image/types/mirror.jpg"),
-  },
-  {
-    id: 4,
-    name: "Ghế gaming",
-    image: require("../access/image/types/ghe.jpg"),
-  },
-  {
-    id: 5,
-    name: "Phụ kiện",
-    image: require("../access/image/types/phukien.jpg"),
-  },
-  {
-    id: 6,
-    name: "Thiết bị mạng",
-    image: require("../access/image/types/mang.jpg"),
-  },
-  {
-    id: 7,
-    name: "Đặt lịch sữa chữa",
-    image: require("../access/image/types/suachua.jpg"),
-  },
-];
+import list from "../listType" ;
 
 function Header() {
   const [statDropDown, setStateDropDown] = useState(false);
@@ -72,6 +35,10 @@ function Header() {
     setStateDropDown(!statDropDown);
   };
 
+  const closeDropDown = () => {
+    setStateDropDown(false);
+  }
+
   const handleLogout = () => {
     setStateLogin(false);
     dispatch({
@@ -83,6 +50,7 @@ function Header() {
     });
     localStorage.removeItem("token");
     localStorage.removeItem("customer_id");
+    localStorage.removeItem("refresh_token");
     window.location.href = "/";
   };
 
@@ -115,6 +83,10 @@ function Header() {
       if (resProducts.login) {
         // setStateLogin(resProducts.login);
         let data = await getUserAPI(resProducts.customer_id);
+        let newToken = data.refreshToken;
+        if (newToken) {
+            localStorage.setItem("token", newToken);
+        }
         setData(data.data[0]);
         setAvatar(data.data[0].avatar);
         dispatch({
@@ -132,14 +104,14 @@ function Header() {
   }, [dispatch]);
 
   return (
-    <header className="relative">
-      <div className={clsx("flex justify-around lg:mx-20 md:mx-5 items-center", style.logo_login)}>
+    <header className="relative border-b-4 sm:border-none border-red-500">
+      <div className={clsx("flex justify-around lg:mx-20 md:mx-5 items-center mb-2", style.logo_login)}>
         <div className={clsx("flex flex-row items-center", style.logo)}>
           <Link to={"/"}>
             <img
               src={require("../access/image/logo.png")}
               alt="Logo"
-              className="lg:h-20 md:h-16"
+              className="lg:h-20 md:h-16 h-20 w-32"
             />
           </Link>
           <Link to={"/"}>
@@ -278,7 +250,7 @@ function Header() {
           </div>
         </div>
 
-      <nav className={clsx("flex-row justify-around p-2 bg-red-500 relative sm:hidden lg:flex", style.nav)}>
+      <nav id="nav" className={clsx("flex-row justify-around p-2 bg-red-500 relative sm:hidden lg:flex", style.nav)}>
         <div className="flex flex-row items-center ml-32 relative">
           <FontAwesomeIcon
             icon={faBars}
@@ -299,7 +271,7 @@ function Header() {
             id="drop-down"
           >
             <ul className="ml-2">
-              {type.map((item, index) => {
+              {list.map((item, index) => {
                 return (
                   <li className="flex flex-row items-center mt-3" key={index}>
                     <img
@@ -308,7 +280,7 @@ function Header() {
                       id={item.name}
                       className="h-6 w-6 rounded-full mr-3"
                     />
-                    <Link to={`/${item.name}`}>
+                    <Link to={item.key !== 'repair' ? `/product/type/${item.key}` : '/repair'} onClick={closeDropDown}>
                       <label
                         className="cursor-pointer hover:text-red-500"
                         htmlFor={item.name}
@@ -323,7 +295,7 @@ function Header() {
           </div>
         </div>
         <span className="text-white">|</span>
-        <ul className="flex flex-row w-2/3 justify-around mr-24">
+        <ul className="flex flex-row w-2/3 justify-around items-center mr-24 text-sm">
           <li>
             <Link to={"/"} className=" text-white hover:text-orange-300">
               Trang chủ
@@ -335,7 +307,7 @@ function Header() {
             </Link>
           </li>
           <li>
-            <Link to={"/"} className="text-white hover:text-orange-300">
+            <Link to={"/product"} className="text-white hover:text-orange-300">
               Sản phẩm
               <FontAwesomeIcon icon={faCaretDown} className="ml-1" />
             </Link>
@@ -352,8 +324,8 @@ function Header() {
             </Link>
           </li>
           <li>
-            <Link to={"/recruit"} className="text-white hover:text-orange-300">
-              Tuyển dụng
+            <Link to={"/blog"} className="text-white hover:text-orange-300">
+              Viết bài
             </Link>
           </li>
           <li>

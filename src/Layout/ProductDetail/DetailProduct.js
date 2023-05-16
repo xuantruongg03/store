@@ -40,6 +40,12 @@ function InfoDetail(props) {
                 const response = await addToCart(params);
                 if(response.message === "ok") {
                     alert('Thêm vào giỏ hàng thành công');
+                    if (response.newToken != null) {
+                        localStorage.setItem('token', response.newToken);
+                    }
+                    if (response.refreshToken != null) {
+                        localStorage.setItem('refresh_token', response.refreshToken);
+                    }
                 } else {
                     alert('Thêm vào giỏ hàng thất bại');
                 }
@@ -53,17 +59,17 @@ function InfoDetail(props) {
     const handleBuyNow = (e) => {
         e.preventDefault();
         handleAddToCart(e);
-        navigate('/pay');
+        navigate('/cart');
     }
 
     return ( 
-        <div className={clsx("flex flex-col sm:mt-5 sm:w-full md:ml-5", style.box_2)} style={{minWidth: '400px'}}>
+        <div className={clsx("flex flex-col sm:mt-5 sm:w-full md:ml-5 text-sm", style.box_2)} style={{minWidth: '400px'}}>
             <h1 className={clsx("font-bold text-lg", style.title)}>{props.title}</h1>
             <div className="flex my-2">
                 <label className="text-sm">Thương hiệu: <span className="font-bold">Apple</span></label>
             </div>
             <label htmlFor="" className="text-red-500 text-2xl font-bold my-2">{formatsMoney(props.price)}</label>
-            <label htmlFor="" className="text-gray-500 text-lg line-through my-2">{formatsMoney(props.cost)}</label>
+            {props.sale > 0 ? (<label htmlFor="" className="text-gray-500 text-lg line-through my-2">{formatsMoney(props.cost)}</label>) : ''}
             <div className="bg-gray-100 w-full p-3 rounded my-2">
                 <div className="py-1 px-3 bg-red-500 w-48 rounded-xl my-3">
                     <label htmlFor="" className="uppercase text-sm text-white font-semibold"> <FontAwesomeIcon icon={faGift}/> Khuyến mãi - ưu đãi</label>
@@ -80,17 +86,17 @@ function InfoDetail(props) {
                 <button onClick={() => {setConfig(256)}} className={clsx("border p-1 rounded-xl", config === 256 ? 'border-red-500 text-red-500' : '')}>256GB</button>
                 <button onClick={() => {setConfig(512)}} className={clsx("border p-1 rounded-xl", config === 512 ? 'border-red-500 text-red-500' : '')}>512GB</button>
             </div>
-            <div className="my-2">
-                <label onClick={handleQuantitySub} className="py-1 px-3 border text-lg hover:bg-red-500 hover:text-white disable-select">-</label>
+            <div className="my-2 flex items-center">
+                <button onClick={handleQuantitySub} className=" px-3 border text-lg hover:bg-red-500 hover:text-white">-</button>
                 <input type="number" className="w-16 text-center border py-1 focus:outline-none" value={quantity} min="1" max={props.quantity} />
-                <label onClick={handleQuantityAdd} className="py-1 px-3 border text-lg hover:bg-red-500 hover:text-white disable-select">+</label>
+                <button onClick={handleQuantityAdd} className=" px-3 border text-lg hover:bg-red-500 hover:text-white">+</button>
             </div>
             <div className="my-2">
                 <button 
-                    className={clsx("bg-red-500 text-white py-1 px-10 rounded border uppercase mr-2 hover:bg-white hover:text-red-500 hover:border hover:border-red-500", style.btnadd)} 
+                    className={clsx("bg-red-500 sm:my-2  text-white py-1 px-10 rounded border uppercase mr-2 hover:bg-white hover:text-red-500 hover:border hover:border-red-500", style.btnadd)} 
                     onClick={handleAddToCart}>Thêm vào giỏ hàng <br /> <span className="text-sm normal-case">Cam kết chính hãng/đổi trả 24h</span> </button>
                 <button 
-                    className={clsx("uppercase text-center bg-green-500 text-white rounded border py-1 px-8 hover:border hover:border-orange-500 hover:text-orange-500 hover:bg-white", style.btnbuy)} 
+                    className={clsx(" sm:my-2 uppercase text-center bg-green-500 text-white rounded border py-1 px-8 hover:border hover:border-orange-500 hover:text-orange-500 hover:bg-white", style.btnbuy)} 
                     onClick={handleBuyNow}>Mua ngay <br /> <span className="text-sm normal-case">Thanh toán nhanh chóng</span> </button>
             </div>
             <div className="my-2 flex items-center">

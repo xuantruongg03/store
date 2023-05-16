@@ -3,7 +3,7 @@ import slug from "../Convert/ConvertStringVNtoTitle";
 
 function NewsItemVer(props) {
   return (
-    <div className="flex my-5 justify-between pr-5 items-center ">
+    <div className="flex my-5 pr-5 items-center ">
       <img
         src={props.data.blog_image}
         alt="Hình ảnh bài viết"

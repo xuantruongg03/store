@@ -80,13 +80,14 @@ function Header() {
     const getData = async () => {
       const resProducts = await getAllProducts();
       setProducts(resProducts.data);
+      if (resProducts.newToken != null) {
+        localStorage.setItem('token', resProducts.newToken);
+      }
+      if (resProducts.refreshToken != null) {
+        localStorage.setItem('refresh_token', resProducts.refreshToken);
+      }
       if (resProducts.login) {
-        // setStateLogin(resProducts.login);
         let data = await getUserAPI(resProducts.customer_id);
-        let newToken = data.refreshToken;
-        if (newToken) {
-            localStorage.setItem("token", newToken);
-        }
         setData(data.data[0]);
         setAvatar(data.data[0].avatar);
         dispatch({

@@ -18,7 +18,12 @@ function AllProducts() {
     if (type === "sale") {
       const fetchData = async () => {
         const res = await getProductsSale();
-        // console.log(res.data);
+        if (res.newToken != null) {
+            localStorage.setItem('token', res.newToken);
+          }
+          if (res.refreshToken != null) {
+            localStorage.setItem('refresh_token', res.refreshToken);
+          }
         setData(res.data);
         setLoading(false);
         setTotalPage(Math.ceil(res.data.length / 12));
@@ -27,6 +32,12 @@ function AllProducts() {
     } else {
       const fetchData = async () => {
         const res = await getProductsByType(type);
+        if (res.newToken != null) {
+            localStorage.setItem('token', res.newToken);
+          }
+          if (res.refreshToken != null) {
+            localStorage.setItem('refresh_token', res.refreshToken);
+          }
         setData(res.data);
         setLoading(false);
         setTotalPage(Math.ceil(res.data.length / 12));

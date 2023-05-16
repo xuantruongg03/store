@@ -20,4 +20,14 @@ const getBlogDetail = (params) => {
     return axiosClient.get(url);
 }
 
-export { postBlog, getAllBlog, rateBlog, getBlogDetail };
+const getComment = (params) => {
+    const url = '/get-comment-blog?blog_id=' + params;
+    return axiosClient.get(url);
+}
+
+const postComment = (params) => {
+    const url = `/comment-blog`;
+    return axiosClient.post(url, params);
+}
+
+export { postBlog, getAllBlog, rateBlog, getBlogDetail, getComment, postComment };

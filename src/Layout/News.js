@@ -28,6 +28,12 @@ function News() {
             setNewest(res.data.sort((a, b) => a.blog_created_at - b.blog_created_at).slice(0, 3));
             setTotal(Math.ceil(res.data.length / 5));
             setLoading(true);
+            if (res.newToken != null) {
+                localStorage.setItem('token', res.newToken);
+              }
+              if (res.refreshToken != null) {
+                localStorage.setItem('refresh_token', res.refreshToken);
+              }
         }
         fetch();
     }, [])

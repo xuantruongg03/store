@@ -7,7 +7,7 @@
     }
     .boxImage{
         height: 30%;
-        width: 320px;
+        // width: 320px;
     }
     .image{
         width: 100%;
@@ -22,7 +22,7 @@
         width: 100% !important;
     }
     .box1{
-        flex-direction: column-reverse;
+        flex-direction: column;
         // width: 100% !important;
         margin: 0 20px;
     }
@@ -56,11 +56,13 @@
     }
     .boxDes{
         margin: 0 20px;
+        font-size: small;
     }
     .boxMore{
         width: auto;
         margin-right: 1.25rem;
         margin-top: 1.25rem;
+        font-size: small;
     }
 
     .titleMore{

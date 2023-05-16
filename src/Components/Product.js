@@ -10,40 +10,47 @@ import { addToCart } from "../api/cart";
 import style from "./Sass/Product.module.scss";
 
 function Product(props) {
-    const navigate = useNavigate();
-    const state = useSelector((state) => state.login);
-    const stateLogin = state !== null ? state.state : false;
+  const navigate = useNavigate();
+  const state = useSelector((state) => state.login);
+  const stateLogin = state !== null ? state.state : false;
 
   const handleAddToCart = () => {
     if (stateLogin) {
-        const product_id = props.productID;
-        const quantity = 1;
-        const customer_id = localStorage.getItem('customer_id');
-        const add = async () => {
-            const params = {
-                product_id,
-                quantity,
-                customer_id,
-            };
-            const res = await addToCart(params);
-            let newToken = res.refreshToken;
-            if (newToken) {
-                localStorage.setItem('token', newToken);
-            }
-            if (res.message === 'ok') {
-                alert('Đặt hàng thành công! Hãy kiểm tra giỏ hàng của bạn.');
-            } else {
-                alert('Lỗi phía Client! Thử lại sau.');
-            }
+      const product_id = props.productID;
+      const quantity = 1;
+      const customer_id = localStorage.getItem("customer_id");
+      const add = async () => {
+        const params = {
+          product_id,
+          quantity,
+          customer_id,
         };
-        add();
+        const res = await addToCart(params);
+        if (res.newToken != null) {
+          localStorage.setItem("token", res.newToken);
+        }
+        if (res.refreshToken != null) {
+          localStorage.setItem("refresh_token", res.refreshToken);
+        }
+        if (res.message === "ok") {
+          alert("Đặt hàng thành công! Hãy kiểm tra giỏ hàng của bạn.");
+        } else {
+          alert("Lỗi phía Client! Thử lại sau.");
+        }
+      };
+      add();
     } else {
-        navigate('/login');
+      navigate("/login");
     }
   };
 
   return (
-    <div className={clsx("relative flex flex-col mb-5 border py-3 lg:px-7 sm:mx-3 sm:px-1 items-center md:w-48 sm:w-44 lg:w-64", style.box)}>
+    <div
+      className={clsx(
+        "relative flex flex-col mb-5 border py-3 lg:px-7 sm:mx-3 sm:px-1 items-center md:w-48 sm:w-44 lg:w-64",
+        style.box
+      )}
+    >
       {Number(props.sale) !== 0 ? (
         <div
           style={{
@@ -57,7 +64,10 @@ function Product(props) {
       ) : (
         ""
       )}
-      <Link to={`/product/${slug(props.name)}?search=${props.productID}`} className="mt-2">
+      <Link
+        to={`/product/${slug(props.name)}?search=${props.productID}`}
+        className="mt-2"
+      >
         <img
           src={props.img.file_path}
           alt={`product-${props.productID}`}
@@ -69,7 +79,10 @@ function Product(props) {
       </Link>
       <Link
         to={`/product/${slug(props.name)}?search=${props.productID}`}
-        className={clsx("lg:w-48 md:h-24 mt-2 font-bold text-center md:w-40 md:text-sm sm:text-xs sm:h-16", style.title)}
+        className={clsx(
+          "lg:w-48 md:h-24 mt-2 font-bold text-center md:w-40 md:text-sm sm:text-xs sm:h-16",
+          style.title
+        )}
       >
         <p
           htmlFor={`product-${props.productID}`}
@@ -83,14 +96,20 @@ function Product(props) {
         <div className="sm:pl-2">
           <p
             htmlFor={`product-${props.productID}`}
-            className={clsx("text-red-500 font-semibold lg:text-lg md:text-base sm:text-sm", style.price)}
+            className={clsx(
+              "text-red-500 font-semibold lg:text-lg md:text-base sm:text-sm",
+              style.price
+            )}
           >
             {formatsMoney(props.price - (props.price * props.sale) / 100)}
           </p>
           {Number(props.sale) !== 0 ? (
             <p
               htmlFor={`product-${props.productID}`}
-              className={clsx("text-gray-500 lg:text-sm line-through md:text-xs", style.price)}
+              className={clsx(
+                "text-gray-500 lg:text-sm line-through md:text-xs",
+                style.price
+              )}
             >
               {formatsMoney(props.price)}
             </p>

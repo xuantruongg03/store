@@ -18,6 +18,13 @@ function Repair() {
             const fetch = await bookingApi(data);
             if (fetch.message === "ok") {
                 alert("Đặt lịch thành công!");
+                ref.current.reset();
+                if (fetch.newToken != null) {
+                    localStorage.setItem('token', fetch.newToken);
+                  }
+                  if (fetch.refreshToken != null) {
+                    localStorage.setItem('refresh_token', fetch.refreshToken);
+                  }
                 window.location.href = "/";
             } else {
                 alert("Đặt lịch thất bại!");

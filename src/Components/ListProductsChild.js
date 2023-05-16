@@ -10,8 +10,8 @@ function ListProductsChild(props) {
   return (
     <div className="my-8">
       <div className="border-b border-red-500 flex flex-row justify-between items-end">
-        <div className="p-3 bg-red-500 border rounded-lg lg:w-44 md:w-40">
-          <h1 className="font-bold lg:text-lg md:text-base text-center text-white tracking-wider">
+        <div className="p-2 bg-red-500 border rounded-lg lg:w-44 md:w-40 ">
+          <h1 className="font-bold md:text-base text-center text-white tracking-wider">
             {props.title}
           </h1>
         </div>

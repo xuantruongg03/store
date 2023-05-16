@@ -8,7 +8,7 @@ function DetailInfo(props) {
     }
 
     return ( 
-        <div className={clsx("md:w-96 sm:mb-5 md:mb-0 sm:w-full", style.box_3)}>
+        <div className={clsx("md:w-96 sm:mb-5 md:mb-0 sm:w-full text-sm", style.box_3)}>
             <div className={clsx("text-2xl font-bold my-5", style.titleInf)}>Thông tin sản phẩm</div>
             <div className="grid grid-cols-1">
                 {props.details.splice(0, 4).map((item, index) => {

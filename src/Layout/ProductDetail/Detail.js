@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import { A11y, Navigation, Pagination, Scrollbar } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Product from "../../Components/Product";
+import ProductMobile from "../../Components/ProductMobile";
 import { getProductById, getProductsByType } from "../../api/products";
 import DetailDes from "./DetailDes";
 import DetailImage from "./DetailImage";
@@ -67,8 +68,8 @@ function Detail() {
   return (
     <div className={clsx("container-custom sm:mx-10 sm:items-center lg:px-24", style.container)}>
       <div className="lg:flex justify-between my-8 sm:block">
-        <div className={clsx("w-3/4 sm:w-full justify-between", style.detailsbox)}>
-          <div className={clsx("flex lg:flex-row my-5 justify-between items-center sm:flex-col", style.box1)}>
+        <div className={clsx("sm:w-3/4 justify-between", style.detailsbox)}>
+          <div className={clsx("flex lg:flex-row my-5 justify-between sm:flex-col", style.box1)}>
             <DetailImage
               setCheck={setCheck}
               img={img}
@@ -106,10 +107,25 @@ function Detail() {
         <div className="border-b border-red-500 my-4">
             <h1 className=" py-2 px-4 bg-red-500 w-48 text-center rounded-md font-bold text-white">Sản phẩm liên quan</h1>
         </div>
-        <Swiper
+        {
+            window.innerWidth < 500 ? (
+                <div className="grid grid-cols-2 gap-2">
+                {products.slice(0,2).map((item, index) => (
+                    <ProductMobile
+                        key={item.product_id}
+                        productID={item.product_id}
+                        sale={item.product_sale_price}
+                        img={item.product_images[0]}
+                        name={item.product_name}
+                        price={item.product_price}
+                    />
+                ))}
+                </div>
+            ) : (
+                <Swiper
             modules={[Navigation, Pagination, Scrollbar, A11y]}
             spaceBetween={10}
-            slidesPerView={2}
+            slidesPerView={4}
         >
             {products.map((item, index) => {
                 if (item.product_id !== id) {
@@ -130,6 +146,8 @@ function Detail() {
                 return null;
             })}
         </Swiper>
+            )
+        }
       </div>
     </div>
   );

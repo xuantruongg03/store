@@ -33,6 +33,12 @@ function Blog() {
         setContent("");
         document.getElementById("content").innerHTML = "";
         setImage("../access/image/logo.png");
+        if (res.newToken != null) {
+            localStorage.setItem('token', res.newToken);
+          }
+          if (res.refreshToken != null) {
+            localStorage.setItem('refresh_token', res.refreshToken);
+          }
       } else {
         alert("Đăng bài thất bại");
       }

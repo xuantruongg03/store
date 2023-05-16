@@ -19,6 +19,7 @@ import Repair from "./Layout/Repair";
 import AllProducts from "./Layout/AllProducts";
 import Blog from "./Layout/Blog";
 import News from "./Layout/News";
+import BlogDetail from "./Layout/BlogDetail";
 // import BookingComplete from "./Layout/BookingComplete/BookingComplete";
 
 function App() {
@@ -53,7 +54,7 @@ function App() {
         </Route>
         <Route path="/news">
             <Route path="" element={layout(<News/>)}/>
-            {/* <Route path=":title" element={layout(<Detail />)} /> */}
+            <Route path=":title" element={layout(<BlogDetail/>)} />
         </Route>
         <Route path="/login" element={layout(<Login />)} />
         <Route path="/forgot-password" element={layout(<ForgotPassword />)} />

@@ -1,9 +1,9 @@
 
 import axiosClient from "./axiosClient";
 
-const getAllProducts = (params) => {
+const getAllProducts = () => {
     const url = '/get-product-all';
-    return axiosClient.get(url, { params });
+    return axiosClient.get(url);
 }
 
 const getProductById = (id) => {

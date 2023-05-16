@@ -3,8 +3,27 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import clsx from "clsx";
 import { Link } from "react-router-dom";
 import style from "./Detail.module.scss"
+import { useEffect, useState } from "react";
+import { getAllBlog } from "../../api/blog";
+import NewsItemVer from "../../Components/NewsItemVer";
 
 function MoreInfo(props) {
+    const [blog, setBlog] = useState([]);
+
+    useEffect(() => {
+        const fetch = async () => {
+            const res = await getAllBlog();
+            setBlog(res.data);
+            if(res.newToken) {
+                localStorage.setItem('token', res.newToken);
+            }
+            if(res.refreshToken) {
+                localStorage.setItem('refresh_token', res.refreshToken);
+            }
+        }
+        fetch();
+    }, [])
+
     return ( 
         <div className={clsx("md:hidden lg:block w-80 ml-5", style.boxMore)}>
             <div className={clsx("flex flex-col bg-gray-100 py-2 px-5", style.box_4)}>
@@ -27,18 +46,9 @@ function MoreInfo(props) {
             <div className="mt-5">
                 <h1 className="text-xl font-bold">Tin tức công nghệ</h1>
                 <div className="flex flex-col">
-                    <div className="flex justify-between items-center my-3">
-                        <img src="https://bizweb.dktcdn.net/thumb/medium/100/429/689/articles/apple-ihome-concept-1.jpg?v=1623602544500" alt="Tin tức-1" className="h-16 w-16"/>
-                        <h1 className={clsx("w-40", style.titleMore)}>Hàng loạt thiết bị mới của Apple bị cháy hàng ở Việt Nam</h1>
-                    </div>
-                    <div className="flex justify-between items-center my-3">
-                        <img src="https://bizweb.dktcdn.net/thumb/medium/100/429/689/articles/apple-ihome-concept-1.jpg?v=1623602544500" alt="Tin tức-1" className="h-16 w-16"/>
-                        <h1 className={clsx("w-40", style.titleMore)}>Hàng loạt thiết bị mới của Apple bị cháy hàng ở Việt Nam</h1>
-                    </div>
-                    <div className="flex justify-between items-center my-3">
-                        <img src="https://bizweb.dktcdn.net/thumb/medium/100/429/689/articles/apple-ihome-concept-1.jpg?v=1623602544500" alt="Tin tức-1" className="h-16 w-16"/>
-                        <h1 className={clsx("w-40", style.titleMore)}>Hàng loạt thiết bị mới của Apple bị cháy hàng ở Việt Nam</h1>
-                    </div>
+                    {blog.slice(0, 3).map((item, index) => (
+                        <NewsItemVer key={index} data={item} />
+                    ))}
                 </div>
             </div>
         </div>

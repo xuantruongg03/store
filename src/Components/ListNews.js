@@ -1,9 +1,6 @@
 import clsx from "clsx";
 import { Link } from "react-router-dom";
-import { A11y, Navigation, Pagination, Scrollbar } from "swiper";
-import { Swiper, SwiperSlide } from "swiper/react";
 import NewsItem from "./NewsItem";
-import style from "./Sass/ListProductsChild.module.scss";
 
 function ListNews(props) {
   return (

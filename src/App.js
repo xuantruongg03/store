@@ -20,6 +20,7 @@ import AllProducts from "./Layout/AllProducts";
 import Blog from "./Layout/Blog";
 import News from "./Layout/News";
 import BlogDetail from "./Layout/BlogDetail";
+import About from "./Layout/About";
 // import BookingComplete from "./Layout/BookingComplete/BookingComplete";
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
       <Routes>
         <Route path="/" index element={layout(<Home />)} />
         <Route path="/product">
+            <Route path="" element={layout(<AllProducts />)} />
           <Route path=":title" element={layout(<Detail />)} />
           <Route path="type/:type" element={layout(<AllProducts />)} />
         </Route>
@@ -56,6 +58,7 @@ function App() {
             <Route path="" element={layout(<News/>)}/>
             <Route path=":title" element={layout(<BlogDetail/>)} />
         </Route>
+        <Route path="/about" element={layout(<About/>)} />
         <Route path="/login" element={layout(<Login />)} />
         <Route path="/forgot-password" element={layout(<ForgotPassword />)} />
         <Route path="/register" element={layout(<Register />)} />

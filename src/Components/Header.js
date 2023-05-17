@@ -1,20 +1,20 @@
 import {
-  faBars,
-  faCaretDown,
-  faPhone,
-  faUser,
+    faBars,
+    faCaretDown,
+    faPhone,
+    faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import clsx from "clsx";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getAllProducts } from "../api/products";
-import { getUserAPI } from "../api/user";
-import style from "./Sass/Header.module.scss";
 import formatsMoney from "../Convert/ConvertMoneyVND";
 import slug from "../Convert/ConvertStringVNtoTitle";
-import list from "../listType" ;
+import { getAllProducts } from "../api/products";
+import { getUserAPI } from "../api/user";
+import list from "../listType";
+import style from "./Sass/Header.module.scss";
 
 function Header() {
   const [statDropDown, setStateDropDown] = useState(false);
@@ -37,7 +37,7 @@ function Header() {
 
   const closeDropDown = () => {
     setStateDropDown(false);
-  }
+  };
 
   const handleLogout = () => {
     setStateLogin(false);
@@ -81,10 +81,10 @@ function Header() {
       const resProducts = await getAllProducts();
       setProducts(resProducts.data);
       if (resProducts.newToken != null) {
-        localStorage.setItem('token', resProducts.newToken);
+        localStorage.setItem("token", resProducts.newToken);
       }
       if (resProducts.refreshToken != null) {
-        localStorage.setItem('refresh_token', resProducts.refreshToken);
+        localStorage.setItem("refresh_token", resProducts.refreshToken);
       }
       if (resProducts.login) {
         let data = await getUserAPI(resProducts.customer_id);
@@ -106,7 +106,12 @@ function Header() {
 
   return (
     <header className="relative border-b-4 sm:border-none border-red-500">
-      <div className={clsx("flex justify-around lg:mx-20 md:mx-5 items-center mb-2", style.logo_login)}>
+      <div
+        className={clsx(
+          "flex justify-around lg:mx-20 md:mx-5 items-center mb-2",
+          style.logo_login
+        )}
+      >
         <div className={clsx("flex flex-row items-center", style.logo)}>
           <Link to={"/"}>
             <img
@@ -116,12 +121,22 @@ function Header() {
             />
           </Link>
           <Link to={"/"}>
-            <h1 className={clsx("lg:text-xl md:text-base font-bold ml-4 uppercase text-red-400 no-underline ", style.name)}>
+            <h1
+              className={clsx(
+                "lg:text-xl md:text-base font-bold ml-4 uppercase text-red-400 no-underline ",
+                style.name
+              )}
+            >
               Computer Central
             </h1>
           </Link>
         </div>
-        <div className={clsx("flex flex-row items-center relative sm:hidden md:block ", style.input)}>
+        <div
+          className={clsx(
+            "flex flex-row items-center relative sm:hidden md:block ",
+            style.input
+          )}
+        >
           <input
             type="search"
             placeholder="Tìm kiếm sản phẩm"
@@ -131,29 +146,43 @@ function Header() {
           />
           <div>
             {result ? (
-                <div className="absolute top-10 z-30 left-0 lg:w-72 md:w-54 text-xs bg-white border border-red-500 rounded">
-                    {result.splice(0, 5).map((item) => (
-                        <Link to={`/${slug(item.product_name)}?search=${item.product_id}`} key={item.product_id} onClick={() => { document.getElementById('search').value = ''; setResult(null) }}>
-                            <div className="flex flex-row items-center p-2 hover:bg-gray-200 cursor-pointer">
-                                <img
-                                    src={item.product_images[0].file_path}
-                                    alt="Avatar"
-                                    className="lg:h-11 md:h-8 lg:w-11 md:w-8 mr-3 border rounded-full border-red-500"
-                                />
-                                <div className="flex flex-col">
-                                    <label className="cursor-pointer">{item.product_name}</label>
-                                    <label className="text-red-500 font-bold mt-1">
-                                        {formatsMoney(item.product_price)} VNĐ
-                                    </label>
-                                </div>
-                            </div>
-                        </Link>
-                    ))}
+              <div className="absolute top-10 z-30 left-0 lg:w-72 md:w-54 text-xs bg-white border border-red-500 rounded">
+                {result.splice(0, 5).map((item) => (
+                  <Link
+                    to={`/${slug(item.product_name)}?search=${item.product_id}`}
+                    key={item.product_id}
+                    onClick={() => {
+                      document.getElementById("search").value = "";
+                      setResult(null);
+                    }}
+                  >
+                    <div className="flex flex-row items-center p-2 hover:bg-gray-200 cursor-pointer">
+                      <img
+                        src={item.product_images[0].file_path}
+                        alt="Avatar"
+                        className="lg:h-11 md:h-8 lg:w-11 md:w-8 mr-3 border rounded-full border-red-500"
+                      />
+                      <div className="flex flex-col">
+                        <label className="cursor-pointer">
+                          {item.product_name}
+                        </label>
+                        <label className="text-red-500 font-bold mt-1">
+                          {formatsMoney(item.product_price)} VNĐ
+                        </label>
+                      </div>
                     </div>
+                  </Link>
+                ))}
+              </div>
             ) : null}
           </div>
         </div>
-        <div className={clsx("flex-row items-center sm:hidden lg:flex", style.contact)}>
+        <div
+          className={clsx(
+            "flex-row items-center sm:hidden lg:flex",
+            style.contact
+          )}
+        >
           <FontAwesomeIcon
             icon={faPhone}
             className={clsx(
@@ -191,67 +220,87 @@ function Header() {
                 Đăng nhập
               </Link>
             )}
-                {show ? (
-            <div className="absolute top-12 -right-5 w-36 dropdown_menu bg-white border border-red-500 flex flex-col justify-center text-sm z-20">
+            {show ? (
+              <div className="absolute top-12 -right-5 w-36 dropdown_menu bg-white border border-red-500 flex flex-col justify-center text-sm z-20">
                 <Link
-                to={`/account`}
-                className="no-underline p-3 cursor-pointer hover:text-white hover:bg-red-500"
-                onClick={showMenu}
+                  to={`/account`}
+                  className="no-underline p-3 cursor-pointer hover:text-white hover:bg-red-500"
+                  onClick={showMenu}
                 >
-                Tài khoản
+                  Tài khoản
                 </Link>
                 <Link
-                to={`/cart`}
-                className="no-underline p-3 cursor-pointer hover:text-white hover:bg-red-500"
-                onClick={showMenu}
+                  to={`/cart`}
+                  className="no-underline p-3 cursor-pointer hover:text-white hover:bg-red-500"
+                  onClick={showMenu}
                 >
-                Giỏ hàng
+                  Giỏ hàng
                 </Link>
                 <div
-                className="no-underline p-3 cursor-pointer hover:text-white hover:bg-red-500"
-                onClick={handleLogout}
+                  className="no-underline p-3 cursor-pointer hover:text-white hover:bg-red-500"
+                  onClick={handleLogout}
                 >
-                Đăng xuất
+                  Đăng xuất
                 </div>
-            </div>
+              </div>
             ) : null}
           </div>
         </div>
       </div>
-      <div className={clsx("flex flex-row items-center relative md:hidden mx-24 my-3", style.input_res)}>
-          <input
-            type="search"
-            placeholder="Tìm kiếm sản phẩm"
-            className="border border-red-500 p-2 pl-2 rounded text-gray-500 focus:outline-none w-full"
-            onChange={search}
-            id="search"
-          />
-          <div>
-            {result ? (
-                <div className="absolute top-10 z-30 left-0 w-full bg-white border border-red-500 rounded">
-                    {result.splice(0, 5).map((item) => (
-                        <Link to={`/${slug(item.product_name)}?search=${item.product_id}`} key={item.product_id} onClick={() => { document.getElementById('search').value = ''; setResult(null) }}>
-                            <div className="flex flex-row items-center p-2 hover:bg-gray-200 cursor-pointer">
-                                <img
-                                    src={item.product_images[0].file_path}
-                                    alt="Avatar"
-                                    className="h-20 w-20 mr-3 border rounded-full border-red-500"
-                                />
-                                <div className="flex flex-col text-base">
-                                    <label className="cursor-pointer">{item.product_name}</label>
-                                    <label className="text-red-500 font-bold mt-1">
-                                        {formatsMoney(item.product_price)} VNĐ
-                                    </label>
-                                </div>
-                            </div>
-                        </Link>
-                    ))}
+      <div
+        className={clsx(
+          "flex flex-row items-center relative md:hidden mx-24 my-3",
+          style.input_res
+        )}
+      >
+        <input
+          type="search"
+          placeholder="Tìm kiếm sản phẩm"
+          className="border border-red-500 p-2 pl-2 rounded text-gray-500 focus:outline-none w-full"
+          onChange={search}
+          id="search"
+        />
+        <div>
+          {result ? (
+            <div className="absolute top-10 z-30 left-0 w-full bg-white border border-red-500 rounded">
+              {result.splice(0, 5).map((item) => (
+                <Link
+                  to={`/${slug(item.product_name)}?search=${item.product_id}`}
+                  key={item.product_id}
+                  onClick={() => {
+                    document.getElementById("search").value = "";
+                    setResult(null);
+                  }}
+                >
+                  <div className="flex flex-row items-center p-2 hover:bg-gray-200 cursor-pointer">
+                    <img
+                      src={item.product_images[0].file_path}
+                      alt="Avatar"
+                      className="h-20 w-20 mr-3 border rounded-full border-red-500"
+                    />
+                    <div className="flex flex-col text-base">
+                      <label className="cursor-pointer">
+                        {item.product_name}
+                      </label>
+                      <label className="text-red-500 font-bold mt-1">
+                        {formatsMoney(item.product_price)} VNĐ
+                      </label>
                     </div>
-            ) : null}
-          </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          ) : null}
         </div>
+      </div>
 
-      <nav id="nav" className={clsx("flex-row justify-around p-2 bg-red-500 relative sm:hidden lg:flex", style.nav)}>
+      <nav
+        id="nav"
+        className={clsx(
+          "flex-row justify-around p-2 bg-red-500 relative sm:hidden lg:flex",
+          style.nav
+        )}
+      >
         <div className="flex flex-row items-center ml-32 relative">
           <FontAwesomeIcon
             icon={faBars}
@@ -281,7 +330,14 @@ function Header() {
                       id={item.name}
                       className="h-6 w-6 rounded-full mr-3"
                     />
-                    <Link to={item.key !== 'repair' ? `/product/type/${item.key}` : '/repair'} onClick={closeDropDown}>
+                    <Link
+                      to={
+                        item.key !== "repair"
+                          ? `/product/type/${item.key}`
+                          : "/repair"
+                      }
+                      onClick={closeDropDown}
+                    >
                       <label
                         className="cursor-pointer hover:text-red-500"
                         htmlFor={item.name}
@@ -308,9 +364,34 @@ function Header() {
             </Link>
           </li>
           <li>
-            <Link to={"/product"} className="text-white hover:text-orange-300">
+            <Link
+              to={"/product"}
+              className={clsx("text-white hover:text-orange-300 relative", style.product)}
+            >
               Sản phẩm
               <FontAwesomeIcon icon={faCaretDown} className="ml-1" />
+              <div className={clsx("absolute bg-red-500 w-52 top-5 z-20 pb-2 hidden dropdown_menu", style.product_dropdown)}>
+                {list.map((item, index) => {
+                  return (
+                    <div key={index} className="flex my-2 px-3">
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        id={item.name}
+                        className="h-6 w-6 rounded-full mr-3"
+                      />
+                      <Link to={`/product/type/${item.key}`}>
+                        <label
+                          className="cursor-pointer text-white hover:text-orange-300"
+                          htmlFor={item.name}
+                        >
+                          {item.name}
+                        </label>
+                      </Link>
+                    </div>
+                  );
+                })}
+              </div>
             </Link>
           </li>
           <li>
@@ -335,7 +416,6 @@ function Header() {
             </Link>
           </li>
         </ul>
-        
       </nav>
     </header>
   );

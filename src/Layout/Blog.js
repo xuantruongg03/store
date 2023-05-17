@@ -1,7 +1,8 @@
-import { CKEditor } from "ckeditor4-react";
-import { useRef, useState } from "react";
-import { postBlog } from "../api/blog";
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import { useEffect, useRef, useState } from "react";
 import img from "../access/image/logo.png";
+import { postBlog } from "../api/blog";
 
 function Blog() {
   const [content, setContent] = useState("");
@@ -45,9 +46,6 @@ function Blog() {
     };
     fetch();
     setLoading(false);
-  };
-  const handleEditorChange = (e) => {
-    setContent(e.editor.getData());
   };
 
   const handleInputImage = (e) => {
@@ -127,7 +125,17 @@ function Blog() {
           <label htmlFor="" className="font-semibold">
             Nội dung:
           </label>
-          <CKEditor className="text-sm" required id="content" name="content" onChange={handleEditorChange} />
+          <CKEditor
+                    editor={ ClassicEditor }
+                    className="text-sm"
+                    required
+                    id="content"
+                    name="content"
+                    onChange={ ( event, editor ) => {
+                        const data = editor.getData();
+                        setContent(data);
+                    } }
+                />
         </div>
         <button
           className="my-3 px-4 py-2 bg-red-500 rounded-lg text-white hover:bg-yellow-400"

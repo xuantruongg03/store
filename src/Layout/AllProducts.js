@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getProductsByType, getProductsSale } from "../api/products";
+import { getAllProducts, getProductsByType, getProductsSale } from "../api/products";
 import Product from "../Components/Product";
 import clsx from "clsx";
 import ProductMobile from "../Components/ProductMobile";
@@ -31,7 +31,12 @@ function AllProducts() {
       fetchData();
     } else {
       const fetchData = async () => {
-        const res = await getProductsByType(type);
+        let res;
+        if(!type) {
+            res = await getAllProducts();
+        } else {
+            res = await getProductsByType(type);
+        }
         if (res.newToken != null) {
             localStorage.setItem('token', res.newToken);
           }
@@ -84,7 +89,7 @@ function AllProducts() {
   return (
     <div className="container-custom ">
       <h1 className="text-center my-5 font-semibold text-red-500 sm:text-3xl">
-        Sản phẩm khuyến mãi
+        Danh sách sản phẩm
       </h1>
       <div className="flex flex-wrap ">
         <button

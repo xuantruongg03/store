@@ -41,7 +41,7 @@ function ProductMobile(props) {
   };
 
   return (
-    <div className="relative flex flex-col mb-5 border items-center w-48">
+    <div className="relative flex flex-col mb-5 border items-center w-40">
       {Number(props.sale) !== 0 ? (
         <div
           style={{

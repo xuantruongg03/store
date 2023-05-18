@@ -9,14 +9,14 @@ import style from "./Account.module.scss"
 
 function Account() {
 
-    const [user, setUser] = useState();
+    const [data, setData] = useState();
     const [loading, setLoading] = useState(true);
     const [show, setShow] = useState('user');
 
     useEffect(() => {
       const user = async () => {
           const res = await getUserAPI();
-        setUser(res.data[0]);
+          setData(res.data[0]);
         setLoading(false);
       };
       user();
@@ -34,7 +34,7 @@ function Account() {
         <div className={clsx("container-custom my-10 flex", style.container)}>
             <nav className="flex flex-col w-80" >
                 <h1 className="text-xl font-semibold uppercase">Trang tài khoản</h1>
-                <p className="font-semibold mt-2 mb-2" >Xin chào, <span className="text-red-500">Xuân Trường</span> !</p>
+                <p className="font-semibold mt-2 mb-2" >Xin chào, <span className="text-red-500">{data.first_name} {data.last_name}</span> !</p>
                 <div className='flex flex-col'>
                     <div className='my-3'><label className={clsx(' cursor-pointer hover:text-yellow-400', show === 'user' ? 'text-yellow-400' : '')}  onClick={() => {setShow('user')}}>Thông tin tài khoản</label></div>
                     <div className='my-3'><label className={clsx(' cursor-pointer hover:text-yellow-400', show === 'orders' ? 'text-yellow-400' : '')}  onClick={() => {setShow('orders')}}>Đơn hàng của bạn</label></div>
@@ -45,11 +45,11 @@ function Account() {
             <div className={clsx("flex flex-col w-3/4", style.box)}>
                 {(() => {
                     switch (show) {
-                        case 'user': return <User data={user} />;
+                        case 'user': return <User data={data} />;
                         case 'orders': return <Orders />;
                         case 'changePass': return <ChangePass />;
                         case 'address': return <Address />;
-                        default: return <User data={user}/>;
+                        default: return <User data={data}/>;
                     }
                 })()}    
             </div>

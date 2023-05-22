@@ -1,6 +1,6 @@
 function About() {
   return (
-    <div className="mx-5 sm:mx-24 my-5">
+    <div className="mx-5 sm:mx-36 my-5">
       <h1 className="text-3xl text-red-500 font-semibold text-center my-5">
         Về chúng tôi
       </h1>
@@ -40,7 +40,7 @@ function About() {
         </strong>
         <br />
         <strong>
-          - cửa hàng bán máy tính và phụ kiện máy tính hàng đầu tại khu vực.
+          - Cửa hàng bán máy tính và phụ kiện máy tính hàng đầu tại Quy Nhơn.
         </strong>
         <br />
         <span className="text-center">

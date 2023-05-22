@@ -1,0 +1,45 @@
+.img {
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    padding: 5px 15px 5px 5px;
+}
+
+.widget {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    z-index: 20;
+}
+
+@keyframes zoomin-zoomout {
+    0% {
+        transform: scale(1, 1);
+    }
+
+    50% {
+        transform: scale(.875, .875);
+    }
+
+    100% {
+        transform: scale(1, 1);
+    }
+}
+
+.imgZalo {
+    animation: zoomin-zoomout 2S ease infinite;
+    vertical-align: middle;
+    border: 0;
+    height: 70px;
+    width: 70px;
+}
+
+.imgZalo:hover {
+    animation: none;
+}
+
+@media screen and (max-width: 500px) {
+    .widget {
+        display: none;
+    }
+}

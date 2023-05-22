@@ -16,7 +16,7 @@ function ListProducts() {
       const res = await getAllProducts();
       const fetchData = await getAllBlog();
       if (res.message === "ok") {
-          setNews(fetchData);
+        setNews(fetchData);
         setLoading(false);
         if (res.newToken != null) {
           localStorage.setItem("token", res.newToken);
@@ -32,6 +32,7 @@ function ListProducts() {
           (element) => element.product_type.toLowerCase() === "accessory"
         );
         setAccessories(accessoriesData);
+        console.log(accessoriesData.length);
         let saleData = res.data.filter(
           (element) => element.product_sale_price > 0
         );
@@ -60,20 +61,18 @@ function ListProducts() {
         image_banner="https://bizweb.dktcdn.net/100/429/689/themes/869367/assets/banner_1.jpg?1677379323227"
       />
       <ListProductsChild
-        list={computer}
-        title="Máy tính xách tay"
-        word="Laptop"
-        image_banner="https://bizweb.dktcdn.net/100/429/689/themes/869367/assets/banner_1.jpg?1677379323227"
-      />
-      <ListProductsChild
         list={accessories}
         title="Phụ kiện máy tính"
         word="accessory"
         image_banner="https://bizweb.dktcdn.net/100/429/689/themes/869367/assets/banner_1.jpg?1677379323227"
       />
-    <ListNews
-        list={news}
-    />
+      <ListProductsChild
+        list={computer}
+        title="Máy tính xách tay"
+        word="laptop"
+        image_banner="https://bizweb.dktcdn.net/100/429/689/themes/869367/assets/banner_1.jpg?1677379323227"
+      />
+      <ListNews list={news} />
     </div>
   );
 }

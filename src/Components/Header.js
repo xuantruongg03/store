@@ -1,8 +1,8 @@
 import {
-    faBars,
-    faCaretDown,
-    faPhone,
-    faUser,
+  faBars,
+  faCaretDown,
+  faPhone,
+  faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import clsx from "clsx";
@@ -17,7 +17,6 @@ import list from "../listType";
 import style from "./Sass/Header.module.scss";
 
 function Header() {
-  const [statDropDown, setStateDropDown] = useState(false);
   const dispatch = useDispatch();
   const state = useSelector((state) => state.login);
   const [data, setData] = useState(
@@ -30,14 +29,6 @@ function Header() {
   const [result, setResult] = useState();
   const [show, setShow] = useState(false);
   const [avatar, setAvatar] = useState();
-
-  const handleDropDown = () => {
-    setStateDropDown(!statDropDown);
-  };
-
-  const closeDropDown = () => {
-    setStateDropDown(false);
-  };
 
   const handleLogout = () => {
     setStateLogin(false);
@@ -106,6 +97,13 @@ function Header() {
 
   return (
     <header className="relative border-b-4 sm:border-none border-red-500">
+      <div className={clsx("py-1 bg-red-500 text-white text-sm px-24 overflow-hidden")}>
+        <p className={style.alert}>
+          Website đang trong quá trình xây dựng. Nếu bạn có góp ý vui lòng gửi
+          phản hồi cho chúng tôi. Sự góp ý của bạn là niềm vinh hạnh cho chúng
+          tôi!
+        </p>
+      </div>
       <div
         className={clsx(
           "flex justify-around lg:mx-20 md:mx-5 items-center mb-2",
@@ -192,7 +190,7 @@ function Header() {
           />
           <div className="flex flex-col">
             <label>Tư vấn hỗ trợ</label>
-            <label className="text-red-500 font-bold">1900 1008</label>
+            <label className="text-red-500 font-bold">0981793201</label>
           </div>
         </div>
         <div className="flex flex-row items-center">
@@ -301,58 +299,53 @@ function Header() {
           style.nav
         )}
       >
-        <div className="flex flex-row items-center ml-32 relative">
+        <div
+          className={clsx(
+            "flex flex-row items-center ml-32 relative",
+            style.product
+          )}
+        >
           <FontAwesomeIcon
             icon={faBars}
             className="h-4 w-4 mr-3 text-white cursor-pointer"
-            onClick={handleDropDown}
+            // onClick={handleDropDown}
           />
           <h1
-            className="text-white text-sm font-bold cursor-pointer disable-select"
-            onClick={handleDropDown}
+            className="text-white text-sm lg:text-base font-bold cursor-pointer disable-select"
+            // onClick={handleDropDown}
           >
             Danh mục sản phẩm
           </h1>
           <div
             className={clsx(
-              "absolute bg-white w-52 top-8 z-20 pb-2 dropdown_menu",
-              statDropDown ? "" : "hidden"
+              "absolute bg-red-500 w-56 -left-4 top-6 z-20 pb-1 hidden dropdown_menu",
+              style.product_dropdown
             )}
-            id="drop-down"
           >
-            <ul className="ml-2">
-              {list.map((item, index) => {
-                return (
-                  <li className="flex flex-row items-center mt-3" key={index}>
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                      id={item.name}
-                      className="h-6 w-6 rounded-full mr-3"
-                    />
-                    <Link
-                      to={
-                        item.key !== "repair"
-                          ? `/product/type/${item.key}`
-                          : "/repair"
-                      }
-                      onClick={closeDropDown}
+            {list.map((item, index) => {
+              return (
+                <div key={index} className="flex my-2 px-3">
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    id={item.name}
+                    className="h-6 w-6 rounded-full mr-3"
+                  />
+                  <Link to={`/product/type/${item.key}`}>
+                    <label
+                      className="cursor-pointer text-white hover:text-orange-300"
+                      htmlFor={item.name}
                     >
-                      <label
-                        className="cursor-pointer hover:text-red-500"
-                        htmlFor={item.name}
-                      >
-                        {item.name}
-                      </label>
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
+                      {item.name}
+                    </label>
+                  </Link>
+                </div>
+              );
+            })}
           </div>
         </div>
         <span className="text-white">|</span>
-        <ul className="flex flex-row w-2/3 justify-around items-center mr-24 text-sm">
+        <ul className="flex flex-row w-2/3 justify-around items-center mr-24 text-sm: text-base">
           <li>
             <Link to={"/"} className=" text-white hover:text-orange-300">
               Trang chủ
@@ -366,54 +359,72 @@ function Header() {
           <li>
             <Link
               to={"/product"}
-              className={clsx("text-white hover:text-orange-300 relative", style.product)}
+              className={clsx(
+                "text-white hover:text-orange-300 relative",
+                style.product
+              )}
             >
               Sản phẩm
-              <FontAwesomeIcon icon={faCaretDown} className="ml-1" />
-              <div className={clsx("absolute bg-red-500 w-52 top-5 z-20 pb-2 hidden dropdown_menu", style.product_dropdown)}>
-                {list.map((item, index) => {
-                  return (
-                    <div key={index} className="flex my-2 px-3">
-                      <img
-                        src={item.image}
-                        alt={item.name}
-                        id={item.name}
-                        className="h-6 w-6 rounded-full mr-3"
-                      />
-                      <Link to={`/product/type/${item.key}`}>
-                        <label
-                          className="cursor-pointer text-white hover:text-orange-300"
-                          htmlFor={item.name}
-                        >
-                          {item.name}
-                        </label>
-                      </Link>
-                    </div>
-                  );
-                })}
-              </div>
             </Link>
           </li>
           <li>
             <Link to={"/news"} className="text-white hover:text-orange-300">
               Tin mới nhất
+              {/* <FontAwesomeIcon icon={faCaretDown} className="ml-1" /> */}
+            </Link>
+          </li>
+          <li>
+            <Link to={"/repair"} className="text-white hover:text-orange-300">
+              Đặt lịch sửa chữa
+            </Link>
+          </li>
+          <li>
+            <Link
+              to={"/blog/my-blog"}
+              className={clsx(
+                "text-white hover:text-orange-300 relative",
+                style.product
+              )}
+            >
+              Bài viết của bạn
               <FontAwesomeIcon icon={faCaretDown} className="ml-1" />
+              <div
+                className={clsx(
+                  "absolute bg-red-500 w-44 top-6 z-20 pb-1 -left-4 hidden dropdown_menu",
+                  style.product_dropdown
+                )}
+              >
+                <div className="my-2 px-3">
+                  <Link
+                    to={"/blog/my-blog"}
+                    className="cursor-pointer text-white hover:text-orange-300"
+                  >
+                    Bài viết của bạn
+                  </Link>
+                </div>
+                <div className="my-2 px-3">
+                  <Link
+                    to={"/blog/create"}
+                    className="cursor-pointer text-white hover:text-orange-300"
+                  >
+                    Viết bài
+                  </Link>
+                </div>
+              </div>
             </Link>
           </li>
           <li>
-            <Link to={"/faq"} className="text-white hover:text-orange-300">
-              Câu hỏi thường gặp
-            </Link>
-          </li>
-          <li>
-            <Link to={"/blog"} className="text-white hover:text-orange-300">
-              Viết bài
-            </Link>
-          </li>
-          <li>
-            <Link to={"/contact"} className="text-white hover:text-orange-300">
+            {/* <Link to={"/contact"} className="text-white hover:text-orange-300">
               Liên hệ
-            </Link>
+            </Link> */}
+            <a
+              href="https://forms.gle/fJ2gj378ETSupZrHA"
+              className="text-white hover:text-orange-300"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Feedback
+            </a>
           </li>
         </ul>
       </nav>

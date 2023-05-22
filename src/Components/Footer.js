@@ -2,6 +2,11 @@ import { Link } from "react-router-dom";
 import slug from "../Convert/ConvertStringVNtoTitle";
 import style from "./Sass/Footer.module.scss"
 import clsx from "clsx";
+import payment1 from "../access/image/payment/payment1.png";
+import payment2 from "../access/image/payment/payment2.png";
+import payment3 from "../access/image/payment/payment3.png";
+import payment4 from "../access/image/payment/payment4.png";
+import payment5 from "../access/image/payment/payment5.png";
 
 const inf = [
   "Đơn vị chủ quản: Siêu thị điện tử Computer Central",
@@ -11,7 +16,7 @@ const inf = [
   "Website: http://www.computercentralqn.vn/",
 ];
 
-const support = ["Giới thiệu", "Chính sách đổi trả", "Hỗ trợ mua hàng"];
+const support = ["Giới thiệu", "Chính sách đổi trả", "Hỗ trợ mua hàng", "Hỗ trợ bảo hành"];
 
 function Footer() {
   return (
@@ -54,27 +59,27 @@ function Footer() {
           <div className=" flex flex-wrap w-56">
             <img
               className="gap-1 mx-1 my-2"
-              src="http://t0338.store.nhanh.vn/tp/T0338/img/payment1.png"
+              src={payment1}
               alt="payment"
             />
             <img
               className="gap-1 mx-1 my-2"
-              src="http://t0338.store.nhanh.vn/tp/T0338/img/payment2.png"
+              src={payment2}
               alt="payment"
             />
             <img
               className="gap-1 mx-1 my-2"
-              src="http://t0338.store.nhanh.vn/tp/T0338/img/payment4.png"
+              src={payment3}
               alt="payment"
             />
             <img
               className="gap-1 mx-1 my-2"
-              src="http://t0338.store.nhanh.vn/tp/T0338/img/payment5.png"
+              src={payment4}
               alt="payment"
             />
             <img
               className="gap-1 mx-1 my-2"
-              src="http://t0338.store.nhanh.vn/tp/T0338/img/payment3.png"
+              src={payment5}
               alt="payment"
             />
           </div>

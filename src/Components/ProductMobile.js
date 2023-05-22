@@ -41,7 +41,7 @@ function ProductMobile(props) {
   };
 
   return (
-    <div className="relative flex flex-col mb-5 border items-center w-40">
+    <div className="relative flex flex-col mb-5 border items-center ">
       {Number(props.sale) !== 0 ? (
         <div
           style={{
@@ -98,7 +98,7 @@ function ProductMobile(props) {
         <div
           className= "ml-1 hover:bg-red-500 hover:cursor-pointer py-2 rounded-md px-3 hover:text-white group transform scale-100 object-fit"
           title="Mua ngay"
-          onClick={handleAddToCart}
+            onClick={handleAddToCart}
         >
           <FontAwesomeIcon
             icon={faCartPlus}

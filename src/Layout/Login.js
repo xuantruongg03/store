@@ -33,25 +33,33 @@ function Login() {
     });
 
     const login = async () => {
-      const params = {
-        username: username,
-        password: password,
-      };
-      const res = await loginAPI(params);
-      if (res.state) {
-        const token = res.token;
-        localStorage.setItem("token", token);
-        localStorage.setItem("refresh_token", res.refreshToken);
-        localStorage.setItem("customer_id", res.data.customer_id);
-        dispatch({ type: "LOGIN", payload: res });
-        window.location.href = "/";
-      } else {
-          alert("Thông tin đăng nhập không chính xác!");
+        const params = {
+          username: username,
+          password: password,
+        };
+      
+        try {
+          const res = await loginAPI(params);
+          console.log(res);
+          if (res.message === "ok") {
+            const token = res.token;
+            localStorage.setItem("token", token);
+            localStorage.setItem("refresh_token", res.refreshToken);
+            localStorage.setItem("customer_id", res.customer_id);
+            dispatch({ type: "LOGIN", payload: res });
+            window.location.href = "/";
+          } else {
+            alert("Thông tin đăng nhập không chính xác!");
+            setState(false);
+          }
+        } catch (error) {
+          console.error("Lỗi khi gọi API:", error);
           setState(false);
-      }
-    };
-    login();
-  };
+          alert("Thông tin đăng nhập không chính xác.");
+        }
+      };
+      login();
+    }      
 
   const handleLoginWithFacebook = () => {};
 

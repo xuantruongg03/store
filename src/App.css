@@ -101,3 +101,11 @@ input[type=number] {
 .ck-content {
     min-height: 500px;
 }
+
+ .image {
+    clear: both;
+    display: table;
+    margin: .9em auto;
+    min-width: 50px;
+    text-align: center;
+}

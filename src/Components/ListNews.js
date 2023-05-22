@@ -19,12 +19,12 @@ function ListNews(props) {
         </Link>
       </div>
       <div className={clsx("sm:grid grid-cols-4 gap-2 hidden")}>
-        {props.list.data.splice(0, 8).map((item, index) => {
+        {props.list.data.slice(0, 4).map((item, index) => {
           return <NewsItem key={index} data={item} />;
         })}
       </div>
       <div className={clsx("grid grid-cols-2 gap-1 sm:hidden")}>
-        {props.list.data.splice(0, 2).map((item, index) => {
+        {props.list.data.slice(0, 2).map((item, index) => {
           return <NewsItem key={index} data={item} />;
         })}
       </div>

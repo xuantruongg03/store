@@ -90,7 +90,7 @@ function BlogDetail() {
     );
 
   return (
-    <div className="my-5 mx-5 sm:mx-24">
+    <div className="my-5 mx-5 sm:mx-36">
       <div className="sm:flex sm:justify-between">
         <div className="hidden sm:block w-1/4">
           <div>
@@ -121,20 +121,23 @@ function BlogDetail() {
           </div>
         </div>
         <div className="sm:w-3/4">
-          <h1 className="font-semibold text-xl">{data.blog_title}</h1>
-          <div className="flex flex-row text-sm mt-1 mb-2">
+          <h1 className="font-semibold text-xl md:text-3xl">
+            {data.blog_title}
+          </h1>
+          <div className="flex flex-row text-sm md:text-base mt-1 mb-2">
             <h2 className="font-semibold">
               {data.first_name} {data.last_name}
             </h2>
             <span className="mx-1">|</span>
             <span>{data.blog_created_at.slice(0, 10)}</span>
           </div>
-          <p
-            className="text-sm"
+          <div
+            className="text-sm sm:text-base"
             dangerouslySetInnerHTML={{ __html: data.blog_content }}
-          ></p>
+          ></div>
+
           <div className="my-4 border-y">
-            <h1 className="font-semibold">Bài viết khác</h1>
+            <h1 className="font-semibold md:text-xl">Bài viết khác</h1>
             <div className="">
               {allBlog.slice(0, 4).map((item, index) => (
                 <NewsItemVer key={index} data={item} />
@@ -142,20 +145,22 @@ function BlogDetail() {
             </div>
           </div>
           <div>
-            <h1 className="font-semibold">
+            <h1 className="font-semibold md:text-xl">
               Bình luận chung ({comment.length} Bình luận)
             </h1>
-            {comment.map((item, index) => (
-              <div className="border-b py-2" key={index}>
-                <h2 className="font-semibold text-sm">
-                  Tên: {item.name_user}{" "}
-                  <span className="text-gray-400 text-xs">
-                    ({item.created_at.slice(0, 10)})
-                  </span>{" "}
-                </h2>
-                <p className="text-sm">{item.value_user}</p>
-              </div>
-            ))}
+            <div className="pl-5">
+              {comment.map((item, index) => (
+                <div className="border-b py-2" key={index}>
+                  <h2 className="font-semibold text-sm">
+                    Tên: {item.name_user}{" "}
+                    <span className="text-gray-400 text-xs">
+                      ({item.created_at.slice(0, 10)})
+                    </span>{" "}
+                  </h2>
+                  <p className="text-sm">{item.value_user}</p>
+                </div>
+              ))}
+            </div>
           </div>
           <div>
             <h1 className="font-semibold my-4">Bình luận của bạn</h1>

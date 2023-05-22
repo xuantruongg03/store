@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { getAllBlog } from "../api/blog";
 import clsx from "clsx";
 import NewsItemVer from "../Components/NewsItemVer";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faScroll } from "@fortawesome/free-solid-svg-icons";
 
 function News() {
   const [data, setData] = useState([]);
@@ -24,7 +26,7 @@ function News() {
     const fetch = async () => {
       const res = await getAllBlog();
       setData(res.data);
-      setView(res.data.sort((a, b) => b.blog_view - a.blog_view).slice(0, 3));
+      setView(res.data.sort((a, b) => a.blog_view - b.blog_view).slice(0, 3));
       setNewest(
         res.data
           .sort((a, b) => a.blog_created_at - b.blog_created_at)
@@ -50,8 +52,7 @@ function News() {
     );
 
   return (
-    <div className="mx-5 sm:mx-36 my-5">
-      {/* <h1 className="text-center text-xl sm:text-3xl text-red-500 my-5" >Tin tức</h1> */}
+    <div className="mx-5 sm:mx-36 my-5 relative">
       <div className="sm:flex sm:justify-between">
         <div className="hidden sm:block w-1/4">
           <div>
@@ -120,6 +121,9 @@ function News() {
             }
           })()}
         </div>
+      </div>
+      <div className="w-10 h-10 rounded-full fixed bottom-5 -right-20 z-20 border-red-500">
+        <FontAwesomeIcon icon={faScroll} className="text-3xl text-red-500" />
       </div>
     </div>
   );

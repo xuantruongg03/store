@@ -63,3 +63,17 @@
 .product:hover > .product_dropdown{
     display: block;
 }
+
+@keyframes alertAnimation {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+.alert{
+    animation: alertAnimation 20s linear infinite;
+    white-space: nowrap;
+}

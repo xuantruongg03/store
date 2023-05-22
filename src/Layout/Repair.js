@@ -34,7 +34,7 @@ function Repair() {
     }
 
     return ( 
-        <div className={clsx("flex justify-center items-center my-10 sm:mx-20", style.container)}>
+        <div className={clsx("flex justify-center items-center my-10 sm:mx-20 md:mx-36", style.container)}>
       <div className={clsx("flex border border-red-500", style.box)}>
         <div className="p-5 sm:w-2/3">
           <h1 className="font-semibold text-lg mb-3">Đặt lịch sửa chữa</h1>

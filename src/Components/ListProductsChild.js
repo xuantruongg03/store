@@ -7,6 +7,7 @@ import clsx from "clsx";
 import ProductMobile from "./ProductMobile";
 
 function ListProductsChild(props) {
+
   return (
     <div className="my-8">
       <div className="border-b border-red-500 flex flex-row justify-between items-end">
@@ -24,7 +25,7 @@ function ListProductsChild(props) {
           className={clsx("w-44 h-auto sm:hidden lg:block", style.banner)}
         />
         <div className={clsx("grid grid-cols-4 gap-1", style.banner)}>
-          {props.list.splice(0, 8).map((element) => {
+          {props.list.slice(0, 8).map((element) => {
             return (
               <Product
                 key={element.product_id}
@@ -37,17 +38,16 @@ function ListProductsChild(props) {
             );
           })}
         </div>
-         
         <Swiper
                 spaceBetween={5}
                 slidesPerView={2}
                 modules={[Navigation, Pagination, Scrollbar, A11y]}
-                pagination={{ clickable: true }}
+                // pagination={{ clickable: true }}
                 className={clsx("sm:hidden", style.swiper)}
             >
                 {props.list.map((element) => {
                     return (
-                        <SwiperSlide key={element.product_id} className={clsx("sm:hidden", style.swiper)}>
+                        <SwiperSlide key={element.product_id}>
                             <ProductMobile
                                  key={element.product_id}
                                  productID={element.product_id}

@@ -1,15 +1,14 @@
 import bcrypt from "bcryptjs";
+import clsx from "clsx";
 import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, } from "react-router-dom";
+import style from "../Components/Sass/Login.module.scss";
 import fb from "../access/image/fb-login-btn.svg";
 import gg from "../access/image/gg-login-btn.svg";
 import { loginAPI } from "../api/login";
-import style from "../Components/Sass/Login.module.scss";
-import clsx from "clsx";
 
 function Login() {
-//   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [state, setState] = useState(true);
   const ref = useRef();
@@ -40,22 +39,23 @@ function Login() {
       
         try {
           const res = await loginAPI(params);
-          console.log(res);
           if (res.message === "ok") {
-            const token = res.token;
-            localStorage.setItem("token", token);
+            localStorage.setItem("token", res.token);
             localStorage.setItem("refresh_token", res.refreshToken);
-            localStorage.setItem("customer_id", res.customer_id);
+            localStorage.setItem("customer_id", res.data.customer_id);
             dispatch({ type: "LOGIN", payload: res });
             window.location.href = "/";
-          } else {
+          } else if (res.status === 500) {
+            alert("Lỗi phía Server! Thử lại sau.");
+            setState(false);
+          } 
+          else {
             alert("Thông tin đăng nhập không chính xác!");
             setState(false);
           }
         } catch (error) {
-          console.error("Lỗi khi gọi API:", error);
           setState(false);
-          alert("Thông tin đăng nhập không chính xác.");
+            console.error(error);
         }
       };
       login();

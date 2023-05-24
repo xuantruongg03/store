@@ -72,10 +72,10 @@ function CompCart(props) {
     return (
         <tbody className={clsx('cart-' + props.data.product_id, "align-middle")}>
             <tr className={style.box}>
-                <th className="max-w-xs min-w-full text-center no-underline hover:tex-red-500 w-96">
+                <th className="max-w-xs min-w-full text-center no-underline hover:tex-red-500 w-96 truncate">
                     <Link
-                        className="max-w-xs min-w-full text-center no-underline hover:tex-red-500"
-                        to={`/products/${slug(props.data.product_name)}`}
+                        className="w-60 text-center no-underline hover:text-red-500 "
+                        to={`/product/${slug(props.data.product_name)}?search=${props.data.product_id}`}
                         onClick={getInf}
                     >
                         {props.data.product_name}
@@ -109,7 +109,7 @@ function CompCart(props) {
                     <img src={props.data.product_images[0].file_path} alt="Hình ảnh sản phẩm" className={style.img}/>
                     <div className='pl-5'>
                         <Link
-                            className="text-center text-xs no-underline hover:tex-red-500"
+                            className="text-center text-xs no-underline hover:text-red-500"
                             to={`/product/${slug(props.data.product_name)}?search=${props.data.product_id}`}
                             onClick={getInf}
                         >

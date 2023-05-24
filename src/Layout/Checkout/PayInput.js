@@ -149,7 +149,7 @@ function PayInput(props) {
                     )}
                 </div>
             <div className={clsx('my-3 flex flex-col')}>
-                    <label className={style.label}>Nhập mã giảm giá</label>
+                    <label className={style.label}>Nhập mã giảm giá (Nếu có)</label>
                     <input placeholder="VD: A123" className='focus:outline-none border border-gray-400 w-full pl-3 py-1 mt-2 rounded-md'/>
             </div>
             <div className={clsx('mt-3 flex flex-col')}>

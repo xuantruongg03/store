@@ -32,7 +32,6 @@ function ListProducts() {
           (element) => element.product_type.toLowerCase() === "accessory"
         );
         setAccessories(accessoriesData);
-        console.log(accessoriesData.length);
         let saleData = res.data.filter(
           (element) => element.product_sale_price > 0
         );

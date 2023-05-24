@@ -24,7 +24,7 @@ function ListProductsChild(props) {
           alt="Banner colums"
           className={clsx("w-44 h-auto sm:hidden lg:block", style.banner)}
         />
-        <div className={clsx("grid grid-cols-4 gap-1", style.banner)}>
+        <div className={clsx("grid grid-cols-4 gap-1 w-full", style.banner)}>
           {props.list.slice(0, 8).map((element) => {
             return (
               <Product
@@ -34,6 +34,7 @@ function ListProductsChild(props) {
                 img={element.product_images[0]}
                 name={element.product_name}
                 price={element.product_price}
+                stateLike={element.product_like}
               />
             );
           })}
@@ -55,6 +56,7 @@ function ListProductsChild(props) {
                                  img={element.product_images[0]}
                                  name={element.product_name}
                                  price={element.product_price}
+                                 stateLike={element.product_like}
                             />
                         </SwiperSlide>
                     );

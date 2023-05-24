@@ -23,6 +23,7 @@ import Repair from "./Layout/Repair";
 import YourBlog from "./Layout/YourBlogs";
 import PrivateRoutes from "./PrivateRoutes";
 import Zalo from "./Components/Zalo";
+import Like from "./Layout/Like";
 // import BookingComplete from "./Layout/BookingComplete/BookingComplete";
 
 function App() {
@@ -60,6 +61,7 @@ function App() {
           <Route path="pay-complete" element={layout(<PayComplete />)} />
           <Route path="account" element={layout(<Account />)} />
           <Route path="repair" element={layout(<Repair />)} />
+          <Route path="like" element={layout(<Like/>)} />
         </Route>
         <Route path="/news">
           <Route path="" element={layout(<News />)} />

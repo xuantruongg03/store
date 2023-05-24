@@ -92,7 +92,7 @@ function Cart() {
       <h1 className="py-3 border-b-2 text-xl uppercase font-semibold border-red-500">
         Giỏ hàng của bạn
       </h1>
-      <div className={clsx(" bg-slate-50 mt-5 px-3", style.parent)} style={{ minHeight: "220px" }}>
+      <div className={clsx(" bg-slate-50 mt-5 px-3", style.parent)} style={{ minHeight: "" }}>
         <br />
         {cart.length === 0 ? (
           <div className="flex justify-center items-center flex-col">
@@ -133,7 +133,7 @@ function Cart() {
             ))}
         </div>
         {cart.length > 0 ? (
-          <div>
+          <div className="h-24">
             <Link
               to={"/pay"}
               className={clsx("h-10 w-40 pt-2 font-semibold bg-red-500 hover:bg-white hover:text-red-500 hover:border-red-500 border text-white text-center no-underline rounded-md mb-3 float-right mr-4 mt-5 cursor pointer", style.btnbuy)}

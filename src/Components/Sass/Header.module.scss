@@ -73,7 +73,24 @@
     }
 }
 
+@keyframes alertAnimation2 {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-500%);
+    }
+}
+
 .alert{
     animation: alertAnimation 20s linear infinite;
     white-space: nowrap;
 }
+
+@media screen and (max-width: 500px) {
+    .alert{
+        animation: alertAnimation2 10s linear infinite;
+        white-space: nowrap;
+    }
+}
+    

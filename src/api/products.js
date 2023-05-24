@@ -20,4 +20,19 @@ const getProductsSale = () => {
   return axiosClient.get(url);
 };
 
-export { getAllProducts, getProductById, getProductsByType, getProductsSale };
+const addLikeProduct = (params) => {
+    const url = `/like-product`;
+    return axiosClient.post(url, params);
+}
+
+const getLikeProduct = () => {
+    const url = `/get-like-product`;
+    return axiosClient.get(url);
+}
+
+const unlikeProduct = (params) => {
+    const url = `/unlike-product`;
+    return axiosClient.post(url, params);
+}
+
+export { getAllProducts, getProductById, getProductsByType, getProductsSale, addLikeProduct, getLikeProduct, unlikeProduct };

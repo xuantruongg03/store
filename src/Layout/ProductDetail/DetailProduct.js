@@ -7,6 +7,7 @@ import formatsMoney from "../../Convert/ConvertMoneyVND";
 import { addToCart } from "../../api/cart";
 import style from './Detail.module.scss'
 import clsx from "clsx";
+import { addLikeProduct } from "../../api/products";
 
 function InfoDetail(props) {
     const navigate = useNavigate();
@@ -62,6 +63,30 @@ function InfoDetail(props) {
         navigate('/cart');
     }
 
+    const like = (e) => {
+        e.preventDefault();
+        if(stateLogin) {
+            const product_id = props.id;
+            const fetch = async () => {
+                const res = await addLikeProduct({product_id: product_id});
+                if(res.message === "ok") {
+                    if (res.newToken != null) {
+                        localStorage.setItem('token', res.newToken);
+                    }
+                    if (res.refreshToken != null) {
+                        localStorage.setItem('refresh_token', res.refreshToken);
+                    }
+                    alert('Đã thêm vào danh sách yêu thích');
+                } else {
+                    alert("Có lỗi! Vui lòng thử lại.")
+                }
+            }
+            fetch();
+        } else {
+            navigate('/login');
+        }
+    }
+
     return ( 
         <div className={clsx("flex flex-col sm:mt-5 sm:w-full md:ml-5 text-sm", style.box_2)} style={{minWidth: '400px'}}>
             <h1 className={clsx("font-bold text-lg", style.title)}>{props.title}</h1>
@@ -104,7 +129,8 @@ function InfoDetail(props) {
                     className="py-2 px-4 text-white bg-yellow-500 rounded-lg">
                         Gọi <span className="font-bold hover:text-red-500 hover:cursor-text">0981793201</span> để được tư vấn mua hàng
                 </label>
-                <button className="bg-yellow-500 py-2 px-3 rounded-xl mx-5 hover:opacity-70"> <FontAwesomeIcon icon={faHeart} className="text-white"/> </button>
+                {/* <button onClick={like} className="bg-yellow-500 py-2 px-3 rounded-xl mx-5 hover:opacity-70"> {loadingButton ? <span class='loader-button'></span> : <FontAwesomeIcon icon={faHeart} className='text-white'/>}</button> */}
+                <button onClick={like} className="bg-yellow-500 py-2 px-3 rounded-xl mx-5 hover:opacity-70"> <FontAwesomeIcon icon={faHeart} className="text-white"/> </button>
                 <button className="bg-yellow-500 py-2 px-3 rounded-xl  hover:opacity-70"> <FontAwesomeIcon icon={faRandom} className="text-white"/> </button>
             </div>
         </div>

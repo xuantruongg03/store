@@ -4,6 +4,7 @@ import { buy, deleteProductCart } from '../../api/cart';
 import style from './Pay.module.scss';
 import PayInput from './PayInput';
 import PayOutput from './PayOutput';
+import { useNavigate } from 'react-router-dom';
 
 function Checkout() {
     const [name, setName] = useState('example');
@@ -15,6 +16,7 @@ function Checkout() {
     const [notes, setNotes] = useState('');
     const [payment, setPayment] = useState('Thanh toán khi nhận hàng (COD)');
     const [errorAddress, setErrorAddress] = useState(true);
+    const nav = useNavigate();
 
     const state = useSelector((state) => state.cart);
     const product = [];
@@ -75,11 +77,12 @@ function Checkout() {
                         total_amount: element.soluong,
                     };
                     const res = await buy(params);
-                    let newToken = res.refreshToken;
-                    if (newToken) {
-                        localStorage.setItem('token', newToken);
+                    if(res.newToken !== null) {
+                        localStorage.setItem('token', res.newToken);
                     }
-                    console.log(res);
+                    if(res.refreshToken !== null) {
+                        localStorage.setItem('refreshToken', res.refreshToken);
+                    }
                     if (res.message !== 'ok') {
                         e.preventDefault();
                         alert('Đặt hàng thất bại!');
@@ -89,7 +92,6 @@ function Checkout() {
                 const deleteCart = async () => {
                     const params = {
                         product_id: element.id_product,
-                        customer_id: localStorage.getItem('customer_id'),
                     };
                     await deleteProductCart(params);
                     document.querySelector('.cart-' + element.id_product).remove();
@@ -99,7 +101,7 @@ function Checkout() {
                 return state;
             });
         }
-        window.location.href = '/pay-complete';
+        nav('/pay-complete');
     };
 
     return (

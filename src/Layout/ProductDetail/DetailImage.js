@@ -9,7 +9,7 @@ function DetailImage(props) {
             <img src={props.img} alt="Hình ảnh sản phẩm" className={clsx("h-96 w-full", style.image)} />
             <Swiper
                 spaceBetween={10}
-                slidesPerView={3}
+                slidesPerView={4}
                 modules={[Navigation, Pagination, Scrollbar, A11y]}
                 className="border mt-3 sm:w-full"
             >
@@ -24,7 +24,7 @@ function DetailImage(props) {
                     )}
                 >
                     <img
-                    className={clsx("w-24 h-16 ml-3 sm:w-full sm:px-10", style.boxchildimage)}
+                    className={clsx("w-24 h-16 sm:w-full ", style.boxchildimage)}
                     key={index}
                     src={item.file_path}
                     alt="Hình ảnh sản phẩm"

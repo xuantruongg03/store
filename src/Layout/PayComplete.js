@@ -13,7 +13,7 @@ function PayComplete() {
             </p>
             <p className = {clsx('text-lg', style.font_small)}>
                 Quý khách có thể theo dõi đơn hàng của mình tại {" "}
-                <Link className={clsx(' text-lg font-semibold text-red-500 no-underline hover:text-yellow-400', style.font_small)} to={"/order"}>đây</Link>
+                <Link className={clsx(' text-lg font-semibold text-red-500 no-underline hover:text-yellow-400', style.font_small)} to={"/account"}>đây</Link>
             </p>
             <Link to={'/'} className={clsx(' text-lg font-semibold underline hover:text-yellow-400', style.font_small)}>
                 Về trang chủ

@@ -1,4 +1,10 @@
 const list = [
+    {
+        id: 1,
+        name: "Đặt lịch sửa chữa",
+        image: require("./access/image/types/suachua.jpg"),
+        key: "repair",
+    },
   {
     id: 2,
     name: "Sản phẩm khuyến mãi",

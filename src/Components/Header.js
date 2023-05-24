@@ -1,6 +1,8 @@
 import {
   faBars,
   faCaretDown,
+  faCartShopping,
+  faHeart,
   faPhone,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
@@ -42,7 +44,7 @@ function Header() {
     localStorage.removeItem("token");
     localStorage.removeItem("customer_id");
     localStorage.removeItem("refresh_token");
-    window.location.href = "/";
+    window.location.reload();
   };
 
   const showMenu = () => {
@@ -99,7 +101,7 @@ function Header() {
     <header className="relative border-b-4 sm:border-none border-red-500">
       <div className={clsx("py-1 bg-red-500 text-white text-sm px-24 overflow-hidden")}>
         <p className={style.alert}>
-          Website đang trong quá trình xây dựng. Nếu bạn có góp ý vui lòng gửi
+          Website đang trong quá trình xây dựng. Hãy sử dụng máy tính để có trải nghiệm tốt nhất! Nếu bạn có góp ý vui lòng gửi
           phản hồi cho chúng tôi. Sự góp ý của bạn là niềm vinh hạnh cho chúng
           tôi!
         </p>
@@ -243,6 +245,21 @@ function Header() {
               </div>
             ) : null}
           </div>
+          <div className="ml-5 hidden sm:block">
+            <Link to={"/like"}>
+                <FontAwesomeIcon
+                    icon={faHeart}
+                    className="h-6 w-6 mr-3 text-red-500 cursor-pointer"
+                />
+            </Link>
+            <Link to={"/cart"}>
+                <FontAwesomeIcon
+                    icon={faCartShopping}
+                    className="h-6 w-6 mr-3 text-red-500 cursor-pointer"
+                />
+            </Link>
+            
+          </div>
         </div>
       </div>
       <div
@@ -331,7 +348,7 @@ function Header() {
                     id={item.name}
                     className="h-6 w-6 rounded-full mr-3"
                   />
-                  <Link to={`/product/type/${item.key}`}>
+                  <Link to={item.key !== 'repair' ? `/product/type/${item.key}` : '/repair'}>
                     <label
                       className="cursor-pointer text-white hover:text-orange-300"
                       htmlFor={item.name}

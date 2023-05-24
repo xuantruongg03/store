@@ -84,13 +84,11 @@ function Like() {
                 }
               }
               return result;
-            } else {
-              return (
-                <p className="text-center text-red-500">
-                  Không có sản phẩm nào
-                </p>
-              );
-            }
+            }  else {
+                return (
+                  <p className="text-center text-red-500">Không có sản phẩm nào</p>
+                );
+              }
           })()}
         </div>
       ) : (

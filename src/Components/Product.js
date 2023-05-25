@@ -14,7 +14,7 @@ function Product(props) {
   const navigate = useNavigate();
   const state = useSelector((state) => state.login);
   const stateLogin = state !== null ? state.state : false;
-    const [stateLike, setStateLike] = React.useState(props.stateLike);
+  const [stateLike, setStateLike] = React.useState(props.stateLike);
 
   const handleAddToCart = () => {
     if (stateLogin) {
@@ -42,51 +42,49 @@ function Product(props) {
       };
       add();
     } else {
-        alert('Bạn cần đăng nhập để thực hiện chức năng này');
+      alert("Bạn cần đăng nhập để thực hiện chức năng này");
       navigate("/login");
     }
   };
 
   const like = () => {
-    if(!stateLogin) {
-        alert('Bạn cần đăng nhập để thực hiện chức năng này');
-        navigate('/login');
-   }
-    console.log(stateLike);
-   if (stateLike === false) {
-    const fetch = async () => {
-        const res = await addLikeProduct({product_id: props.productID});
-        if (res.message === 'ok') {
-            if(res.refreshToken != null) {
-                localStorage.setItem('refresh_token', res.refreshToken);
-            }
-            if (res.newToken != null) {
-                localStorage.setItem('token', res.newToken);
-            }
-            alert('Đã thêm vào yêu thích');
-            setStateLike(true);
-        }
+    if (!stateLogin) {
+      alert("Bạn cần đăng nhập để thực hiện chức năng này");
+      navigate("/login");
     }
-    fetch();
-   } else {
-        const unlike = async () => {
-            const res = await unlikeProduct({product_id: props.productID});
-            if (res.message === 'ok') {
-                if(res.refreshToken != null) {
-                    localStorage.setItem('refresh_token', res.refreshToken);
-                }
-                if (res.newToken != null) {
-                    localStorage.setItem('token', res.newToken);
-                }
-                alert('Đã xóa khỏi yêu thích');
-                setStateLike(false);
-                // document.getElementById(`product-${props.productID}`).remove();
-            }
+    if (stateLike === false) {
+      const fetch = async () => {
+        const res = await addLikeProduct({ product_id: props.productID });
+        if (res.message === "ok") {
+          if (res.refreshToken != null) {
+            localStorage.setItem("refresh_token", res.refreshToken);
+          }
+          if (res.newToken != null) {
+            localStorage.setItem("token", res.newToken);
+          }
+          alert("Đã thêm vào yêu thích");
+          setStateLike(true);
         }
-        unlike();
-   }
-
-  }
+      };
+      fetch();
+    } else {
+      const unlike = async () => {
+        const res = await unlikeProduct({ product_id: props.productID });
+        if (res.message === "ok") {
+          if (res.refreshToken != null) {
+            localStorage.setItem("refresh_token", res.refreshToken);
+          }
+          if (res.newToken != null) {
+            localStorage.setItem("token", res.newToken);
+          }
+          alert("Đã xóa khỏi yêu thích");
+          setStateLike(false);
+          // document.getElementById(`product-${props.productID}`).remove();
+        }
+      };
+      unlike();
+    }
+  };
 
   return (
     <div
@@ -109,9 +107,22 @@ function Product(props) {
       ) : (
         ""
       )}
-        <div className={clsx(" hidden absolute top-0 right-0 w-9 h-9 rounded-lg z-20 bg-yellow-500 justify-center items-center", style.like)} title="Thêm vào yêu thích">
-            <FontAwesomeIcon icon={faHeart} className={clsx("h-6 w-6 border-yellow-500 cursor-pointer hover:text-red-500", stateLike ? "text-red-500" : "text-white")} onClick={like}/>
-        </div>
+      <div
+        className={clsx(
+          " hidden absolute top-0 right-0 w-9 h-9 rounded-lg z-20 bg-yellow-500 justify-center items-center",
+          style.like
+        )}
+        title="Thêm vào yêu thích"
+      >
+        <FontAwesomeIcon
+          icon={faHeart}
+          className={clsx(
+            "h-6 w-6 border-yellow-500 cursor-pointer hover:text-red-500",
+            stateLike ? "text-red-500" : "text-white"
+          )}
+          onClick={like}
+        />
+      </div>
       <Link
         to={`/product/${slug(props.name)}?search=${props.productID}`}
         className="mt-2"

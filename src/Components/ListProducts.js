@@ -14,30 +14,29 @@ function ListProducts() {
   useEffect(() => {
     const getProducts = async () => {
       const res = await getAllProducts();
-      const fetchData = await getAllBlog();
+      const news = await getAllBlog();
       if (res.message === "ok") {
-        setNews(fetchData);
+        setNews(news);
         setLoading(false);
+        const data = res.data;
+        let saleData = data.filter(
+          (element) => element.product_sale_price > 0
+        );
+        setSale(saleData);
+        let accessoriesData = data.filter(
+            (element) => element.product_type.toLowerCase() === "accessory"
+        );
+        setAccessories(accessoriesData);
+        let computerData = data.filter(
+          (element) => element.product_type.toLowerCase() === "laptop"
+        );
+        setComputer(computerData);
         if (res.newToken != null) {
           localStorage.setItem("token", res.newToken);
         }
         if (res.refreshToken != null) {
           localStorage.setItem("refresh_token", res.refreshToken);
         }
-        let computerData = res.data.filter(
-          (element) => element.product_type.toLowerCase() === "laptop"
-        );
-        setComputer(computerData);
-        let accessoriesData = res.data.filter(
-          (element) => element.product_type.toLowerCase() === "accessory"
-        );
-        setAccessories(accessoriesData);
-        let saleData = res.data.filter(
-          (element) => element.product_sale_price > 0
-        );
-        setSale(saleData);
-      } else if (res.status === 404) {
-        setLoading(false);
       }
     };
     getProducts();

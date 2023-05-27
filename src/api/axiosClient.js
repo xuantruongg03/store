@@ -22,7 +22,6 @@ if (refresh_token) {
 }
 
 axiosClient.interceptors.request.use(async (config) => {
-    // Handle token here ...
     return config;
 });
 
@@ -31,7 +30,6 @@ axiosClient.interceptors.response.use(
         if (response && response.data) {
             return response.data;
         }
-
         return response;
     },
     (error) => {
